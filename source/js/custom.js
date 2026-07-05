@@ -416,7 +416,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // 初始化右侧按钮、评论区、分享
   // ===============================
   setTimeout(function() {
-    addRightsideButtons();
+    createFloatHomeButton();
+    addRightsideCommentButton();
     initCommentSection();
     initShareButtons();
   }, 300);
@@ -452,66 +453,55 @@ document.addEventListener('pjax:success', function() {
   });
 
   // 重新初始化右侧按钮和评论区
-  addRightsideButtons();
+  createFloatHomeButton();
+  addRightsideCommentButton();
   initCommentSection();
   initShareButtons();
   setTimeout(fixBrokenImages, 300);
 });
 
 // ===============================
-// 11. 添加"回到首页"按钮到右侧
+// 11. 独立浮动"回到首页"按钮 - 不依赖rightside容器
 // ===============================
-function addRightsideButtons() {
-  if (document.querySelector('#rightside .go-home-btn')) return;
+function createFloatHomeButton() {
+  if (document.querySelector('.float-home-btn')) return;
   
-  // 尝试找到 rightside 容器 - 可能是 #rightside-config-hide 或 #rightside > div
-  let rightside = document.querySelector('#rightside-config-hide') || document.querySelector('#rightside > div');
-  if (!rightside) {
-    // 如果还没渲染，稍后重试
-    setTimeout(addRightsideButtons, 500);
-    return;
-  }
-
-  // 回到首页按钮
-  const homeBtn = document.createElement('a');
-  homeBtn.className = 'go-home-btn';
+  var homeBtn = document.createElement('a');
+  homeBtn.className = 'float-home-btn';
   homeBtn.href = '/';
   homeBtn.title = '回到首页';
   homeBtn.innerHTML = '<i class="fas fa-home"></i>';
-  homeBtn.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;font-size:18px;color:#E52521;transition:all 0.3s;border-bottom:1px solid rgba(200,76,12,0.15);text-decoration:none;cursor:pointer;';
-  homeBtn.addEventListener('mouseenter', function(){this.style.background='#E52521';this.style.color='white';this.style.transform='scale(1.15)';});
-  homeBtn.addEventListener('mouseleave', function(){this.style.background='';this.style.color='#E52521';this.style.transform='';});
+  document.body.appendChild(homeBtn);
+}
 
-  // 前往评论按钮
-  const commentBtn = document.createElement('a');
+// 添加评论按钮到 rightside（如果存在）
+function addRightsideCommentButton() {
+  if (document.querySelector('#rightside .go-comment-btn')) return;
+  
+  var rightside = document.querySelector('#rightside-config-hide');
+  if (!rightside) return;
+  
+  var commentBtn = document.createElement('button');
   commentBtn.className = 'go-comment-btn';
-  commentBtn.href = '#comments-section';
+  commentBtn.type = 'button';
   commentBtn.title = '发表评论';
   commentBtn.innerHTML = '<i class="fas fa-comments"></i>';
-  commentBtn.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;font-size:18px;color:#43B047;transition:all 0.3s;border-bottom:1px solid rgba(200,76,12,0.15);text-decoration:none;cursor:pointer;';
-  commentBtn.addEventListener('mouseenter', function(){this.style.background='#43B047';this.style.color='white';this.style.transform='scale(1.15)';});
-  commentBtn.addEventListener('mouseleave', function(){this.style.background='';this.style.color='#43B047';this.style.transform='';});
+  commentBtn.style.cssText = 'color:#43B047;transition:all 0.3s;';
   commentBtn.addEventListener('click', function(e){
     e.preventDefault();
-    // 先尝试自定义评论区
-    let commentEl = document.getElementById('comments-section');
-    // 再尝试 Butterfly 评论区
+    var commentEl = document.getElementById('comments-section');
     if (!commentEl) commentEl = document.querySelector('#post-comment, .comment-container, #comment');
     if (commentEl) {
       commentEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
-      // 如果没有评论区，滚动到页面底部
       window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     }
   });
-
-  // 插入到 rightside 容器最前面
-  const firstChild = rightside.firstChild;
+  
+  var firstChild = rightside.firstChild;
   if (firstChild) {
     rightside.insertBefore(commentBtn, firstChild);
-    rightside.insertBefore(homeBtn, commentBtn);
   } else {
-    rightside.appendChild(homeBtn);
     rightside.appendChild(commentBtn);
   }
 }
@@ -613,40 +603,56 @@ function showShareToast(msg) {
 function initShareButtons() {
   const article = document.querySelector('#article-container');
   if (!article) return;
+  
+  // 1. 在 Butterfly 自带的分享区域添加"复制链接"按钮
+  var socialShare = document.querySelector('.post-share .social-share');
+  if (socialShare && !socialShare.querySelector('.copy-link-btn')) {
+    var copyBtn = document.createElement('a');
+    copyBtn.className = 'copy-link-btn';
+    copyBtn.href = 'javascript:void(0)';
+    copyBtn.innerHTML = '<i class="fas fa-copy"></i> 复制链接';
+    copyBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      copyShareLink();
+    });
+    socialShare.appendChild(copyBtn);
+  }
+  
+  // 2. 如果没有自带分享区，创建自定义分享区
   if (document.querySelector('.share-container')) return;
-  
-  const shareUrl = encodeURIComponent(window.location.href);
-  const shareTitle = encodeURIComponent(document.title);
-  
-  const container = document.createElement('div');
-  container.className = 'share-container';
-  container.innerHTML = `
-    <h4>📤 转发这篇文章</h4>
-    <div class="share-buttons">
-      <button class="share-btn share-btn-weixin" onclick="shareToWeixin()">
-        <i class="fab fa-weixin"></i> 微信
-      </button>
-      <button class="share-btn share-btn-qq" onclick="shareToQQ()">
-        <i class="fab fa-qq"></i> QQ
-      </button>
-      <button class="share-btn share-btn-weibo" onclick="shareToWeibo()">
-        <i class="fab fa-weibo"></i> 微博
-      </button>
-      <button class="share-btn share-btn-douyin" onclick="shareToDouyin()">
-        <i class="fab fa-tiktok"></i> 抖音
-      </button>
-      <button class="share-btn share-btn-copy" onclick="copyShareLink()">
-        <i class="fas fa-copy"></i> 复制链接
-      </button>
-    </div>
-  `;
-  
-  // 插入到评论区之前
-  const commentSection = document.getElementById('comments-section');
-  if (commentSection) {
-    article.insertBefore(container, commentSection);
-  } else {
-    article.appendChild(container);
+  if (!socialShare) {
+    const shareUrl = encodeURIComponent(window.location.href);
+    const shareTitle = encodeURIComponent(document.title);
+    
+    const container = document.createElement('div');
+    container.className = 'share-container';
+    container.innerHTML = `
+      <h4>📤 转发这篇文章</h4>
+      <div class="share-buttons">
+        <button class="share-btn share-btn-wechat" onclick="shareToWeixin()">
+          <i class="fab fa-weixin"></i> 微信
+        </button>
+        <button class="share-btn share-btn-qq" onclick="shareToQQ()">
+          <i class="fab fa-qq"></i> QQ
+        </button>
+        <button class="share-btn share-btn-weibo" onclick="shareToWeibo()">
+          <i class="fab fa-weibo"></i> 微博
+        </button>
+        <button class="share-btn share-btn-douyin" onclick="shareToDouyin()">
+          <i class="fab fa-tiktok"></i> 抖音
+        </button>
+        <button class="share-btn share-btn-copy" onclick="copyShareLink()">
+          <i class="fas fa-copy"></i> 复制链接
+        </button>
+      </div>
+    `;
+    
+    const commentSection = document.getElementById('comments-section');
+    if (commentSection) {
+      article.insertBefore(container, commentSection);
+    } else {
+      article.appendChild(container);
+    }
   }
   
   // 添加微信二维码弹窗到 body
@@ -721,6 +727,27 @@ document.addEventListener('click', function(e) {
 // ===============================
 // 14. 初始化
 // ===============================
-addRightsideButtons();
+createFloatHomeButton();
+addRightsideCommentButton();
 initCommentSection();
 initShareButtons();
+
+// 确保 DOM 完全加载后再执行一次
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+      createFloatHomeButton();
+      addRightsideCommentButton();
+      initCommentSection();
+      initShareButtons();
+    }, 500);
+  });
+} else {
+  // DOM 已经加载完成
+  setTimeout(function() {
+    createFloatHomeButton();
+    addRightsideCommentButton();
+    initCommentSection();
+    initShareButtons();
+  }, 500);
+}
