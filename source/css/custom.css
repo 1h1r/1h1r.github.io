@@ -97,52 +97,90 @@ body {
 }
 
 /* ===============================
- * 横幅 - 首页紧凑，内页完整显示
+ * 横幅 - 首页白云飘动，内页文字完整显示
  * =============================== */
 #page-header {
-  background: linear-gradient(180deg, #5C94FC 0%, #5C94FC 70%, #43B047 90%, #8B4513 90%, #8B4513 100%) !important;
   position: relative;
   overflow: hidden;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
 }
 
-/* 首页横幅保持紧凑 */
+/* 首页横幅 */
 #page-header:not(.not-top-img):not(.is-post) {
-  height: 280px !important;
-  max-height: 40vh !important;
+  height: 320px !important;
+  max-height: 45vh !important;
+  min-height: 200px !important;
 }
 
-/* 内页横幅 - 文字完整显示 */
+/* 内页横幅 - 确保文字完整显示 */
 #page-header.is-post {
   height: auto !important;
   min-height: 350px !important;
   max-height: none !important;
 }
 
-/* 文章标题不被截断 */
-#page-header #post-info {
-  padding: 40px 20px !important;
-  word-wrap: break-word !important;
+/* banner 背景图确保覆盖且居中 */
+#page-header:not(.not-top-img) {
+  background-size: cover !important;
+  background-position: center 30% !important;
 }
 
-#page-header #post-info .post-title {
-  font-size: 2em !important;
-  white-space: normal !important;
-  line-height: 1.3 !important;
-  color: white !important;
-  text-shadow: 3px 3px 0 var(--mario-red) !important;
+/* 首页 banner 白云飘动动画 */
+#page-header:not(.not-top-img):not(.is-post)::before,
+#page-header:not(.not-top-img):not(.is-post)::after {
+  content: '';
+  position: absolute;
+  top: 10%;
+  width: 120px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 50px;
+  z-index: 1;
+  pointer-events: none;
+  animation: cloudDrift 40s linear infinite;
 }
 
+#page-header:not(.not-top-img):not(.is-post)::before {
+  top: 8%;
+  width: 100px;
+  height: 40px;
+  animation-duration: 35s;
+  box-shadow: 30px -10px 0 -5px rgba(255,255,255,0.85),
+              60px -5px 0 -10px rgba(255,255,255,0.85),
+              -25px -5px 0 -8px rgba(255,255,255,0.85);
+}
+
+#page-header:not(.not-top-img):not(.is-post)::after {
+  top: 20%;
+  width: 80px;
+  height: 35px;
+  animation-duration: 50s;
+  animation-delay: -10s;
+  opacity: 0.7;
+  box-shadow: 25px -8px 0 -5px rgba(255,255,255,0.7),
+              50px -3px 0 -10px rgba(255,255,255,0.7),
+              -20px -3px 0 -8px rgba(255,255,255,0.7);
+}
+
+@keyframes cloudDrift {
+  from { transform: translateX(-200px); }
+  to { transform: translateX(calc(100vw + 200px)); }
+}
+
+/* 内页 banner 标题和副标题居中且完整 */
 #page-header #site-title,
 #page-header #site-subtitle,
 #page-header .site-info {
   padding-top: 20px !important;
+  position: relative;
+  z-index: 2;
 }
 
 #page-header:not(.not-top-img):before {
   background-color: transparent !important;
 }
-
-/* 首页横幅去除云朵装饰 - 简洁风格 */
 
 /* 网站标题动画 - 弹跳入场 */
 #site-title, #site-subtitle {
@@ -163,6 +201,78 @@ body {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
+}
+
+/* ===============================
+ * 独立浮动"回到首页"按钮 - 不依赖rightside容器
+ * =============================== */
+.float-home-btn {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--mario-red);
+  border: 3px solid var(--mario-brown);
+  box-shadow: 0 4px 0 var(--mario-brown), 0 6px 15px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 9998;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  animation: homeBtnPop 0.5s ease;
+}
+
+.float-home-btn:hover {
+  background: var(--mario-yellow);
+  color: var(--mario-red);
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 7px 0 var(--mario-brown), 0 10px 20px rgba(0,0,0,0.4);
+}
+
+.float-home-btn:active {
+  transform: translateY(0) scale(1);
+  box-shadow: 0 2px 0 var(--mario-brown);
+}
+
+@keyframes homeBtnPop {
+  0% { opacity: 0; transform: scale(0) rotate(-180deg); }
+  60% { opacity: 1; transform: scale(1.2) rotate(10deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+/* ===============================
+ * 复制链接按钮样式
+ * =============================== */
+.copy-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border-radius: 25px;
+  border: 2px solid var(--mario-blue);
+  background: var(--mario-blue);
+  color: white !important;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+.copy-link-btn:hover {
+  background: #0378B4;
+  border-color: #0378B4;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 0 rgba(0,0,0,0.3);
 }
 
 /* ===============================
