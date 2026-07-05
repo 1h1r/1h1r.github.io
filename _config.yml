@@ -1,0 +1,127 @@
+# Hexo Configuration
+## Docs: https://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site
+title: 亦然亦航
+subtitle: 双胞胎男孩的成长日记
+description: 记录双胞胎男孩亦然与亦航从幼儿园到大学的成长历程、兴趣爱好、趣味生活实践和学校课程
+keywords: 双胞胎,成长博客,儿童成长,亦然亦航,成长日记,亲子记录
+author: 亦然亦航
+language: zh-CN
+timezone: Asia/Shanghai
+
+# URL
+## Set your site url here. For GitHub Page, set url as 'https://username.github.io'
+url: https://1h1r.github.io
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+pretty_urls:
+  trailing_index: true
+  trailing_html: true
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+# Writing
+new_post_name: :title.md
+default_layout: post
+titlecase: false
+external_link:
+  enable: true
+  field: site
+  exclude: ''
+filename_case: 0
+render_drafts: false
+post_asset_folder: true
+relative_link: false
+future: true
+syntax_highlighter: highlight.js
+highlight:
+  line_number: true
+  auto_detect: false
+  tab_replace: ''
+  wrap: true
+  hljs: false
+prismjs:
+  preprocess: true
+  line_number: true
+  tab_replace: ''
+
+# Home page setting
+index_generator:
+  path: ''
+  per_page: 12
+  order_by: -date
+
+# Category & Tag
+default_category: uncategorized
+category_map:
+tag_map:
+
+# Metadata elements
+meta_generator: true
+
+# Date / Time format
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+updated_option: 'mtime'
+
+# Pagination
+per_page: 12
+pagination_dir: page
+
+# Include / Exclude file(s)
+include:
+exclude:
+ignore:
+
+# Extensions
+theme: butterfly
+
+# Deployment (GitHub Actions handles build & deploy automatically)
+deploy:
+  type: ''
+
+# Search
+search:
+  path: search.xml
+  field: post
+  content: true
+  format: html
+
+# Feed
+feed:
+  enable: true
+  type: atom
+  path: atom.xml
+  limit: 20
+
+# Sitemap
+sitemap:
+  path: sitemap.xml
+
+# Navigation
+nav:
+  - name: 首页
+    url: /
+    icon: fas fa-home
+  - name: 成长日记
+    url: /categories/
+    icon: fas fa-book-open
+  - name: 兴趣爱好
+    url: /tags/
+    icon: fas fa-heart
+  - name: 时间线
+    url: /archives/
+    icon: fas fa-timeline
+  - name: 关于我们
+    url: /about/
+    icon: fas fa-info-circle
