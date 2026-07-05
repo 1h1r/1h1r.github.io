@@ -270,7 +270,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // ===============================
   // 2. 淡入动画 - 管道弹出效果
   // ===============================
-  const observer = new IntersectionObserver((entries) => {
+  const scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('fade-in-up');
@@ -280,7 +280,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }, { threshold: 0.1 });
 
   document.querySelectorAll('.recent-post-item, .category-list-item, .tag-cloud-list a').forEach(el => {
-    observer.observe(el);
+    scrollObserver.observe(el);
   });
 
   // ===============================
