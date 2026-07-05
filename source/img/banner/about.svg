@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400" viewBox="0 0 1200 400">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E52521"/>
+      <stop offset="50%" style="stop-color:#FBD000"/>
+      <stop offset="100%" style="stop-color:#43B047"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="400" fill="url(#g)"/>
+  <text x="600" y="170" font-family="'ZCOOL KuaiLe', 'Arial', sans-serif" font-size="56" fill="white" text-anchor="middle" dominant-baseline="middle" font-weight="bold" stroke="#C84C0C" stroke-width="3">关于我们</text>
+  <text x="600" y="230" font-family="'ZCOOL KuaiLe', 'Arial', sans-serif" font-size="24" fill="#FBD000" text-anchor="middle" stroke="#C84C0C" stroke-width="1">亦然亦航</text>
+</svg>
