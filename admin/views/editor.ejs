@@ -1,0 +1,128 @@
+<!-- 文章编辑器 -->
+<div class="page-title-bar">
+  <h2>
+    <i class="fas fa-edit"></i>
+    <%= post ? '编辑文章' : '写新文章' %>
+  </h2>
+  <button class="btn btn-sm btn-success" onclick="savePost()">
+    <i class="fas fa-save"></i> 保存文章
+  </button>
+</div>
+
+<form id="postForm" onsubmit="return false;">
+  <input type="hidden" name="filename" value="<%= post ? post.filename : '' %>">
+  
+  <div class="editor-layout">
+    <!-- 左侧：编辑区 -->
+    <div class="editor-main">
+      <div class="form-group">
+        <label><i class="fas fa-heading"></i> 文章标题</label>
+        <input type="text" id="title" name="title" class="form-control" placeholder="请输入文章标题..." 
+               value="<%= post ? post.title : '' %>" required>
+      </div>
+
+      <div class="form-group">
+        <label><i class="fas fa-align-left"></i> 文章内容 (Markdown)</label>
+        <div class="editor-toolbar">
+          <button type="button" onclick="insertMarkdown('**','**','粗体')" title="粗体"><i class="fas fa-bold"></i></button>
+          <button type="button" onclick="insertMarkdown('*','*','斜体')" title="斜体"><i class="fas fa-italic"></i></button>
+          <button type="button" onclick="insertMarkdown('## ','','标题')" title="标题"><i class="fas fa-heading"></i></button>
+          <button type="button" onclick="insertMarkdown('> ','','引用')" title="引用"><i class="fas fa-quote-right"></i></button>
+          <button type="button" onclick="insertMarkdown('- ','','列表项')" title="列表"><i class="fas fa-list-ul"></i></button>
+          <button type="button" onclick="insertMarkdown('[','](url)','链接')" title="链接"><i class="fas fa-link"></i></button>
+          <button type="button" onclick="insertMarkdown('![','](img-url)','图片')" title="图片"><i class="fas fa-image"></i></button>
+          <button type="button" onclick="insertMarkdown('```\n','\n```','代码')" title="代码"><i class="fas fa-code"></i></button>
+          <button type="button" onclick="insertMarkdown('\n---\n','','分隔线')" title="分隔线"><i class="fas fa-minus"></i></button>
+          <button type="button" onclick="insertMarkdown('| 列1 | 列2 |\n|---|---|\n| 内容 | 内容 |','','表格')" title="表格"><i class="fas fa-table"></i></button>
+          <span class="toolbar-divider"></span>
+          <button type="button" onclick="togglePreview()" id="previewBtn" title="预览"><i class="fas fa-eye"></i> 预览</button>
+        </div>
+        <textarea id="content" name="content" class="form-control editor-textarea" placeholder="在这里输入文章内容..." 
+                  oninput="autoSave()"><%= post ? post.content : '' %></textarea>
+      </div>
+
+      <!-- 预览区 -->
+      <div id="previewArea" class="preview-area" style="display:none;">
+        <div class="preview-content" id="previewContent"></div>
+      </div>
+    </div>
+
+    <!-- 右侧：设置面板 -->
+    <div class="editor-sidebar">
+      <div class="settings-panel">
+        <h4><i class="fas fa-cog"></i> 文章设置</h4>
+        
+        <div class="form-group">
+          <label><i class="fas fa-calendar"></i> 发布日期</label>
+          <input type="text" id="date" name="date" class="form-control" placeholder="2026-09-01 08:00:00"
+                 value="<%= post ? post.date : '' %>">
+        </div>
+
+        <div class="form-group">
+          <label><i class="fas fa-folder"></i> 分类</label>
+          <input type="text" id="categories" name="categories" class="form-control" placeholder="幼儿园, 生活"
+                 value="<%= post && post.categories ? (Array.isArray(post.categories) ? post.categories.join(', ') : post.categories) : '' %>">
+          <div class="tag-suggestions">
+            <% categories.forEach(cat => { %>
+              <span class="tag-suggestion" onclick="addCategory('<%= cat.name %>')"><%= cat.name %></span>
+            <% }) %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label><i class="fas fa-tags"></i> 标签</label>
+          <input type="text" id="tags" name="tags" class="form-control" placeholder="亦然, 亦航, 成长"
+                 value="<%= post && post.tags ? (Array.isArray(post.tags) ? post.tags.join(', ') : post.tags) : '' %>">
+          <div class="tag-suggestions">
+            <% tags.forEach(tag => { %>
+              <span class="tag-suggestion" onclick="addTag('<%= tag.name %>')"><%= tag.name %></span>
+            <% }) %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label><i class="fas fa-image"></i> 封面图片</label>
+          <input type="text" id="cover" name="cover" class="form-control" placeholder="/img/cover/default.svg"
+                 value="<%= post ? post.cover || '' : '' %>">
+          <button type="button" class="btn btn-sm btn-outline btn-block" onclick="selectCover()">
+            <i class="fas fa-image"></i> 从媒体库选择
+          </button>
+        </div>
+
+        <div class="form-group">
+          <label><i class="fas fa-align-right"></i> 摘要描述</label>
+          <textarea id="description" name="description" class="form-control" rows="3" placeholder="文章摘要..."><%= post ? post.description || '' : '' %></textarea>
+        </div>
+
+        <div class="form-group">
+          <label><i class="fas fa-star"></i> 置顶权重</label>
+          <input type="number" id="top" name="top" class="form-control" placeholder="0" min="0"
+                 value="<%= post ? post.top || 0 : 0 %>">
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" name="draft" <%= post && post.draft ? 'checked' : '' %>>
+            <span>存为草稿</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- AI写作助手 -->
+      <div class="settings-panel ai-panel">
+        <h4><i class="fas fa-robot"></i> AI写作助手</h4>
+        <div class="ai-actions">
+          <button type="button" class="btn btn-sm btn-outline btn-block" onclick="aiSuggestTitle()">
+            <i class="fas fa-lightbulb"></i> 智能推荐标题
+          </button>
+          <button type="button" class="btn btn-sm btn-outline btn-block" onclick="aiGenerateSummary()">
+            <i class="fas fa-align-right"></i> 自动生成摘要
+          </button>
+          <button type="button" class="btn btn-sm btn-outline btn-block" onclick="aiOptimizeContent()">
+            <i class="fas fa-magic"></i> 内容优化
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

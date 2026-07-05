@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>亦然亦航 - 管理后台</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --pk: #FF6B8A;
+      --bl: #5C94FC;
+      --gn: #43B047;
+      --yl: #FBD000;
+      --or: #FF8C42;
+      --pr: #9B59B6;
+      --bg: #FFF8F0;
+      --card: #FFFFFF;
+      --txt: #4A3728;
+      --mt: #999;
+      --bd: #F0E6DC;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Noto Sans SC', sans-serif;
+      background: var(--bg);
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(255,107,138,0.08) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(92,148,252,0.08) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(251,208,0,0.05) 0%, transparent 60%);
+      color: var(--txt);
+      min-height: 100vh;
+    }
+    /* === LOGIN === */
+    .login-wrap {
+      display: flex; justify-content: center; align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #FFF8F0 0%, #FFE8D6 30%, #D6ECFF 70%, #FFF8F0 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .login-wrap::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ctext x='10' y='45' font-size='30'%3E⭐%3C/text%3E%3C/svg%3E") repeat;
+      opacity: 0.06; pointer-events: none;
+    }
+    .login-card {
+      background: white;
+      border-radius: 24px;
+      padding: 45px 40px;
+      width: 420px;
+      max-width: 95vw;
+      box-shadow: 0 10px 50px rgba(0,0,0,0.1), 0 0 0 1px rgba(255,107,138,0.1);
+      position: relative;
+      z-index: 1;
+      border: 3px solid #FFD1DC;
+    }
+    .login-card .logo-icon {
+      text-align: center; font-size: 60px;
+      margin-bottom: 10px;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .login-card h1 {
+      font-family: 'ZCOOL KuaiLe', sans-serif;
+      text-align: center; color: var(--pk);
+      font-size: 30px; margin-bottom: 5px;
+    }
+    .login-card .sub {
+      text-align: center; color: var(--mt);
+      font-size: 14px; margin-bottom: 30px;
+    }
+    .login-card .field-label {
+      font-size: 13px; color: var(--txt);
+      font-weight: 600; margin-bottom: 6px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .login-card input {
+      width: 100%; padding: 14px 18px;
+      background: #FFFBF6;
+      border: 2px solid #F0E6DC;
+      border-radius: 14px;
+      font-size: 15px; font-family: inherit;
+      margin-bottom: 18px;
+      transition: all 0.3s;
+      color: var(--txt);
+    }
+    .login-card input:focus {
+      outline: none;
+      border-color: var(--pk);
+      box-shadow: 0 0 0 4px rgba(255,107,138,0.1);
+    }
+    .login-btn {
+      width: 100%; padding: 15px;
+      background: linear-gradient(135deg, #FF6B8A, #FF8C42);
+      border: none; border-radius: 14px;
+      color: white; font-size: 17px; font-weight: 700;
+      cursor: pointer; transition: all 0.3s;
+      font-family: 'Noto Sans SC', sans-serif;
+      box-shadow: 0 4px 15px rgba(255,107,138,0.3);
+    }
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(255,107,138,0.4);
+    }
+    .login-error {
+      background: rgba(255,80,80,0.1);
+      border: 1px solid #ff5050;
+      border-radius: 12px; padding: 10px 16px;
+      color: #d32f2f; font-size: 13px;
+      margin-bottom: 16px; display: none;
+    }
+    .login-hint {
+      font-size: 12px; color: var(--mt);
+      margin-top: 20px; text-align: center; line-height: 1.6;
+    }
+    /* === DASHBOARD === */
+    .dashboard { display: none; }
+    .dashboard.active { display: block; }
+    .topbar {
+      background: white;
+      border-bottom: 2px solid var(--bd);
+      padding: 0 28px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    }
+    .topbar-l {
+      display: flex; align-items: center; gap: 14px;
+    }
+    .topbar-logo {
+      font-family: 'ZCOOL KuaiLe', sans-serif;
+      color: var(--pk); font-size: 22px;
+    }
+    .topbar-badge {
+      background: linear-gradient(135deg, var(--pk), var(--or));
+      color: white; padding: 4px 14px; border-radius: 20px;
+      font-size: 11px; font-weight: 600;
+    }
+    .topbar-r { display: flex; align-items: center; gap: 10px; }
+    .tbtn {
+      background: var(--bg);
+      border: 2px solid var(--bd);
+      color: var(--txt); padding: 8px 18px;
+      border-radius: 12px; cursor: pointer; font-size: 14px;
+      transition: all 0.3s; display: flex; align-items: center; gap: 6px;
+      font-family: inherit;
+    }
+    .tbtn:hover { background: var(--pk); color: white; border-color: var(--pk); }
+    .main-layout { display: flex; min-height: calc(100vh - 64px); }
+    .sidebar {
+      width: 230px; background: white;
+      border-right: 2px solid var(--bd);
+      padding: 24px 0; flex-shrink: 0;
+    }
+    .sidebar .s-group {
+      padding: 0 16px; margin-bottom: 12px;
+      font-size: 11px; color: var(--mt);
+      text-transform: uppercase; letter-spacing: 1px;
+      font-weight: 700;
+    }
+    .s-item {
+      padding: 11px 20px; margin: 0 10px;
+      cursor: pointer; transition: all 0.3s;
+      display: flex; align-items: center; gap: 10px;
+      color: var(--txt); font-size: 14px;
+      border-radius: 10px;
+      font-weight: 500;
+    }
+    .s-item:hover { background: #FFF0F3; color: var(--pk); }
+    .s-item.active { background: linear-gradient(135deg, #FFF0F3, #FFF0E6); color: var(--pk); font-weight: 700; }
+    .s-item .s-ico { width: 22px; text-align: center; font-size: 16px; }
+    .content-area {
+      flex: 1; padding: 32px;
+      overflow-y: auto; max-height: calc(100vh - 64px);
+    }
+    .page-section { display: none; }
+    .page-section.active { display: block; }
+    .page-title {
+      font-family: 'ZCOOL KuaiLe', sans-serif;
+      font-size: 26px; color: var(--txt);
+      margin-bottom: 28px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .page-title .p-ico { font-size: 28px; }
+    /* Cards */
+    .card {
+      background: white;
+      border: 2px solid var(--bd);
+      border-radius: 16px;
+      padding: 24px; margin-bottom: 20px;
+      transition: all 0.3s;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+    }
+    .card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+    .card-title {
+      font-size: 17px; font-weight: 700;
+      color: var(--txt); margin-bottom: 18px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    /* Form */
+    .form-group { margin-bottom: 18px; }
+    .form-label {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 13px; color: var(--txt);
+      font-weight: 600; margin-bottom: 6px;
+    }
+    .form-input, .form-textarea, .form-select {
+      width: 100%; padding: 12px 16px;
+      background: #FFFBF6;
+      border: 2px solid var(--bd);
+      border-radius: 12px;
+      font-size: 14px; font-family: inherit;
+      color: var(--txt);
+      transition: all 0.3s;
+    }
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      outline: none;
+      border-color: var(--pk);
+      box-shadow: 0 0 0 3px rgba(255,107,138,0.08);
+    }
+    .form-textarea {
+      min-height: 200px; resize: vertical;
+      font-family: 'Consolas','Monaco',monospace;
+      font-size: 13px; line-height: 1.7;
+    }
+    .form-textarea.md-ed { min-height: 420px; }
+    .form-row { display: flex; gap: 14px; }
+    .form-row .form-group { flex: 1; }
+    .form-hint { font-size: 12px; color: var(--mt); margin-top: 4px; }
+    /* Buttons */
+    .btn {
+      padding: 10px 22px;
+      border: none; border-radius: 12px;
+      font-size: 14px; font-weight: 600;
+      cursor: pointer; transition: all 0.3s;
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: inherit;
+    }
+    .btn-pk { background: var(--pk); color: white; box-shadow: 0 3px 12px rgba(255,107,138,0.25); }
+    .btn-pk:hover { background: #ff5277; transform: translateY(-1px); }
+    .btn-bl { background: var(--bl); color: white; box-shadow: 0 3px 12px rgba(92,148,252,0.25); }
+    .btn-bl:hover { background: #4a85f0; transform: translateY(-1px); }
+    .btn-gn { background: var(--gn); color: white; box-shadow: 0 3px 12px rgba(67,176,71,0.25); }
+    .btn-gn:hover { background: #3a9d3e; transform: translateY(-1px); }
+    .btn-or { background: var(--or); color: white; box-shadow: 0 3px 12px rgba(255,140,66,0.25); }
+    .btn-pr { background: var(--pr); color: white; box-shadow: 0 3px 12px rgba(155,89,182,0.25); }
+    .btn-ghost {
+      background: var(--bg); color: var(--txt);
+      border: 2px solid var(--bd);
+    }
+    .btn-ghost:hover { border-color: var(--pk); background: #FFF0F3; }
+    .btn-danger {
+      background: rgba(255,80,80,0.1); color: #d32f2f;
+      border: 1px solid rgba(255,80,80,0.2);
+    }
+    .btn-danger:hover { background: #ff5050; color: white; }
+    .btn-sm { padding: 6px 14px; font-size: 13px; }
+    .btn-xs { padding: 4px 10px; font-size: 12px; border-radius: 8px; }
+    .btn-group { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+    /* Post list */
+    .post-list { display: flex; flex-direction: column; gap: 8px; }
+    .post-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 15px 18px;
+      background: #FFFBF6;
+      border: 2px solid var(--bd);
+      border-radius: 12px;
+      transition: all 0.3s;
+    }
+    .post-item:hover {
+      background: white;
+      border-color: var(--yl);
+      box-shadow: 0 2px 12px rgba(251,208,0,0.1);
+    }
+    .post-info { flex: 1; }
+    .post-pt { font-size: 15px; font-weight: 600; color: var(--txt); }
+    .post-pm { font-size: 12px; color: var(--mt); margin-top: 4px; }
+    .post-actions { display: flex; gap: 8px; }
+    /* Toast */
+    .toast {
+      position: fixed; bottom: 28px; right: 28px;
+      padding: 14px 24px; border-radius: 14px;
+      font-size: 14px; font-weight: 600;
+      z-index: 9999;
+      transform: translateY(100px); opacity: 0;
+      transition: all 0.4s;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast-success { background: var(--gn); color: white; }
+    .toast-error { background: #ff5050; color: white; }
+    .toast-info { background: var(--bl); color: white; }
+    /* Loading */
+    .loading-overlay {
+      position: fixed; inset: 0;
+      background: rgba(255,255,255,0.7);
+      display: none; justify-content: center; align-items: center;
+      z-index: 9998;
+    }
+    .loading-overlay.active { display: flex; }
+    .loading-box {
+      background: white; padding: 30px 45px;
+      border-radius: 18px; text-align: center;
+      border: 2px solid var(--bd);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    }
+    .loading-box p { margin-top: 12px; color: var(--txt); }
+    .spinner {
+      display: inline-block;
+      width: 36px; height: 36px;
+      border: 4px solid #F0E6DC;
+      border-top-color: var(--pk);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    /* Badges */
+    .badge {
+      display: inline-block; padding: 3px 10px;
+      border-radius: 8px; font-size: 11px; font-weight: 600;
+    }
+    .badge-bl { background: rgba(92,148,252,0.12); color: var(--bl); }
+    .badge-gn { background: rgba(67,176,71,0.12); color: var(--gn); }
+    .badge-yl { background: rgba(251,208,0,0.15); color: #B8860B; }
+    .badge-pk { background: rgba(255,107,138,0.12); color: var(--pk); }
+    .badge-pr { background: rgba(155,89,182,0.12); color: var(--pr); }
+    /* Deploy status */
+    .deploy-status {
+      display: flex; align-items: center; gap: 12px;
+      padding: 16px 20px; border-radius: 14px; margin-bottom: 16px;
+    }
+    .deploy-idle { background: rgba(67,176,71,0.08); border: 1px solid rgba(67,176,71,0.2); }
+    .deploy-building { background: rgba(251,208,0,0.08); border: 1px solid rgba(251,208,0,0.2); }
+    .ds-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .deploy-idle .ds-dot { background: var(--gn); }
+    .deploy-building .ds-dot { background: var(--yl); animation: pulse 1s ease infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    /* Editor toolbar */
+    .editor-bar { display: flex; gap: 8px; margin-bottom: 10px; align-items: center; }
+    .em-btn {
+      padding: 4px 14px; font-size: 12px;
+      border-radius: 8px; cursor: pointer;
+      border: 2px solid var(--bd); background: var(--bg);
+      color: var(--mt); font-family: inherit;
+    }
+    .em-btn.active { background: var(--yl); color: var(--txt); border-color: var(--yl); }
+    .md-preview {
+      background: white; color: var(--txt);
+      padding: 20px; border-radius: 14px;
+      min-height: 200px; line-height: 1.8;
+      border: 1px solid var(--bd);
+    }
+    .md-preview h1 { font-size: 24px; margin: 16px 0 8px; color: var(--pk); }
+    .md-preview h2 { font-size: 20px; margin: 14px 0 6px; color: var(--bl); }
+    .md-preview h3 { font-size: 18px; margin: 12px 0 4px; color: var(--gn); }
+    .md-preview p { margin: 8px 0; }
+    .md-preview ul, .md-preview ol { margin: 8px 0; padding-left: 24px; }
+    .md-preview blockquote {
+      border-left: 4px solid var(--yl); padding: 8px 16px;
+      margin: 10px 0; background: rgba(251,208,0,0.05);
+    }
+    .md-preview code { background: rgba(0,0,0,0.06); padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+    .md-preview pre { background: #2C2C3A; color: #e0e0e0; padding: 14px; border-radius: 10px; overflow-x: auto; }
+    .md-preview table { border-collapse: collapse; width: 100%; margin: 10px 0; }
+    .md-preview th, .md-preview td { border: 1px solid #ddd; padding: 8px 12px; }
+    .md-preview th { background: var(--pk); color: white; }
+    .md-preview img { max-width: 100%; border-radius: 10px; }
+    /* Stats quick cards */
+    .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 14px; margin-bottom: 24px; }
+    .stat-card {
+      background: white; border: 2px solid var(--bd);
+      border-radius: 14px; padding: 20px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .stat-ico { font-size: 36px; }
+    .stat-val { font-size: 28px; font-weight: 800; color: var(--txt); }
+    .stat-lbl { font-size: 13px; color: var(--mt); }
+    /* 可爱装饰 */
+    .cute-emoji { font-size: 20px; }
+    /* Responsive */
+    @media (max-width: 768px) {
+      .sidebar { width: 60px; }
+      .s-item span, .s-group { display: none; }
+      .content-area { padding: 16px; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="loginScreen">
+  <div class="login-card">
+    <div class="logo-icon">🍄</div>
+    <h1>亦然亦航</h1>
+    <p class="sub">⭐ 双胞胎成长博客 · 管理后台</p>
+    <div class="login-error" id="loginError"></div>
+    <div class="field-label">🔐 管理密码</div>
+    <input type="password" id="loginPassword" placeholder="请输入管理员密码" autocomplete="off">
+    <div class="field-label">🔑 GitHub Token</div>
+    <input type="password" id="loginToken" placeholder="ghp_xxxxxxxxxxxx" autocomplete="off">
+    <div class="form-hint" style="margin-bottom:20px">Token 仅存储在浏览器本地，不会上传</div>
+    <button class="login-btn" onclick="doLogin()">✨ 进入后台</button>
+    <p class="login-hint">忘记密码？请联系管理员重置</p>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dashboard" id="dashboard">
+  <div class="topbar">
+    <div class="topbar-l">
+      <span class="topbar-logo">🍄 亦然亦航</span>
+      <span class="topbar-badge">管理后台</span>
+    </div>
+    <div class="topbar-r">
+      <a href="/" target="_blank" class="tbtn"><i class="fas fa-home"></i> 访问博客</a>
+      <button class="tbtn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> 退出</button>
+    </div>
+  </div>
+
+  <div class="main-layout">
+    <div class="sidebar">
+      <div class="s-group">📝 内容管理</div>
+      <div class="s-item active" data-page="posts" onclick="switchPage('posts')">
+        <span class="s-ico">📑</span> <span>文章管理</span>
+      </div>
+      <div class="s-item" data-page="pages" onclick="switchPage('pages')">
+        <span class="s-ico">📄</span> <span>页面管理</span>
+      </div>
+      <div class="s-group">⚙️ 系统设置</div>
+      <div class="s-item" data-page="settings" onclick="switchPage('settings')">
+        <span class="s-ico">🏠</span> <span>站点信息</span>
+      </div>
+      <div class="s-item" data-page="theme" onclick="switchPage('theme')">
+        <span class="s-ico">🎨</span> <span>主题样式</span>
+      </div>
+      <div class="s-item" data-page="menu" onclick="switchPage('menu')">
+        <span class="s-ico">📋</span> <span>导航菜单</span>
+      </div>
+      <div class="s-group">🔧 高级</div>
+      <div class="s-item" data-page="custom-css" onclick="switchPage('custom-css')">
+        <span class="s-ico">💅</span> <span>自定义CSS</span>
+      </div>
+      <div class="s-item" data-page="custom-js" onclick="switchPage('custom-js')">
+        <span class="s-ico">⚡</span> <span>自定义JS</span>
+      </div>
+      <div class="s-item" data-page="deploy" onclick="switchPage('deploy')">
+        <span class="s-ico">🚀</span> <span>部署管理</span>
+      </div>
+    </div>
+
+    <div class="content-area">
+
+      <!-- 文章管理 -->
+      <div class="page-section active" id="page-posts">
+        <h2 class="page-title"><span class="p-ico">📑</span> 文章管理</h2>
+        <div class="stats-row" id="post-stats"></div>
+        <div class="card">
+          <div class="card-title">📝 文章列表
+            <button class="btn btn-gn btn-sm" style="margin-left:auto" onclick="newPost()">
+              <i class="fas fa-plus"></i> 新建文章
+            </button>
+          </div>
+          <div class="post-list" id="postList">
+            <p style="color:var(--mt);text-align:center;padding:30px"><span class="spinner"></span> 加载中...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 文章编辑器 -->
+      <div class="page-section" id="page-post-edit">
+        <h2 class="page-title"><span class="p-ico">✏️</span> 编辑文章</h2>
+        <div class="card">
+          <div class="card-title">📋 文章信息</div>
+          <div class="form-row">
+            <div class="form-group">
+              <span class="form-label">标题</span>
+              <input type="text" class="form-input" id="postTitle" placeholder="文章标题">
+            </div>
+            <div class="form-group">
+              <span class="form-label">日期</span>
+              <input type="text" class="form-input" id="postDate" placeholder="2026-07-31 10:00:00">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <span class="form-label">分类</span>
+              <input type="text" class="form-input" id="postCategories" placeholder="幼儿园时光">
+            </div>
+            <div class="form-group">
+              <span class="form-label">标签（逗号分隔）</span>
+              <input type="text" class="form-input" id="postTags" placeholder="亦然,亦航,趣事">
+            </div>
+          </div>
+          <div class="form-group">
+            <span class="form-label">封面图 URL（可选）</span>
+            <input type="text" class="form-input" id="postCover" placeholder="/img/cover/default.jpg">
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">📝 Markdown 正文
+            <div style="margin-left:auto;display:flex;gap:6px">
+              <button class="em-btn active" onclick="setPostEditorMode('edit')">编辑</button>
+              <button class="em-btn" onclick="setPostEditorMode('preview')">预览</button>
+            </div>
+          </div>
+          <textarea class="form-textarea md-ed" id="postContent" placeholder="在此输入 Markdown 内容..."></textarea>
+          <div id="postPreview" style="display:none"></div>
+          <div class="btn-group">
+            <button class="btn btn-pk" onclick="savePost()"><i class="fas fa-save"></i> 保存文章</button>
+            <button class="btn btn-ghost" onclick="switchPage('posts')"><i class="fas fa-arrow-left"></i> 返回列表</button>
+            <button class="btn btn-danger" id="deletePostBtn" style="margin-left:auto;display:none" onclick="deletePost()">
+              <i class="fas fa-trash"></i> 删除文章
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 页面管理 -->
+      <div class="page-section" id="page-pages">
+        <h2 class="page-title"><span class="p-ico">📄</span> 页面管理</h2>
+        <div class="card">
+          <div class="card-title">📖 关于亦航亦然</div>
+          <div class="editor-bar">
+            <button class="em-btn active" onclick="setPageEditorMode('edit','about')">编辑</button>
+            <button class="em-btn" onclick="setPageEditorMode('preview','about')">预览</button>
+          </div>
+          <textarea class="form-textarea md-ed" id="aboutContent" placeholder="关于页面内容..."></textarea>
+          <div id="aboutPreview" style="display:none"></div>
+          <div class="btn-group">
+            <button class="btn btn-pk" onclick="saveAboutPage()"><i class="fas fa-save"></i> 保存</button>
+            <button class="btn btn-ghost" onclick="loadAboutPage()"><i class="fas fa-sync"></i> 重新加载</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 站点信息 -->
+      <div class="page-section" id="page-settings">
+        <h2 class="page-title"><span class="p-ico">🏠</span> 站点信息设置</h2>
+        <div class="card">
+          <div class="card-title">📝 基本信息（_config.yml）</div>
+          <div class="form-row">
+            <div class="form-group">
+              <span class="form-label">网站标题</span>
+              <input type="text" class="form-input" id="siteTitle" placeholder="亦然亦航">
+            </div>
+            <div class="form-group">
+              <span class="form-label">副标题</span>
+              <input type="text" class="form-input" id="siteSubtitle" placeholder="记录双胞胎帅哥亦然与亦航的日常">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <span class="form-label">网站描述</span>
+              <input type="text" class="form-input" id="siteDescription" placeholder="SEO描述">
+            </div>
+            <div class="form-group">
+              <span class="form-label">关键词</span>
+              <input type="text" class="form-input" id="siteKeywords" placeholder="双胞胎,成长博客,亦然亦航">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <span class="form-label">网站URL</span>
+              <input type="text" class="form-input" id="siteUrl" placeholder="http://www.1r1h.com">
+            </div>
+            <div class="form-group">
+              <span class="form-label">作者</span>
+              <input type="text" class="form-input" id="siteAuthor" placeholder="亦然亦航">
+            </div>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-pk" onclick="saveSiteSettings()"><i class="fas fa-save"></i> 保存</button>
+            <button class="btn btn-ghost" onclick="loadSiteSettings()"><i class="fas fa-sync"></i> 重新加载</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">💬 侧边栏公告 + 社交链接</div>
+          <div class="form-group">
+            <span class="form-label">公告文字</span>
+            <input type="text" class="form-input" id="announceContent" placeholder="this is our blog">
+          </div>
+          <div class="form-group">
+            <span class="form-label">页脚文字</span>
+            <input type="text" class="form-input" id="footerText" placeholder="亦然亦航 | 用爱记录双胞胎的每一天">
+          </div>
+          <div class="form-group">
+            <span class="form-label">社交链接（每行一个：图标class | URL | 显示名称）</span>
+            <textarea class="form-textarea" id="socialLinks" style="min-height:100px;font-family:monospace;font-size:13px" placeholder="fas fa-home | http://www.1r1h.com | 亦然亦航&#10;fab fa-github | https://github.com/1h1r | GitHub&#10;fas fa-envelope | mailto:contact@1r1h.com | 邮箱"></textarea>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-pk" onclick="saveAnnounceAndFooter()"><i class="fas fa-save"></i> 保存</button>
+            <button class="btn btn-ghost" onclick="loadAnnounceAndFooter()"><i class="fas fa-sync"></i> 重新加载</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 主题样式 -->
+      <div class="page-section" id="page-theme">
+        <h2 class="page-title"><span class="p-ico">🎨</span> 主题样式配置</h2>
+        <div class="card">
+          <div class="card-title">🎨 主题配色 + 全局配置（_config.butterfly.yml）</div>
+          <div class="editor-bar">
+            <button class="em-btn active" onclick="setThemeEditorMode('edit')">编辑</button>
+            <button class="em-btn" onclick="setThemeEditorMode('preview')">预览</button>
+          </div>
+          <textarea class="form-textarea md-ed" id="butterflyConfig" style="font-family:monospace;font-size:12px;min-height:500px"></textarea>
+          <div id="butterflyPreview" style="display:none"></div>
+          <div class="btn-group">
+            <button class="btn btn-pk" onclick="saveButterflyConfig()"><i class="fas fa-save"></i> 保存主题配置</button>
+            <button class="btn btn-ghost" onclick="loadThemeConfig()"><i class="fas fa-sync"></i> 重新加载</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 导航菜单 -->
+      <div class="page-section" id="page-menu">
+        <h2 class="page-title"><span class="p-ico">📋</span> 导航菜单</h2>
+        <div class="card">
+          <div class="card-title">🔗 菜单项
+            <button class="btn btn-gn btn-sm" style="margin-left:auto" onclick="addMenuItem()">
+              <i class="fas fa-plus"></i> 添加
+            </button>
+          </div>
+          <div id="menuList"></div>
+          <div class="btn-group">
+            <button class="btn btn-pk" onclick="saveMenu()"><i class="fas fa-save"></i> 保存菜单</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 自定义CSS -->
+      <div class="page-section" id="page-custom-css">
+        <h2 class="page-title"><span class="p-ico">💅</span> 自定义 CSS</h2>
+        <div class="card">
+          <div class="card-title">🎨 source/css/custom.css</div>
+          <textarea class="form-textarea" id="customCSS" style="min-height:600px;font-family:monospace;font-size:12px" placeholder="/* 自定义CSS样式 */"></textarea>
+          <div class="btn-group">
+            <button class="btn btn-pk" onclick="saveCustomCSS()"><i class="fas fa-save"></i> 保存CSS</button>
+            <button class="btn btn-ghost" onclick="loadCustomCSS()"><i class="fas fa-sync"></i> 重新加载</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 自定义JS -->
+      <div class="page-section" id="page-custom-js">
+        <h2 class="page-title"><span class="p-ico">⚡</span> 自定义 JavaScript</h2>
+        <div class="card">
+          <div class="card-title">⚡ source/js/custom.js</div>
+          <textarea class="form-textarea" id="customJS" style="min-height:600px;font-family:monospace;font-size:12px" placeholder="// 自定义JavaScript代码"></textarea>
+          <div class="btn-group">
+            <button class="btn btn-pk" onclick="saveCustomJS()"><i class="fas fa-save"></i> 保存JS</button>
+            <button class="btn btn-ghost" onclick="loadCustomJS()"><i class="fas fa-sync"></i> 重新加载</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 部署管理 -->
+      <div class="page-section" id="page-deploy">
+        <h2 class="page-title"><span class="p-ico">🚀</span> 部署管理</h2>
+        <div class="card">
+          <div class="card-title">📊 部署状态</div>
+          <div class="deploy-status deploy-idle" id="deployStatusBox">
+            <div class="ds-dot"></div>
+            <span id="deployStatusText">检查中...</span>
+          </div>
+          <div style="padding:14px;background:#FFFBF6;border-radius:12px;font-family:monospace;font-size:13px;line-height:1.8">
+            📦 仓库: 1h1r/1h1r.github.io<br>
+            🌿 源码分支: source<br>
+            🚀 部署分支: main<br>
+            🌐 站点: <a href="http://www.1r1h.com" target="_blank" style="color:var(--pk)">http://www.1r1h.com</a>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-pk" onclick="triggerBuild()"><i class="fas fa-play"></i> 触发重新构建</button>
+            <button class="btn btn-ghost" onclick="checkDeployStatus()"><i class="fas fa-sync"></i> 刷新状态</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">📜 最近部署记录</div>
+          <div id="deployHistory">
+            <p style="color:var(--mt)">点击"刷新状态"查看部署记录</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Loading -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loading-box">
+    <div class="spinner"></div>
+    <p id="loadingText">处理中...</p>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ==================== CONFIG ====================
+const CONFIG = {
+  repo: '1h1r/1h1r.github.io',
+  branch: 'source',
+  apiBase: 'https://api.github.com'
+};
+
+let token = null;
+let currentPostFile = null;
+let postEditorMode = 'edit';
+let pageEditorMode = 'edit';
+let themeEditorMode = 'edit';
+
+// ==================== AUTH ====================
+function showLoginError(msg) {
+  const el = document.getElementById('loginError');
+  el.textContent = msg; el.style.display = 'block';
+  setTimeout(() => el.style.display = 'none', 5000);
+}
+
+async function doLogin() {
+  const pwd = document.getElementById('loginPassword').value;
+  const tkn = document.getElementById('loginToken').value.trim();
+
+  if (!pwd || !tkn) { showLoginError('请输入密码和Token'); return; }
+  if (!tkn.startsWith('ghp_') && !tkn.startsWith('github_pat_')) {
+    showLoginError('Token 格式不正确'); return;
+  }
+
+  // Check password
+  if (pwd !== 'admin20230731') {
+    showLoginError('密码错误 🔒'); return;
+  }
+
+  try {
+    const resp = await fetch(`${CONFIG.apiBase}/repos/${CONFIG.repo}`, {
+      headers: { 'Authorization': `token ${tkn}`, 'Accept': 'application/vnd.github.v3+json' }
+    });
+    if (!resp.ok) throw new Error('Token 无效或无权限');
+    
+    token = tkn;
+    localStorage.setItem('admin_token', tkn);
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('dashboard').classList.add('active');
+    showToast('登录成功！🍄', 'success');
+    loadPosts();
+  } catch (e) {
+    showLoginError('Token 验证失败：' + e.message);
+  }
+}
+
+function logout() {
+  token = null;
+  localStorage.removeItem('admin_token');
+  location.reload();
+}
+
+// Auto-login
+window.addEventListener('DOMContentLoaded', async () => {
+  const savedToken = localStorage.getItem('admin_token');
+  if (savedToken) {
+    try {
+      const resp = await fetch(`${CONFIG.apiBase}/repos/${CONFIG.repo}`, {
+        headers: { 'Authorization': `token ${savedToken}`, 'Accept': 'application/vnd.github.v3+json' }
+      });
+      if (resp.ok) {
+        token = savedToken;
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('dashboard').classList.add('active');
+        loadPosts();
+        return;
+      }
+    } catch(e) {}
+  }
+});
+
+['loginPassword','loginToken'].forEach(id => {
+  document.getElementById(id).addEventListener('keypress', e => {
+    if (e.key === 'Enter') {
+      if (id === 'loginPassword') document.getElementById('loginToken').focus();
+      else doLogin();
+    }
+  });
+});
+
+// ==================== GITHUB API ====================
+async function ghGet(path) {
+  const resp = await fetch(`${CONFIG.apiBase}/repos/${CONFIG.repo}/contents/${path}?ref=${CONFIG.branch}`, {
+    headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+  });
+  if (!resp.ok) throw new Error(`GitHub API: ${resp.status}`);
+  return resp.json();
+}
+
+async function ghPut(path, content, sha, message) {
+  const body = { message: message || `Update ${path}`, content: btoa(unescape(encodeURIComponent(content))), branch: CONFIG.branch };
+  if (sha) body.sha = sha;
+  const resp = await fetch(`${CONFIG.apiBase}/repos/${CONFIG.repo}/contents/${path}`, {
+    method: 'PUT', headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  if (!resp.ok) { const err = await resp.json(); throw new Error(`保存失败: ${err.message || resp.status}`); }
+  return resp.json();
+}
+
+async function ghDelete(path, sha, msg) {
+  const resp = await fetch(`${CONFIG.apiBase}/repos/${CONFIG.repo}/contents/${path}`, {
+    method: 'DELETE', headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: msg || `Delete ${path}`, sha, branch: CONFIG.branch })
+  });
+  if (!resp.ok) throw new Error(`删除失败: ${resp.status}`);
+  return resp.json();
+}
+
+function decodeB64(b64) { return decodeURIComponent(escape(atob(b64))); }
+
+// ==================== PAGE SWITCH ====================
+function switchPage(page) {
+  document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.sidebar-item').forEach(s => s.classList.remove('active'));
+
+  const targetId = page === 'post-edit' ? 'page-post-edit' : `page-${page}`;
+  const target = document.getElementById(targetId);
+  if (target) target.classList.add('active');
+
+  const sitem = document.querySelector(`.sidebar-item[data-page="${page === 'post-edit' ? 'posts' : page}"]`);
+  if (sitem) sitem.classList.add('active');
+
+  if (page === 'posts') loadPosts();
+  if (page === 'pages') loadAboutPage();
+  if (page === 'menu') loadMenu();
+  if (page === 'theme') loadThemeConfig();
+  if (page === 'settings') loadSiteSettings();
+  if (page === 'custom-css') loadCustomCSS();
+  if (page === 'custom-js') loadCustomJS();
+  if (page === 'deploy') checkDeployStatus();
+}
+
+// ==================== POSTS ====================
+async function loadPosts() {
+  showLoading('加载文章列表...');
+  try {
+    const files = await ghGet('source/_posts');
+    const postList = document.getElementById('postList');
+    postList.innerHTML = '';
+    if (!Array.isArray(files) || files.length === 0) {
+      postList.innerHTML = '<p style="color:var(--mt);text-align:center;padding:30px">暂无文章 📝</p>';
+      hideLoading(); return;
+    }
+    files.sort((a, b) => b.name.localeCompare(a.name));
+    let catCount = {};
+    for (const file of files) {
+      if (!file.name.endsWith('.md')) continue;
+      let title = file.name.replace('.md', ''), date = '', categories = '', tags = '';
+      try {
+        const f = await ghGet(`source/_posts/${file.name}`);
+        const c = decodeB64(f.content);
+        title = c.match(/^title:\s*(.+)$/m)?.[1]?.trim()?.replace(/['"]/g, '') || title;
+        date = c.match(/^date:\s*(.+)$/m)?.[1]?.trim() || '';
+        categories = c.match(/^categories:\s*(.+)$/m)?.[1]?.trim() || '';
+        if (categories) catCount[categories] = (catCount[categories] || 0) + 1;
+      } catch(e) {}
+      const item = document.createElement('div');
+      item.className = 'post-item';
+      item.innerHTML = `<div class="post-info">
+        <div class="post-pt">${title}</div>
+        <div class="post-pm">
+          ${date ? `<span class="badge badge-bl">${date.substring(0,10)}</span> ` : ''}
+          ${categories ? `<span class="badge badge-pk">${categories}</span>` : ''}
+        </div>
+      </div>
+      <div class="post-actions">
+        <button class="btn btn-ghost btn-xs" onclick="editPost('${file.name}')"><i class="fas fa-edit"></i> 编辑</button>
+        <button class="btn btn-danger btn-xs" onclick="confirmDeletePost('${file.name}')"><i class="fas fa-trash"></i></button>
+      </div>`;
+      postList.appendChild(item);
+    }
+    // Stats
+    document.getElementById('post-stats').innerHTML = `
+      <div class="stat-card"><div class="stat-ico">📝</div><div><div class="stat-val">${files.filter(f=>f.name.endsWith('.md')).length}</div><div class="stat-lbl">文章总数</div></div></div>
+      <div class="stat-card"><div class="stat-ico">📂</div><div><div class="stat-val">${Object.keys(catCount).length}</div><div class="stat-lbl">分类数</div></div></div>
+      <div class="stat-card"><div class="stat-ico">⭐</div><div><div class="stat-val">${(files.filter(f=>f.name.endsWith('.md')).length * 17).toFixed(0)}</div><div class="stat-lbl">大概阅读时间(分钟)</div></div></div>
+    `;
+  } catch (e) {
+    document.getElementById('postList').innerHTML = `<p style="color:#d32f2f;text-align:center;padding:30px">加载失败: ${e.message}</p>`;
+  }
+  hideLoading();
+}
+
+function newPost() {
+  currentPostFile = null;
+  document.getElementById('postTitle').value = '';
+  document.getElementById('postDate').value = new Date().toISOString().substring(0, 19).replace('T', ' ');
+  document.getElementById('postCategories').value = '';
+  document.getElementById('postTags').value = '';
+  document.getElementById('postCover').value = '';
+  document.getElementById('postContent').value = '';
+  document.getElementById('deletePostBtn').style.display = 'none';
+  switchPage('post-edit');
+}
+
+async function editPost(filename) {
+  showLoading('加载文章...');
+  try {
+    const file = await ghGet(`source/_posts/${filename}`);
+    const content = decodeB64(file.content);
+    currentPostFile = filename;
+    const fmMatch = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+    if (fmMatch) {
+      const fm = fmMatch[1], body = fmMatch[2];
+      document.getElementById('postTitle').value = fm.match(/^title:\s*(.+)$/m)?.[1]?.trim()?.replace(/['"]/g, '') || '';
+      document.getElementById('postDate').value = fm.match(/^date:\s*(.+)$/m)?.[1]?.trim() || '';
+      document.getElementById('postCategories').value = fm.match(/^categories:\s*(.+)$/m)?.[1]?.trim() || '';
+      const tm = fm.match(/^tags:\s*\n((?:-\s+.+\n?)+)/m);
+      if (tm) document.getElementById('postTags').value = tm[1].match(/-\s+(.+)/g)?.map(t => t.replace(/^-\s+/, '').trim()).join(', ') || '';
+      else document.getElementById('postTags').value = fm.match(/^tags:\s*\[(.+)\]$/m)?.[1]?.trim() || '';
+      document.getElementById('postCover').value = fm.match(/^cover:\s*(.+)$/m)?.[1]?.trim() || '';
+      document.getElementById('postContent').value = body;
+    }
+    document.getElementById('deletePostBtn').style.display = '';
+    switchPage('post-edit');
+  } catch (e) { showToast('加载失败: ' + e.message, 'error'); }
+  hideLoading();
+}
+
+async function savePost() {
+  const title = document.getElementById('postTitle').value.trim();
+  const date = document.getElementById('postDate').value.trim();
+  const categories = document.getElementById('postCategories').value.trim();
+  const tagsStr = document.getElementById('postTags').value.trim();
+  const cover = document.getElementById('postCover').value.trim();
+  const body = document.getElementById('postContent').value;
+  if (!title || !body) { showToast('标题和内容不能为空', 'error'); return; }
+
+  let fm = `---\ntitle: ${title}\ndate: ${date || new Date().toISOString().substring(0,19).replace('T',' ')}\n`;
+  if (categories) fm += `categories:\n  - ${categories}\n`;
+  if (tagsStr) { fm += `tags:\n`; tagsStr.split(',').map(t=>t.trim()).filter(t=>t).forEach(t => fm += `  - ${t}\n`); }
+  if (cover) fm += `cover: ${cover}\n`;
+  fm += `---\n\n${body}`;
+
+  const datePrefix = date ? date.substring(0,10) : new Date().toISOString().substring(0,10);
+  const safeTitle = title.replace(/[^\w\u4e00-\u9fa5-]/g, '-').replace(/-+/g, '-');
+  const filename = currentPostFile || `${datePrefix}-${safeTitle}.md`;
+  const filepath = `source/_posts/${filename}`;
+
+  showLoading('保存文章...');
+  try {
+    let sha = null;
+    try { sha = (await ghGet(filepath)).sha; } catch(e) {}
+    await ghPut(filepath, fm, sha, `Update post: ${title}`);
+    currentPostFile = filename;
+    document.getElementById('deletePostBtn').style.display = '';
+    showToast('文章保存成功！🍄', 'success');
+  } catch (e) { showToast('保存失败: ' + e.message, 'error'); }
+  hideLoading();
+}
+
+function confirmDeletePost(filename) {
+  if (!confirm(`确定删除 "${filename}" 吗？`)) return;
+  deletePost(filename);
+}
+async function deletePost(filename) {
+  const target = filename || currentPostFile;
+  if (!target) return;
+  showLoading('删除中...');
+  try {
+    const file = await ghGet(`source/_posts/${target}`);
+    await ghDelete(`source/_posts/${target}`, file.sha, `Delete: ${target}`);
+    showToast('已删除 ✅', 'success');
+    switchPage('posts');
+  } catch(e) { showToast('删除失败: ' + e.message, 'error'); }
+  hideLoading();
+}
+
+// ==================== ABOUT ====================
+async function loadAboutPage() {
+  showLoading('加载...');
+  try {
+    const file = await ghGet('source/about/index.md');
+    document.getElementById('aboutContent').value = decodeB64(file.content);
+  } catch(e) { showToast('加载失败: ' + e.message, 'error'); }
+  hideLoading();
+}
+async function saveAboutPage() {
+  showLoading('保存...');
+  try {
+    const file = await ghGet('source/about/index.md');
+    await ghPut('source/about/index.md', document.getElementById('aboutContent').value, file.sha, 'Update about page');
+    showToast('关于页面已保存！', 'success');
+  } catch(e) { showToast('保存失败: ' + e.message, 'error'); }
+  hideLoading();
+}
+
+// ==================== SITE SETTINGS ====================
+async function loadSiteSettings() {
+  showLoading('加载...');
+  try {
+    const file = await ghGet('_config.yml');
+    const c = decodeB64(file.content);
+    document.getElementById('siteTitle').value = c.match(/^title:\s*(.+)$/m)?.[1]?.trim() || '';
+    document.getElementById('siteSubtitle').value = c.match(/^subtitle:\s*(.+)$/m)?.[1]?.trim() || '';
+    document.getElementById('siteDescription').value = c.match(/^description:\s*(.+)$/m)?.[1]?.trim() || '';
+    document.getElementById('siteKeywords').value = c.match(/^keywords:\s*(.+)$/m)?.[1]?.trim() || '';
+    document.getElementById('siteUrl').value = c.match(/^url:\s*(.+)$/m)?.[1]?.trim() || '';
+    document.getElementById('siteAuthor').value = c.match(/^author:\s*(.+)$/m)?.[1]?.trim() || '';
+    loadAnnounceAndFooter();
+  } catch(e) { showToast('加载失败: ' + e.message, 'error'); }
+  hideLoading();
+}
+async function saveSiteSettings() {
+  showLoading('保存...');
+  try {
+    const file = await ghGet('_config.yml');
+    let c = decodeB64(file.content);
+    c = c.replace(/^title:\s*.+$/m, `title: ${document.getElementById('siteTitle').value}`);
+    c = c.replace(/^subtitle:\s*.+$/m, `subtitle: ${document.getElementById('siteSubtitle').value}`);
+    c = c.replace(/^description:\s*.+$/m, `description: ${document.getElementById('siteDescription').value}`);
+    c = c.replace(/^keywords:\s*.+$/m, `keywords: ${document.getElementById('siteKeywords').value}`);
+    c = c.replace(/^url:\s*.+$/m, `url: ${document.getElementById('siteUrl').value}`);
+    c = c.replace(/^author:\s*.+$/m, `author: ${document.getElementById('siteAuthor').value}`);
+    await ghPut('_config.yml', c, file.sha, 'Update site settings');
+    showToast('站点设置已保存！', 'success');
+  } catch(e) { showToast('保存失败: ' + e.message, 'error'); }
+  hideLoading();
+}
+
+async function loadAnnounceAndFooter() {
+  try {
+    const bf = await ghGet('_config.butterfly.yml');
+    let bc = decodeB64(bf.content);
+    // Announcement - check both aside.card_announcement and top-level announcement
+    let annVal = '';
+    const asideMatch = bc.match(/card_announcement:\s*\n\s+content:\s*(.+)/);
+    if (asideMatch) annVal = asideMatch[1].trim();
+    else {
+      const topMatch = bc.match(/^announcement:\s*\n\s+content:\s*(.+)/m);
+      if (topMatch) annVal = topMatch[1].trim();
+    }
+    document.getElementById('announceContent').value = annVal;
+    // Footer
+    const ftMatch = bc.match(/custom_text:\s*(.+)/m);
+    document.getElementById('footerText').value = ftMatch?.[1]?.trim() || '';
+    // Social links - format: icon_class: url || name
+    const socialMatch = bc.match(/^social:\s*\n([\s\S]*?)(?=\n[#\w])/m);
+    if (socialMatch) {
+      const lines = socialMatch[1].split('\n').filter(l => l.trim());
+      document.getElementById('socialLinks').value = lines.map(l => {
+        const cleaned = l.replace(/^\s+/, '');
+        const m = cleaned.match(/^(\S+)\s*:\s*(.+?)\s*\|\|\s*(.+)/);
+        if (m) return `${m[1]} | ${m[2]} | ${m[3]}`;
+        return cleaned;
+      }).join('\n');
+    }
+  } catch(e) {}
+}
+async function saveAnnounceAndFooter() {
+  showLoading('保存...');
+  try {
+    const file = await ghGet('_config.butterfly.yml');
+    let c = decodeB64(file.content);
+    const announceVal = document.getElementById('announceContent').value || '';
+    // Update aside.card_announcement.content (Butterfly theme uses this)
+    if (c.match(/card_announcement:\s*\n\s+content:/)) {
+      c = c.replace(/(card_announcement:\s*\n\s+content:)\s*.*/, '$1 ' + announceVal);
+    }
+    // Also update top-level announcement.content for backwards compat
+    if (c.match(/^announcement:\s*\n\s+content:/m)) {
+      c = c.replace(/(^announcement:\s*\n\s+content:)\s*.*/m, '$1 ' + announceVal);
+    }
+    // Footer
+    const footerVal = document.getElementById('footerText').value || '';
+    c = c.replace(/(\s+custom_text:)\s*.*/m, '$1 ' + footerVal);
+    // Social links
+    const socialVal = document.getElementById('socialLinks').value || '';
+    if (socialVal.trim()) {
+      const socialLines = socialVal.split('\n').filter(l => l.trim()).map(l => {
+        const parts = l.split('|').map(p => p.trim());
+        if (parts.length >= 3) {
+          return `  ${parts[0]}: ${parts[1]} || ${parts[2]}`;
+        }
+        return null;
+      }).filter(Boolean).join('\n');
+      if (socialLines) {
+        if (c.match(/^social:\s*\n([\s\S]*?)(?=\n[#\w])/m)) {
+          c = c.replace(/^social:\s*\n[\s\S]*?(?=\n[#\w])/m, 'social:\n' + socialLines + '\n');
+        }
+      }
+    }
+    await ghPut('_config.butterfly.yml', c, file.sha, 'Update announcement, footer and social links');
+    showToast('公告、页脚和社交链接已保存！', 'success');
+  } catch(e) { showToast('保存失败: ' + e.message, 'error'); }
+  hideLoading();
+}
+
+// ==================== THEME (Full Butterfly Config) ====================
+async function loadThemeConfig() {
+  showLoading('加载主题配置...');
+  try {
+    const file = await ghGet('_config.butterfly.yml');
+    document.getElementById('butterflyConfig').value = decodeB64(file.content);
+  } catch(e) { showToast('加载失败: ' + e.message, 'error'); }
+  hideLoading();
+}
+async function saveButterflyConfig() {
+  showLoading('保存...');
+  try {
+    const file = await ghGet('_config.butterfly.yml');
+    await ghPut('_config.butterfly.yml', document.getElementById('butterflyConfig').value, file.sha, 'Update butterfly config');
+    showToast('主题配置已保存！🎨', 'success');
+  } catch(e) { showToast('保存失败: ' + e.message, 'error'); }
+  hideLoading();
+}
+
+// ==================== MENU ====================
+let menuItems = [];
+async function loadMenu() {
+  showLoading('加载...');
+  try {
+    const file = await ghGet('_config.yml');
+    const c = decodeB64(file.content);
+    const navMatch = c.match(/^nav:\s*\n((?:\s+-\s+.+\n?)+)/m);
+    menuItems = [];
+    if (navMatch) {
+      let current = null;
+      const lines = navMatch[1].split('\n').filter(l => l.trim());
+      for (const line of lines) {
+        const nm = line.match(/name:\s*(.+)/);
+        const um = line.match(/url:\s*(.+)/);
+        const im = line.match(/icon:\s*(.+)/);
+        if (nm) current = { name: nm[1].trim(), url: '/', icon: 'fas fa-link' };
+        if (um && current) current.url = um[1].trim();
+        if (im && current) current.icon = im[1].trim();
+        if (current && line.includes('- name:')) menuItems.push(current);
+      }
+      if (current && !menuItems.includes(current)) menuItems.push(current);
+    }
+    renderMenu();
+  } catch(e) { showToast('加载失败: ' + e.message, 'error'); }
+  hideLoading();
+}
+function renderMenu() {
+  const list = document.getElementById('menuList');
+  list.innerHTML = '';
+  menuItems.forEach((item, i) => {
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;gap:10px;margin-bottom:10px;align-items:center';
+    row.innerHTML = `
+      <input type="text" class="form-input" placeholder="名称" value="${item.name}" style="flex:1" onchange="menuItems[${i}].name=this.value">
+      <input type="text" class="form-input" placeholder="链接" value="${item.url}" style="flex:1" onchange="menuItems[${i}].url=this.value">
+      <input type="text" class="form-input" placeholder="图标" value="${item.icon}" style="width:180px" onchange="menuItems[${i}].icon=this.value">
+      <button class="btn btn-danger btn-xs" onclick="menuItems.splice(${i},1);renderMenu()"><i class="fas fa-times"></i></button>`;
+    list.appendChild(row);
+  });
+}
+function addMenuItem() { menuItems.push({ name: '新菜单', url: '/', icon: 'fas fa-link' }); renderMenu(); }
+async function saveMenu() {
+  showLoading('保存...');
+  try {
+    const file = await ghGet('_config.yml');
+    let c = decodeB64(file.content);
+    let navStr = 'nav:\n';
+    menuItems.forEach(item => navStr += `  - name: ${item.name}\n    url: ${item.url}\n    icon: ${item.icon}\n`);
+    c = c.replace(/^nav:\s*\n(?:\s+-\s+.+\n?)+/m, navStr);
+    await ghPut('_config.yml', c, file.sha, 'Update nav menu');
+    showToast('菜单已保存！', 'success');
+  } catch(e) { showToast('保存失败: ' + e.message, 'error'); }
+  hideLoading();
+}
+
+// ==================== CUSTOM CSS / JS ====================
+async function loadCustomCSS() {
+  showLoading('加载...');
+  try {
+    const file = await ghGet('source/css/custom.css');
+    document.getElementById('customCSS').value = decodeB64(file.content);
+  } catch(e) { showToast('加载失败: ' + e.message, 'error'); }
+  hideLoading();
+}
+async function saveCustomCSS() {
+  showLoading('保存...');
+  try {
+    const file = await ghGet('source/css/custom.css');
+    await ghPut('source/css/custom.css', document.getElementById('customCSS').value, file.sha, 'Update custom CSS');
+    showToast('CSS已保存！💅', 'success');
+  } catch(e) { showToast('保存失败: ' + e.message, 'error'); }
+  hideLoading();
+}
+async function loadCustomJS() {
+  showLoading('加载...');
+  try {
+    const file = await ghGet('source/js/custom.js');
+    document.getElementById('customJS').value = decodeB64(file.content);
+  } catch(e) { showToast('加载失败: ' + e.message, 'error'); }
+  hideLoading();
+}
+async function saveCustomJS() {
+  showLoading('保存...');
+  try {
+    const file = await ghGet('source/js/custom.js');
+    await ghPut('source/js/custom.js', document.getElementById('customJS').value, file.sha, 'Update custom JS');
+    showToast('JS已保存！⚡', 'success');
+  } catch(e) { showToast('保存失败: ' + e.message, 'error'); }
+  hideLoading();
+}
+
+// ==================== DEPLOY ====================
+async function checkDeployStatus() {
+  try {
+    const resp = await fetch(`${CONFIG.apiBase}/repos/${CONFIG.repo}/pages`, {
+      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+    });
+    if (resp.ok) {
+      const d = await resp.json();
+      const box = document.getElementById('deployStatusBox');
+      const txt = document.getElementById('deployStatusText');
+      if (d.status === 'built') { box.className = 'deploy-status deploy-idle'; txt.textContent = `部署完成 ✅ | ${d.html_url}`; }
+      else { box.className = 'deploy-status deploy-building'; txt.textContent = `状态: ${d.status}`; }
+    }
+    const wfr = await fetch(`${CONFIG.apiBase}/repos/${CONFIG.repo}/actions/runs?per_page=5`, {
+      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+    });
+    if (wfr.ok) {
+      const wfd = await wfr.json();
+      const h = document.getElementById('deployHistory');
+      if (wfd.workflow_runs?.length) {
+        h.innerHTML = wfd.workflow_runs.map(run => `
+          <div style="padding:12px;border:1px solid var(--bd);border-radius:10px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:14px">🔄 ${run.name||'Build'}</span>
+            <span class="badge ${run.conclusion==='success'?'badge-gn':run.conclusion==='failure'?'badge-pk':'badge-yl'}">${run.conclusion||run.status}</span>
+            <span style="font-size:12px;color:var(--mt)">${new Date(run.created_at).toLocaleString('zh-CN')}</span>
+          </div>`).join('');
+      } else { h.innerHTML = '<p style="color:var(--mt)">暂无记录</p>'; }
+    }
+  } catch(e) { document.getElementById('deployStatusText').textContent = '检查失败: ' + e.message; }
+}
+async function triggerBuild() {
+  showLoading('触发构建...');
+  try {
+    const resp = await fetch(`${CONFIG.apiBase}/repos/${CONFIG.repo}/actions/workflows/deploy.yml/dispatches`, {
+      method: 'POST',
+      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ref: CONFIG.branch })
+    });
+    if (resp.ok || resp.status === 204) { showToast('构建已触发！等待1-2分钟 🚀', 'success'); setTimeout(checkDeployStatus, 3000); }
+    else { const err = await resp.json().catch(()=>({})); showToast('触发失败: '+(err.message||resp.status), 'error'); }
+  } catch(e) { showToast('触发失败: ' + e.message, 'error'); }
+  hideLoading();
+}
+
+// ==================== MARKDOWN PREVIEW ====================
+function setPostEditorMode(mode) {
+  postEditorMode = mode;
+  const ed = document.getElementById('postContent'), pv = document.getElementById('postPreview');
+  if (mode === 'preview') { ed.style.display='none'; pv.style.display='block'; pv.className='md-preview'; pv.innerHTML=renderMD(ed.value); }
+  else { ed.style.display='block'; pv.style.display='none'; }
+}
+function setPageEditorMode(mode, name) {
+  pageEditorMode = mode;
+  const ed = document.getElementById(name+'Content'), pv = document.getElementById(name+'Preview');
+  if (mode === 'preview') { ed.style.display='none'; pv.style.display='block'; pv.className='md-preview'; pv.innerHTML=renderMD(ed.value); }
+  else { ed.style.display='block'; pv.style.display='none'; }
+}
+function setThemeEditorMode(mode) {
+  themeEditorMode = mode;
+  const ed = document.getElementById('butterflyConfig'), pv = document.getElementById('butterflyPreview');
+  if (mode === 'preview') { ed.style.display='none'; pv.style.display='block'; pv.className='md-preview'; pv.innerHTML='<pre>'+escapeHtml(ed.value)+'</pre>'; }
+  else { ed.style.display='block'; pv.style.display='none'; }
+}
+function renderMD(md) {
+  let h = md;
+  h = h.replace(/```(\w*)\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>');
+  h = h.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+  h = h.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+  h = h.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+  h = h.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  h = h.replace(/\*(.+?)\*/g, '<em>$1</em>');
+  h = h.replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2">$1</a>');
+  h = h.replace(/!\[(.+?)\]\((.+?)\)/g, '<img src="$2" alt="$1">');
+  h = h.replace(/\n\n/g, '</p><p>');
+  h = '<p>' + h + '</p>';
+  h = h.replace(/<p>(<h[1-3]>)/g, '$1');
+  h = h.replace(/(<\/h[1-3]>)<\/p>/g, '$1');
+  h = h.replace(/<p>(<pre>)/g, '$1');
+  h = h.replace(/(<\/pre>)<\/p>/g, '$1');
+  return h;
+}
+function escapeHtml(t) { const d=document.createElement('div'); d.textContent=t; return d.innerHTML; }
+
+// ==================== UTILITIES ====================
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = `toast toast-${type||'info'} show`;
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+function showLoading(text) {
+  document.getElementById('loadingText').textContent = text || '处理中...';
+  document.getElementById('loadingOverlay').classList.add('active');
+}
+function hideLoading() { document.getElementById('loadingOverlay').classList.remove('active'); }
+</script>
+</body>
+</html>

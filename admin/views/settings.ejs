@@ -1,0 +1,163 @@
+<!-- 系统设置 -->
+<div class="page-title-bar">
+  <h2><i class="fas fa-cog"></i> 系统设置</h2>
+  <button class="btn btn-success btn-sm" onclick="saveSettings()">
+    <i class="fas fa-save"></i> 保存设置
+  </button>
+</div>
+
+<div class="settings-layout">
+  <!-- 博客设置 -->
+  <div class="content-card">
+    <div class="card-header">
+      <h3><i class="fas fa-blog"></i> 博客信息</h3>
+    </div>
+    <div class="card-body">
+      <div class="form-group">
+        <label>博客名称</label>
+        <input type="text" id="blogName" class="form-control" value="<%= config.blog.name %>">
+      </div>
+      <div class="form-group">
+        <label>副标题</label>
+        <input type="text" id="blogSubtitle" class="form-control" value="<%= config.blog.subtitle %>">
+      </div>
+      <div class="form-group">
+        <label>博客描述</label>
+        <textarea id="blogDescription" class="form-control" rows="3"><%= config.blog.description %></textarea>
+      </div>
+      <div class="form-group">
+        <label>博客域名</label>
+        <input type="text" class="form-control" value="<%= config.blog.domain %>" readonly>
+      </div>
+    </div>
+  </div>
+
+  <!-- 部署设置 -->
+  <div class="content-card">
+    <div class="card-header">
+      <h3><i class="fas fa-rocket"></i> 部署设置</h3>
+    </div>
+    <div class="card-body">
+      <div class="form-group">
+        <label>GitHub 仓库</label>
+        <input type="text" class="form-control" value="<%= config.deploy.repo %>" readonly>
+      </div>
+      <div class="form-group">
+        <label>部署分支</label>
+        <input type="text" class="form-control" value="<%= config.deploy.branch %>" readonly>
+      </div>
+      <div class="form-group">
+        <label>GitHub Token</label>
+        <input type="password" id="githubToken" class="form-control" placeholder="<%= deployStatus.hasToken ? '已配置（输入新Token可更新）' : '请输入GitHub Token' %>">
+        <small>用于自动部署到 GitHub Pages</small>
+      </div>
+      <div class="deploy-status-box">
+        <div class="status-item">
+          <i class="fas fa-<%= deployStatus.hasToken ? 'check-circle' : 'times-circle' %>"></i>
+          <span>Token: <%= deployStatus.hasToken ? '已配置' : '未配置' %></span>
+        </div>
+        <div class="status-item">
+          <i class="fas fa-<%= deployStatus.lastBuild ? 'check-circle' : 'times-circle' %>"></i>
+          <span>构建: <%= deployStatus.lastBuild ? '已构建' : '未构建' %></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 安全设置 -->
+  <div class="content-card">
+    <div class="card-header">
+      <h3><i class="fas fa-shield-alt"></i> 安全设置</h3>
+    </div>
+    <div class="card-body">
+      <div class="form-group">
+        <label>修改管理员密码</label>
+        <input type="password" id="newPassword" class="form-control" placeholder="输入新密码">
+        <small>留空则不修改密码</small>
+      </div>
+      <div class="form-group">
+        <label>确认新密码</label>
+        <input type="password" id="confirmPassword" class="form-control" placeholder="再次输入新密码">
+      </div>
+      <div class="form-group">
+        <label>当前用户名</label>
+        <input type="text" class="form-control" value="<%= config.admin.username %>" readonly>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI自动化设置 -->
+  <div class="content-card">
+    <div class="card-header">
+      <h3><i class="fas fa-robot"></i> AI自动化接口</h3>
+    </div>
+    <div class="card-body">
+      <div class="form-group">
+        <label>API密钥</label>
+        <input type="text" class="form-control" value="<%= config.api.apiKey %>" readonly>
+        <small>用于REST API认证（AI自动发文等）</small>
+      </div>
+      <div class="api-info-box">
+        <h4><i class="fas fa-code"></i> API端点说明</h4>
+        <div class="api-endpoint">
+          <span class="method method-get">GET</span>
+          <code>/api/status</code>
+          <span>获取系统状态</span>
+        </div>
+        <div class="api-endpoint">
+          <span class="method method-get">GET</span>
+          <code>/api/posts</code>
+          <span>获取文章列表</span>
+        </div>
+        <div class="api-endpoint">
+          <span class="method method-post">POST</span>
+          <code>/api/posts</code>
+          <span>创建新文章</span>
+        </div>
+        <div class="api-endpoint">
+          <span class="method method-put">PUT</span>
+          <code>/api/posts/:filename</code>
+          <span>更新文章</span>
+        </div>
+        <div class="api-endpoint">
+          <span class="method method-delete">DEL</span>
+          <code>/api/posts/:filename</code>
+          <span>删除文章</span>
+        </div>
+        <div class="api-endpoint highlight">
+          <span class="method method-post">POST</span>
+          <code>/api/ai/publish</code>
+          <span>AI自动发文+部署</span>
+        </div>
+        <div class="api-endpoint">
+          <span class="method method-post">POST</span>
+          <code>/api/deploy/build</code>
+          <span>构建站点</span>
+        </div>
+        <div class="api-endpoint">
+          <span class="method method-post">POST</span>
+          <code>/api/deploy/github</code>
+          <span>部署到GitHub</span>
+        </div>
+        <div class="api-endpoint">
+          <span class="method method-post">POST</span>
+          <code>/api/deploy/all</code>
+          <span>构建并部署</span>
+        </div>
+      </div>
+      <div class="api-example">
+        <h4><i class="fas fa-terminal"></i> 调用示例</h4>
+        <pre><code>curl -X POST http://localhost:3000/api/ai/publish \
+  -H "X-API-Key: <%= config.api.apiKey %>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "亦然的第一篇AI文章",
+    "content": "今天亦然学会了...",
+    "categories": ["幼儿园"],
+    "tags": ["AI生成","亦然"],
+    "autoDeploy": true
+  }'</code></pre>
+      </div>
+    </div>
+  </div>
+</div>

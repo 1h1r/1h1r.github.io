@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <rect width="200" height="200" rx="20" fill="#5C94FC"/>
+  <circle cx="100" cy="80" r="35" fill="#FFD700" stroke="#B8860B" stroke-width="3"/>
+  <circle cx="88" cy="75" r="5" fill="#2C3E50"/>
+  <circle cx="112" cy="75" r="5" fill="#2C3E50"/>
+  <path d="M85 90 Q100 100 115 90" stroke="#2C3E50" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <rect x="70" y="130" width="60" height="50" rx="10" fill="#43B047" stroke="#006400" stroke-width="3"/>
+  <text x="100" y="165" font-family="sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">亦然亦航</text>
+</svg>

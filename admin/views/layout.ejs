@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= config.blog.name %> · 后台管理</title>
+  <link rel="stylesheet" href="/admin/static/css/admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+</head>
+<body>
+  <div class="app-wrapper">
+    <!-- 侧边栏 -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <span class="logo-icon">🌈</span>
+          <div class="logo-text">
+            <h2><%= config.blog.name %></h2>
+            <span>后台管理系统</span>
+          </div>
+        </div>
+        <button class="sidebar-toggle" onclick="toggleSidebar()">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="/admin" class="nav-item" id="nav-dashboard">
+          <i class="fas fa-home"></i><span>仪表盘</span>
+        </a>
+        <a href="/admin/posts" class="nav-item" id="nav-posts">
+          <i class="fas fa-file-alt"></i><span>文章管理</span>
+        </a>
+        <a href="/admin/posts/new" class="nav-item" id="nav-new-post">
+          <i class="fas fa-edit"></i><span>写文章</span>
+        </a>
+        <a href="/admin/categories" class="nav-item" id="nav-categories">
+          <i class="fas fa-folder"></i><span>分类标签</span>
+        </a>
+        <a href="/admin/media" class="nav-item" id="nav-media">
+          <i class="fas fa-images"></i><span>媒体库</span>
+        </a>
+        <a href="/admin/plugins" class="nav-item" id="nav-plugins">
+          <i class="fas fa-puzzle-piece"></i><span>插件管理</span>
+          <span class="badge"><%= typeof plugins !== 'undefined' ? plugins.filter(p => p.enabled).length : 10 %></span>
+        </a>
+        <a href="/admin/settings" class="nav-item" id="nav-settings">
+          <i class="fas fa-cog"></i><span>系统设置</span>
+        </a>
+        <div class="nav-divider"></div>
+        <a href="<%= config.blog.domain %>" target="_blank" class="nav-item">
+          <i class="fas fa-external-link-alt"></i><span>访问博客</span>
+        </a>
+        <a href="/admin/logout" class="nav-item">
+          <i class="fas fa-sign-out-alt"></i><span>退出登录</span>
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="birthday-badge">
+          <i class="fas fa-birthday-cake"></i>
+          <span>生日：2023-07-31</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 主内容区 -->
+    <main class="main-content">
+      <header class="top-bar">
+        <button class="mobile-toggle" onclick="toggleSidebar()">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="top-bar-title">
+          <h1><%= typeof pageTitle !== 'undefined' ? pageTitle : '仪表盘' %></h1>
+        </div>
+        <div class="top-bar-actions">
+          <button class="btn btn-deploy" onclick="quickDeploy()">
+            <i class="fas fa-rocket"></i>
+            <span>一键部署</span>
+          </button>
+          <div class="user-info">
+            <div class="avatar">管</div>
+            <span><%= typeof user !== 'undefined' && user ? user.username : 'admin' %></span>
+          </div>
+        </div>
+      </header>
+
+      <div class="content-wrapper">
+        <%- body %>
+      </div>
+    </main>
+  </div>
+
+  <!-- 部署进度弹窗 -->
+  <div class="modal-overlay" id="deployModal" style="display:none;">
+    <div class="modal deploy-modal">
+      <div class="modal-header">
+        <h3><i class="fas fa-rocket"></i> 部署中...</h3>
+      </div>
+      <div class="modal-body">
+        <div class="deploy-steps">
+          <div class="deploy-step" id="step-build">
+            <i class="fas fa-cog fa-spin"></i>
+            <span>构建静态站点...</span>
+          </div>
+          <div class="deploy-step pending" id="step-deploy">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <span>部署到 GitHub Pages...</span>
+          </div>
+          <div class="deploy-step pending" id="step-done">
+            <i class="fas fa-check-circle"></i>
+            <span>部署完成！</span>
+          </div>
+        </div>
+        <div class="deploy-progress">
+          <div class="progress-bar" id="deployProgress"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 通知提示 -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="/admin/static/js/admin.js"></script>
+</body>
+</html>

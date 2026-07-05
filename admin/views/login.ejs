@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>亦然亦航 · 后台登录</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .bg-shapes { position: absolute; width: 100%; height: 100%; overflow: hidden; z-index: 0; }
+    .bg-shapes span {
+      position: absolute; display: block; border-radius: 50%;
+      background: rgba(255,255,255,0.1); animation: float 15s infinite ease-in-out;
+    }
+    .bg-shapes span:nth-child(1){width:80px;height:80px;top:10%;left:10%;animation-delay:0s;}
+    .bg-shapes span:nth-child(2){width:120px;height:120px;top:60%;left:20%;animation-delay:2s;}
+    .bg-shapes span:nth-child(3){width:60px;height:60px;top:30%;left:80%;animation-delay:4s;}
+    .bg-shapes span:nth-child(4){width:100px;height:100px;top:70%;left:70%;animation-delay:6s;}
+    .bg-shapes span:nth-child(5){width:50px;height:50px;top:50%;left:50%;animation-delay:8s;}
+    @keyframes float { 0%,100%{transform:translateY(0) rotate(0);} 50%{transform:translateY(-30px) rotate(180deg);} }
+    .login-card {
+      background: rgba(255,255,255,0.95); backdrop-filter: blur(20px);
+      border-radius: 24px; padding: 50px 40px; width: 420px; max-width: 90%;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.3); z-index: 1;
+      animation: slideUp 0.6s ease-out;
+    }
+    @keyframes slideUp { from{opacity:0;transform:translateY(40px);} to{opacity:1;transform:translateY(0);} }
+    .login-logo { text-align: center; margin-bottom: 35px; }
+    .login-logo .icon { font-size: 60px; }
+    .login-logo h1 { font-size: 28px; color: #2c3e50; margin: 10px 0 5px; }
+    .login-logo p { color: #7f8c8d; font-size: 14px; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 14px; color: #2c3e50; margin-bottom: 8px; font-weight: 600; }
+    .input-wrapper { position: relative; }
+    .input-wrapper i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #bbb; font-size: 18px; }
+    .form-input {
+      width: 100%; padding: 14px 16px 14px 48px; border: 2px solid #e0e0e0;
+      border-radius: 12px; font-size: 16px; transition: all 0.3s; outline: none;
+    }
+    .form-input:focus { border-color: #667eea; box-shadow: 0 0 0 4px rgba(102,126,234,0.1); }
+    .btn-login {
+      width: 100%; padding: 15px; border: none; border-radius: 12px;
+      background: linear-gradient(135deg, #667eea, #764ba2); color: white;
+      font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(102,126,234,0.4);
+    }
+    .btn-login:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(102,126,234,0.5); }
+    .btn-login:active { transform: translateY(0); }
+    .error-msg {
+      background: #fee; color: #c0392b; padding: 12px 16px; border-radius: 10px;
+      margin-bottom: 20px; font-size: 14px; text-align: center;
+      border: 1px solid #fbb; animation: shake 0.4s;
+    }
+    @keyframes shake { 0%,100%{transform:translateX(0);} 25%{transform:translateX(-8px);} 75%{transform:translateX(8px);} }
+    .login-footer { text-align: center; margin-top: 25px; color: #95a5a6; font-size: 13px; }
+    .login-info { margin-top: 20px; padding: 15px; background: #f0f4ff; border-radius: 10px; font-size: 13px; color: #555; }
+    .login-info strong { color: #667eea; }
+  </style>
+</head>
+<body>
+  <div class="bg-shapes">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="icon">🌈</div>
+      <h1>亦然亦航</h1>
+      <p>双胞胎男孩的成长博客 · 后台管理系统</p>
+    </div>
+    <% if (typeof error !== 'undefined' && error) { %>
+      <div class="error-msg"><i class="fas fa-exclamation-circle"></i> <%= error %></div>
+    <% } %>
+    <form method="POST" action="/admin/login">
+      <div class="form-group">
+        <label><i class="fas fa-user"></i> 用户名</label>
+        <div class="input-wrapper">
+          <i class="fas fa-user-circle"></i>
+          <input type="text" name="username" class="form-input" placeholder="请输入用户名" value="admin" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-lock"></i> 密码</label>
+        <div class="input-wrapper">
+          <i class="fas fa-key"></i>
+          <input type="password" name="password" class="form-input" placeholder="请输入密码" value="" required>
+        </div>
+      </div>
+      <button type="submit" class="btn-login">
+        <i class="fas fa-sign-in-alt"></i> 登 录
+      </button>
+    </form>
+    <div class="login-info">
+      <strong>初始账号：</strong>admin<br>
+      <strong>初始密码：</strong>yiran2023
+    </div>
+    <div class="login-footer">
+      © 2023-2045 亦然亦航 · 双胞胎成长博客
+    </div>
+  </div>
+</body>
+</html>

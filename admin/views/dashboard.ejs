@@ -1,0 +1,170 @@
+<!-- 仪表盘内容 -->
+<div class="page-title-bar">
+  <h2><i class="fas fa-tachometer-alt"></i> 仪表盘</h2>
+  <span class="date-badge"><i class="fas fa-calendar"></i> <%= new Date().toLocaleDateString('zh-CN', {weekday:'long', year:'numeric', month:'long', day:'numeric'}) %></span>
+</div>
+
+<!-- 统计卡片 -->
+<div class="stats-grid">
+  <div class="stat-card stat-pink">
+    <div class="stat-icon"><i class="fas fa-file-alt"></i></div>
+    <div class="stat-info">
+      <div class="stat-number"><%= stats.totalPosts %></div>
+      <div class="stat-label">文章总数</div>
+    </div>
+  </div>
+  <div class="stat-card stat-blue">
+    <div class="stat-icon"><i class="fas fa-folder"></i></div>
+    <div class="stat-info">
+      <div class="stat-number"><%= stats.totalCategories %></div>
+      <div class="stat-label">分类数量</div>
+    </div>
+  </div>
+  <div class="stat-card stat-yellow">
+    <div class="stat-icon"><i class="fas fa-tags"></i></div>
+    <div class="stat-info">
+      <div class="stat-number"><%= stats.totalTags %></div>
+      <div class="stat-label">标签数量</div>
+    </div>
+  </div>
+  <div class="stat-card stat-green">
+    <div class="stat-icon"><i class="fas fa-font"></i></div>
+    <div class="stat-info">
+      <div class="stat-number"><%= (stats.totalWords / 1000).toFixed(1) %>K</div>
+      <div class="stat-label">总字数</div>
+    </div>
+  </div>
+  <div class="stat-card stat-purple">
+    <div class="stat-icon"><i class="fas fa-puzzle-piece"></i></div>
+    <div class="stat-info">
+      <div class="stat-number"><%= enabledPlugins.length %></div>
+      <div class="stat-label">已启用插件</div>
+    </div>
+  </div>
+</div>
+
+<!-- 成长阶段统计 -->
+<div class="content-card">
+  <div class="card-header">
+    <h3><i class="fas fa-chart-pie"></i> 成长阶段统计</h3>
+  </div>
+  <div class="stages-grid">
+    <% for (const [stage, count] of Object.entries(stats.stages)) { %>
+      <div class="stage-item">
+        <div class="stage-icon stage-<%= stage %>">
+          <% if (stage === '幼儿园') { %><i class="fas fa-child"></i><% } %>
+          <% if (stage === '小学') { %><i class="fas fa-book"></i><% } %>
+          <% if (stage === '初中') { %><i class="fas fa-graduation-cap"></i><% } %>
+          <% if (stage === '高中') { %><i class="fas fa-school"></i><% } %>
+          <% if (stage === '大学') { %><i class="fas fa-university"></i><% } %>
+          <% if (stage === '生活') { %><i class="fas fa-heart"></i><% } %>
+        </div>
+        <div class="stage-info">
+          <div class="stage-name"><%= stage %></div>
+          <div class="stage-count"><%= count %> 篇文章</div>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</div>
+
+<!-- 部署状态 -->
+<div class="content-card">
+  <div class="card-header">
+    <h3><i class="fas fa-cloud"></i> 部署状态</h3>
+    <a href="/admin/settings" class="btn btn-sm btn-outline">配置</a>
+  </div>
+  <div class="deploy-info">
+    <div class="deploy-row">
+      <span class="deploy-label"><i class="fas fa-globe"></i> 博客地址</span>
+      <a href="<%= deployStatus.domain %>" target="_blank" class="deploy-value"><%= deployStatus.domain %></a>
+    </div>
+    <div class="deploy-row">
+      <span class="deploy-label"><i class="fab fa-github"></i> 仓库</span>
+      <span class="deploy-value"><%= deployStatus.repo %></span>
+    </div>
+    <div class="deploy-row">
+      <span class="deploy-label"><i class="fas fa-code-branch"></i> 分支</span>
+      <span class="deploy-value"><%= deployStatus.branch %></span>
+    </div>
+    <div class="deploy-row">
+      <span class="deploy-label"><i class="fas fa-key"></i> Token</span>
+      <span class="deploy-value"><%= deployStatus.hasToken ? '已配置' : '未配置' %></span>
+    </div>
+    <div class="deploy-row">
+      <span class="deploy-label"><i class="fas fa-check-circle"></i> 构建状态</span>
+      <span class="deploy-value"><%= deployStatus.lastBuild ? '已构建' : '未构建' %></span>
+    </div>
+  </div>
+  <div class="deploy-actions">
+    <button class="btn btn-primary" onclick="deployBuild()">
+      <i class="fas fa-hammer"></i> 构建站点
+    </button>
+    <button class="btn btn-success" onclick="deployGitHub()">
+      <i class="fas fa-cloud-upload-alt"></i> 部署到GitHub
+    </button>
+    <button class="btn btn-warning" onclick="deployAll()">
+      <i class="fas fa-rocket"></i> 一键构建并部署
+    </button>
+  </div>
+</div>
+
+<!-- 最近文章 -->
+<div class="content-card">
+  <div class="card-header">
+    <h3><i class="fas fa-clock"></i> 最近文章</h3>
+    <a href="/admin/posts" class="btn btn-sm btn-outline">查看全部</a>
+  </div>
+  <div class="recent-posts">
+    <% stats.recentPosts.forEach(post => { %>
+      <div class="recent-post-item">
+        <div class="post-icon">
+          <i class="fas fa-file-alt"></i>
+        </div>
+        <div class="post-content">
+          <h4><a href="/admin/posts/edit/<%= post.filename %>"><%= post.title %></a></h4>
+          <div class="post-meta">
+            <span><i class="fas fa-calendar"></i> <%= post.date %></span>
+            <% if (post.categories && post.categories.length) { %>
+              <span><i class="fas fa-folder"></i> <%= Array.isArray(post.categories) ? post.categories.join(', ') : post.categories %></span>
+            <% } %>
+            <span><i class="fas fa-font"></i> <%= post.wordCount %> 字</span>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</div>
+
+<!-- 快捷操作 -->
+<div class="content-card">
+  <div class="card-header">
+    <h3><i class="fas fa-bolt"></i> 快捷操作</h3>
+  </div>
+  <div class="quick-actions">
+    <a href="/admin/posts/new" class="quick-action">
+      <i class="fas fa-edit"></i>
+      <span>写新文章</span>
+    </a>
+    <a href="/admin/media" class="quick-action">
+      <i class="fas fa-upload"></i>
+      <span>上传图片</span>
+    </a>
+    <a href="/admin/plugins" class="quick-action">
+      <i class="fas fa-puzzle-piece"></i>
+      <span>管理插件</span>
+    </a>
+    <a href="/admin/settings" class="quick-action">
+      <i class="fas fa-cog"></i>
+      <span>系统设置</span>
+    </a>
+    <a href="/admin/categories" class="quick-action">
+      <i class="fas fa-tags"></i>
+      <span>分类标签</span>
+    </a>
+    <a href="<%= config.blog.domain %>" target="_blank" class="quick-action">
+      <i class="fas fa-external-link-alt"></i>
+      <span>访问博客</span>
+    </a>
+  </div>
+</div>

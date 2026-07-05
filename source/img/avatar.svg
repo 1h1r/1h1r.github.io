@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <radialGradient id="skyGrad" cx="50%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#5C94FC"/>
+      <stop offset="100%" stop-color="#049CD8"/>
+    </radialGradient>
+    <radialGradient id="sunGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFE066"/>
+      <stop offset="100%" stop-color="#FBD000"/>
+    </radialGradient>
+    <radialGradient id="centerGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#8B4513"/>
+      <stop offset="100%" stop-color="#C84C0C"/>
+    </radialGradient>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="200" height="200" rx="20" fill="url(#skyGrad)"/>
+
+  <!-- 云朵 -->
+  <ellipse cx="35" cy="30" rx="18" ry="10" fill="white" opacity="0.85"/>
+  <ellipse cx="50" cy="32" rx="12" ry="8" fill="white" opacity="0.85"/>
+  <ellipse cx="160" cy="25" rx="14" ry="9" fill="white" opacity="0.85"/>
+
+  <!-- 向日葵（左） -->
+  <g transform="translate(60,75)">
+    <!-- 花瓣 -->
+    <ellipse cx="0" cy="-20" rx="7" ry="14" fill="url(#sunGrad)" stroke="#E45C10" stroke-width="1.5"/>
+    <ellipse cx="0" cy="-20" rx="7" ry="14" fill="url(#sunGrad)" stroke="#E45C10" stroke-width="1.5" transform="rotate(45)"/>
+    <ellipse cx="0" cy="-20" rx="7" ry="14" fill="url(#sunGrad)" stroke="#E45C10" stroke-width="1.5" transform="rotate(90)"/>
+    <ellipse cx="0" cy="-20" rx="7" ry="14" fill="url(#sunGrad)" stroke="#E45C10" stroke-width="1.5" transform="rotate(135)"/>
+    <ellipse cx="0" cy="-20" rx="7" ry="14" fill="url(#sunGrad)" stroke="#E45C10" stroke-width="1.5" transform="rotate(180)"/>
+    <ellipse cx="0" cy="-20" rx="7" ry="14" fill="url(#sunGrad)" stroke="#E45C10" stroke-width="1.5" transform="rotate(225)"/>
+    <ellipse cx="0" cy="-20" rx="7" ry="14" fill="url(#sunGrad)" stroke="#E45C10" stroke-width="1.5" transform="rotate(270)"/>
+    <ellipse cx="0" cy="-20" rx="7" ry="14" fill="url(#sunGrad)" stroke="#E45C10" stroke-width="1.5" transform="rotate(315)"/>
+    <!-- 花蕊 -->
+    <circle cx="0" cy="0" r="11" fill="url(#centerGrad)" stroke="#8B2500" stroke-width="1.5"/>
+    <!-- 笑脸 -->
+    <circle cx="-4" cy="-2" r="1.8" fill="white"/>
+    <circle cx="4" cy="-2" r="1.8" fill="white"/>
+    <circle cx="-4" cy="-2" r="1" fill="#2C3E50"/>
+    <circle cx="4" cy="-2" r="1" fill="#2C3E50"/>
+    <path d="M -4 3 Q 0 6 4 3" stroke="#2C3E50" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <!-- 茎 -->
+    <rect x="-2" y="11" width="4" height="35" fill="#43B047" rx="2"/>
+    <!-- 叶子 -->
+    <ellipse cx="-10" cy="30" rx="8" ry="4" fill="#43B047" stroke="#006400" stroke-width="1" transform="rotate(-30 -10 30)"/>
+  </g>
+
+  <!-- 向日葵（右） -->
+  <g transform="translate(140,75)">
+    <ellipse cx="0" cy="-20" rx="7" ry="14" fill="url(#sunGrad)" stroke="#E45C10" stroke-width="1.5"/>
+    <ellipse cx="0" cy="-20" rx="7" ry="14" fill="url(#sunGrad)" stroke="#E45C10" stroke-width="1.5" transform="rotate(45)"/>
+    <ellipse cx="0" cy="-20" rx="7" ry="14" fill="url(#sunGrad)" stroke="#E45C10" stroke-width="1.5" transform="rotate(90)"/>
+    <ellipse cx="0" cy="-20" rx="7" ry="14" fill="url(#sunGrad)" stroke="#E45C10" stroke-width="1.5" transform="rotate(135)"/>
+    <ellipse cx="0" cy="-20" rx="7" ry="14" fill="url(#sunGrad)" stroke="#E45C10" stroke-width="1.5" transform="rotate(180)"/>
+    <ellipse cx="0" cy="-20" rx="7" ry="14" fill="url(#sunGrad)" stroke="#E45C10" stroke-width="1.5" transform="rotate(225)"/>
+    <ellipse cx="0" cy="-20" rx="7" ry="14" fill="url(#sunGrad)" stroke="#E45C10" stroke-width="1.5" transform="rotate(270)"/>
+    <ellipse cx="0" cy="-20" rx="7" ry="14" fill="url(#sunGrad)" stroke="#E45C10" stroke-width="1.5" transform="rotate(315)"/>
+    <circle cx="0" cy="0" r="11" fill="url(#centerGrad)" stroke="#8B2500" stroke-width="1.5"/>
+    <circle cx="-4" cy="-2" r="1.8" fill="white"/>
+    <circle cx="4" cy="-2" r="1.8" fill="white"/>
+    <circle cx="-4" cy="-2" r="1" fill="#2C3E50"/>
+    <circle cx="4" cy="-2" r="1" fill="#2C3E50"/>
+    <path d="M -4 3 Q 0 6 4 3" stroke="#2C3E50" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <rect x="-2" y="11" width="4" height="35" fill="#43B047" rx="2"/>
+    <ellipse cx="10" cy="30" rx="8" ry="4" fill="#43B047" stroke="#006400" stroke-width="1" transform="rotate(30 10 30)"/>
+  </g>
+
+  <!-- 砖块地面 -->
+  <rect x="0" y="170" width="200" height="30" fill="#C84C0C"/>
+  <rect x="0" y="170" width="200" height="5" fill="#E45C10"/>
+  <line x1="25" y1="170" x2="25" y2="200" stroke="#8B2500" stroke-width="2"/>
+  <line x1="50" y1="170" x2="50" y2="200" stroke="#8B2500" stroke-width="2"/>
+  <line x1="75" y1="170" x2="75" y2="200" stroke="#8B2500" stroke-width="2"/>
+  <line x1="100" y1="170" x2="100" y2="200" stroke="#8B2500" stroke-width="2"/>
+  <line x1="125" y1="170" x2="125" y2="200" stroke="#8B2500" stroke-width="2"/>
+  <line x1="150" y1="170" x2="150" y2="200" stroke="#8B2500" stroke-width="2"/>
+  <line x1="175" y1="170" x2="175" y2="200" stroke="#8B2500" stroke-width="2"/>
+
+  <!-- 小金币 -->
+  <circle cx="100" cy="155" r="8" fill="#FFD700" stroke="#B8860B" stroke-width="1.5"/>
+  <circle cx="100" cy="155" r="5" fill="#FFEC8B"/>
+  <text x="100" y="159" font-family="Arial" font-size="9" font-weight="bold" fill="#B8860B" text-anchor="middle">★</text>
+
+  <!-- 标题文字 -->
+  <text x="100" y="50" font-family="'ZCOOL KuaiLe', 'Noto Sans SC', sans-serif" font-size="16" font-weight="bold" fill="white" text-anchor="middle" stroke="#C84C0C" stroke-width="1" opacity="0.95">亦然亦航</text>
+</svg>

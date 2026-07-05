@@ -1,0 +1,23 @@
+{
+  "name": "yiran-yihang-admin",
+  "version": "1.0.0",
+  "description": "亦然亦航博客可视化后台管理系统",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node app.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "express-ejs-layouts": "^2.5.1",
+    "express-rate-limit": "^8.5.2",
+    "express-session": "^1.19.0",
+    "gray-matter": "^4.0.3",
+    "helmet": "^8.2.0",
+    "jsonwebtoken": "^9.0.3",
+    "marked": "^18.0.5",
+    "multer": "^2.2.0"
+  }
+}

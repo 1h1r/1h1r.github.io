@@ -1,0 +1,43 @@
+<!-- 媒体库 -->
+<div class="page-title-bar">
+  <h2><i class="fas fa-images"></i> 媒体库</h2>
+  <button class="btn btn-primary btn-sm" onclick="document.getElementById('uploadInput').click()">
+    <i class="fas fa-upload"></i> 上传图片
+  </button>
+</div>
+<input type="file" id="uploadInput" multiple accept="image/*" style="display:none;" onchange="uploadMedia()">
+
+<!-- 媒体网格 -->
+<div class="media-grid">
+  <% if (media.length === 0) { %>
+    <div class="no-data">
+      <i class="fas fa-images"></i>
+      <p>还没有上传任何图片</p>
+      <button class="btn btn-primary" onclick="document.getElementById('uploadInput').click()">
+        <i class="fas fa-upload"></i> 上传第一张图片
+      </button>
+    </div>
+  <% } else { %>
+    <% media.forEach(item => { %>
+      <div class="media-card">
+        <div class="media-preview">
+          <img src="<%= item.path %>" alt="<%= item.name %>" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22><rect width=%22120%22 height=%22120%22 fill=%22%23eee%22/><text x=%2260%22 y=%2260%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22 font-size=%2214%22>图片</text></svg>'">
+        </div>
+        <div class="media-info">
+          <div class="media-name" title="<%= item.name %>"><%= item.name %></div>
+          <div class="media-meta">
+            <span><i class="fas fa-weight"></i> <%= item.sizeText %></span>
+          </div>
+          <div class="media-actions">
+            <button onclick="copyMediaUrl('<%= item.path %>')" class="btn-icon" title="复制路径">
+              <i class="fas fa-copy"></i>
+            </button>
+            <button onclick="deleteMedia('<%= item.path %>')" class="btn-icon btn-delete" title="删除">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  <% } %>
+</div>
