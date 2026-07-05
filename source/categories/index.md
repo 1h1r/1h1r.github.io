@@ -2,6 +2,7 @@
 title: 成长日记
 date: 2020-09-01 00:00:00
 type: categories
+top_img: /img/banner/category.svg
 ---
 
 # 成长阶段分类
