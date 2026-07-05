@@ -2,6 +2,7 @@
 title: 兴趣爱好
 date: 2020-09-01 00:00:00
 type: tags
+top_img: /img/banner/tag.svg
 ---
 
 # 兴趣标签
