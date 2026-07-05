@@ -107,11 +107,11 @@ body {
   background-repeat: no-repeat !important;
 }
 
-/* 首页横幅 */
+/* 首页横幅 - 增加高度避免文字被裁剪 */
 #page-header:not(.not-top-img):not(.is-post) {
-  height: 320px !important;
-  max-height: 45vh !important;
-  min-height: 200px !important;
+  height: 400px !important;
+  max-height: 55vh !important;
+  min-height: 280px !important;
 }
 
 /* 内页横幅 - 确保文字完整显示 */
@@ -121,10 +121,10 @@ body {
   max-height: none !important;
 }
 
-/* banner 背景图确保覆盖且居中 */
+/* banner 背景图确保覆盖且居中 - center center确保文字完整显示 */
 #page-header:not(.not-top-img) {
   background-size: cover !important;
-  background-position: center 30% !important;
+  background-position: center center !important;
 }
 
 /* 首页 banner 白云飘动动画 */
@@ -204,46 +204,31 @@ body {
 }
 
 /* ===============================
- * 独立浮动"回到首页"按钮 - 不依赖rightside容器
+ * "回到首页"按钮 - 集成到rightside面板，位于"回到顶部"下方
  * =============================== */
-.float-home-btn {
-  position: fixed;
-  bottom: 80px;
-  right: 20px;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--mario-red);
-  border: 3px solid var(--mario-brown);
-  box-shadow: 0 4px 0 var(--mario-brown), 0 6px 15px rgba(0,0,0,0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
-  z-index: 9998;
+#rightside-config-show .float-home-btn {
+  display: block;
+  margin-bottom: 5px;
+  width: 35px;
+  height: 35px;
+  background-color: var(--mario-red) !important;
+  color: white !important;
+  text-align: center;
+  font-size: 16px;
+  line-height: 35px;
+  border-radius: 5px;
   text-decoration: none;
-  transition: all 0.3s ease;
-  animation: homeBtnPop 0.5s ease;
+  transition: all 0.3s;
 }
 
-.float-home-btn:hover {
-  background: var(--mario-yellow);
-  color: var(--mario-red);
-  transform: translateY(-3px) scale(1.1);
-  box-shadow: 0 7px 0 var(--mario-brown), 0 10px 20px rgba(0,0,0,0.4);
+#rightside-config-show .float-home-btn:hover {
+  background-color: var(--mario-yellow) !important;
+  color: var(--mario-red) !important;
 }
 
-.float-home-btn:active {
-  transform: translateY(0) scale(1);
-  box-shadow: 0 2px 0 var(--mario-brown);
-}
-
-@keyframes homeBtnPop {
-  0% { opacity: 0; transform: scale(0) rotate(-180deg); }
-  60% { opacity: 1; transform: scale(1.2) rotate(10deg); }
-  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+#rightside-config-show .float-home-btn i {
+  position: relative;
+  z-index: 2;
 }
 
 /* ===============================
