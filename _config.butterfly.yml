@@ -58,21 +58,14 @@ error_img:
 # ===============================
 # 顶部图
 # ===============================
-banner:
-  enable: true
-  index:
-    url: /img/banner/index.svg
-  category:
-    url: /img/banner/category.svg
-  tag:
-    url: /img/banner/tag.svg
-  archive:
-    url: /img/banner/archive.svg
-
-# ===============================
-# 首页配置
-# ===============================
+# 首页banner
 index_img: /img/index_bg.svg
+# 分类页banner
+category_img: /img/banner/category.svg
+# 标签页banner
+tag_img: /img/banner/tag.svg
+# 归档页banner
+archive_img: /img/banner/archive.svg
 
 # ===============================
 # 文章页配置
