@@ -2,6 +2,7 @@
 title: 成长相册
 date: 2020-09-01 00:00:00
 type: gallery
+top_img: /img/banner/gallery.svg
 ---
 
 # 亦然亦航成长相册
