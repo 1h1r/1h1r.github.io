@@ -2,6 +2,7 @@
 title: 亦然与亦航
 date: 2026-07-31 00:00:00
 type: about
+top_img: /img/banner/about.svg
 ---
 
 # 亦然亦航 - 双胞胎成长博客
