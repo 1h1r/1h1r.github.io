@@ -1,11 +1,110 @@
-<svg xmlns='http://www.w3.org/2000/svg' width='1920' height='1080'>
-    <defs>
-      <linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'>
-        <stop offset='0%' style='stop-color:/'/>
-        <stop offset='100%' style='stop-color:/'/>
-      </linearGradient>
-    </defs>
-    <rect width='1920' height='1080' fill='url(#g)'/>
-    <text x='50%' y='50%' font-family='Arial, sans-serif' font-size='48' fill='white' text-anchor='middle' dominant-baseline='middle' font-weight='bold'>亦然亦航</text>
-    <text x='50%' y='65%' font-family='Arial, sans-serif' font-size='20' fill='rgba(255,255,255,0.7)' text-anchor='middle'>亦然亦航</text>
-  </svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400" viewBox="0 0 1200 400">
+  <!-- 天空 -->
+  <rect width="1200" height="320" fill="#5C94FC"/>
+  
+  <!-- 云朵 -->
+  <g opacity="0.9">
+    <ellipse cx="100" cy="60" rx="30" ry="18" fill="white"/>
+    <ellipse cx="140" cy="55" rx="35" ry="22" fill="white"/>
+    <ellipse cx="180" cy="60" rx="25" ry="15" fill="white"/>
+    
+    <ellipse cx="500" cy="40" rx="25" ry="15" fill="white"/>
+    <ellipse cx="540" cy="35" rx="30" ry="18" fill="white"/>
+    <ellipse cx="575" cy="40" rx="20" ry="12" fill="white"/>
+    
+    <ellipse cx="900" cy="70" rx="30" ry="18" fill="white"/>
+    <ellipse cx="940" cy="65" rx="35" ry="22" fill="white"/>
+    <ellipse cx="980" cy="70" rx="25" ry="15" fill="white"/>
+  </g>
+  
+  <!-- 灌木丛 -->
+  <g>
+    <circle cx="300" cy="280" r="40" fill="#43B047"/>
+    <circle cx="340" cy="285" r="35" fill="#43B047"/>
+    <circle cx="270" cy="285" r="30" fill="#43B047"/>
+    <rect x="250" y="280" width="120" height="40" fill="#43B047"/>
+    <ellipse cx="310" cy="250" rx="15" ry="8" fill="#5FD05F"/>
+  </g>
+  
+  <g>
+    <circle cx="800" cy="280" r="35" fill="#43B047"/>
+    <circle cx="835" cy="285" r="30" fill="#43B047"/>
+    <rect x="780" y="280" width="80" height="40" fill="#43B047"/>
+    <ellipse cx="810" cy="255" rx="12" ry="6" fill="#5FD05F"/>
+  </g>
+  
+  <!-- 砖块 -->
+  <g>
+    <rect x="450" y="200" width="40" height="40" fill="#C84C0C" stroke="#8B2500" stroke-width="3" rx="2"/>
+    <line x1="470" y1="200" x2="470" y2="240" stroke="#8B2500" stroke-width="2"/>
+    
+    <rect x="490" y="200" width="40" height="40" fill="#FAC000" stroke="#C84C0C" stroke-width="3" rx="2"/>
+    <text x="510" y="227" font-family="Arial" font-size="24" font-weight="bold" fill="white" text-anchor="middle">?</text>
+    
+    <rect x="530" y="200" width="40" height="40" fill="#C84C0C" stroke="#8B2500" stroke-width="3" rx="2"/>
+    <line x1="550" y1="200" x2="550" y2="240" stroke="#8B2500" stroke-width="2"/>
+  </g>
+  
+  <!-- 金币 -->
+  <g>
+    <circle cx="510" cy="140" r="15" fill="#FFD700" stroke="#B8860B" stroke-width="3"/>
+    <circle cx="510" cy="140" r="10" fill="#FFEC8B"/>
+    <text x="510" y="145" font-family="Arial" font-size="14" font-weight="bold" fill="#B8860B" text-anchor="middle">$</text>
+  </g>
+  
+  <g>
+    <circle cx="200" cy="160" r="12" fill="#FFD700" stroke="#B8860B" stroke-width="2"/>
+    <circle cx="200" cy="160" r="8" fill="#FFEC8B"/>
+  </g>
+  
+  <!-- 绿色管道 -->
+  <g>
+    <rect x="100" y="260" width="50" height="60" fill="#43B047" stroke="#006400" stroke-width="3"/>
+    <rect x="95" y="255" width="60" height="15" fill="#43B047" stroke="#006400" stroke-width="3" rx="3"/>
+    <rect x="103" y="270" width="8" height="40" fill="#5FD05F" opacity="0.5"/>
+  </g>
+  
+  <g>
+    <rect x="1050" y="260" width="50" height="60" fill="#43B047" stroke="#006400" stroke-width="3"/>
+    <rect x="1045" y="255" width="60" height="15" fill="#43B047" stroke="#006400" stroke-width="3" rx="3"/>
+    <rect x="1053" y="270" width="8" height="40" fill="#5FD05F" opacity="0.5"/>
+  </g>
+  
+  <!-- 地面砖块 -->
+  <rect x="0" y="320" width="1200" height="80" fill="#C84C0C"/>
+  <!-- 砖块纹理 -->
+  <g stroke="#8B2500" stroke-width="2">
+    <line x1="0" y1="340" x2="1200" y2="340"/>
+    <line x1="0" y1="360" x2="1200" y2="360"/>
+    <line x1="0" y1="380" x2="1200" y2="380"/>
+    <!-- 垂直线 - 错落 -->
+    <line x1="40" y1="320" x2="40" y2="340"/>
+    <line x1="80" y1="320" x2="80" y2="340"/>
+    <line x1="120" y1="320" x2="120" y2="340"/>
+    <line x1="160" y1="320" x2="160" y2="340"/>
+    <line x1="200" y1="320" x2="200" y2="340"/>
+    <line x1="20" y1="340" x2="20" y2="360"/>
+    <line x1="60" y1="340" x2="60" y2="360"/>
+    <line x1="100" y1="340" x2="100" y2="360"/>
+    <line x1="140" y1="340" x2="140" y2="360"/>
+    <line x1="180" y1="340" x2="180" y2="360"/>
+  </g>
+  
+  <!-- 星星 -->
+  <g transform="translate(700, 120)">
+    <polygon points="0,-20 5,-6 20,-6 8,4 13,20 0,10 -13,20 -8,4 -20,-6 -5,-6" 
+             fill="#FFD700" stroke="#B8860B" stroke-width="2"/>
+    <circle cx="0" cy="-5" r="3" fill="white" opacity="0.6"/>
+  </g>
+  
+  <g transform="translate(350, 100)">
+    <polygon points="0,-15 4,-5 15,-5 6,3 10,15 0,8 -10,15 -6,3 -15,-5 -4,-5" 
+             fill="#FFD700" stroke="#B8860B" stroke-width="2"/>
+  </g>
+  
+  <!-- 博客标题 -->
+  <text x="600" y="180" font-family="'ZCOOL KuaiLe', sans-serif" font-size="56" font-weight="bold" 
+        fill="white" text-anchor="middle" stroke="#C84C0C" stroke-width="3">亦然亦航</text>
+  <text x="600" y="215" font-family="'ZCOOL KuaiLe', sans-serif" font-size="24" 
+        fill="#FBD000" text-anchor="middle" stroke="#C84C0C" stroke-width="1">🍄 双胞胎男孩的成长日记 🍄</text>
+</svg>
