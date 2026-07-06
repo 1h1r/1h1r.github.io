@@ -1,224 +1,419 @@
 /* ===============================
+
  * 亦然亦航 - 马里奥兄弟主题
+
  * 超级马里奥风格的可爱儿童博客
+
  * =============================== */
 
+
+
 /* ===============================
+
  * 字体 - 像素风 + 可爱中文
+
  * =============================== */
+
 body {
+
   font-family: 'Noto Sans SC', 'ZCOOL KuaiLe', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
   --global-font-size: 16px;
+
 }
+
+
 
 h1, h2, h3, h4, h5, h6,
+
 #page-header #site-title,
+
 #site-name {
+
   font-family: 'ZCOOL KuaiLe', 'Noto Sans SC', sans-serif !important;
+
 }
 
+
+
 /* ===============================
+
  * 马里奥经典配色变量
+
  * =============================== */
+
 :root {
+
   --mario-red: #E52521;
+
   --mario-blue: #049CD8;
+
   --mario-green: #43B047;
+
   --mario-yellow: #FBD000;
+
   --mario-brown: #C84C0C;
+
   --mario-sky: #5C94FC;
+
   --mario-cloud: #FFFFFF;
+
   --mario-brick: #E45C10;
+
   --mario-question: #FAC000;
+
   --mario-coin: #FFD700;
+
   --mario-pipe: #00A800;
+
   --mario-bg: #5C94FC;
+
   --mario-card-bg: #FFFFFF;
+
   --mario-text: #2C3E50;
+
 }
+
+
 
 [data-theme="dark"] {
+
   --mario-red: #E52521;
+
   --mario-blue: #049CD8;
+
   --mario-green: #43B047;
+
   --mario-yellow: #FBD000;
+
   --mario-brown: #C84C0C;
+
   --mario-sky: #1a1a4e;
+
   --mario-cloud: #2a2a4e;
+
   --mario-brick: #8B2500;
+
   --mario-question: #B8860B;
+
   --mario-coin: #DAA520;
+
   --mario-pipe: #006400;
+
   --mario-bg: #0d1b2a;
+
   --mario-card-bg: #1a2a3e;
+
   --mario-text: #E0E0E0;
+
 }
 
+
+
 /* ===============================
+
  * 背景 - 纯蓝色简洁背景
+
  * =============================== */
+
 body {
+
   background: var(--mario-bg) !important;
+
   background-image: none !important;
+
 }
 
+
+
 /* ===============================
+
  * 顶部导航栏 - 马里奥砖块风格
+
  * =============================== */
+
 #nav {
+
   background: var(--mario-red) !important;
+
   border-bottom: 4px solid var(--mario-brown) !important;
+
   box-shadow: 0 4px 0 rgba(0,0,0,0.15), 0 6px 20px rgba(0,0,0,0.2) !important;
+
 }
+
+
 
 #nav .menus_item a {
+
   font-family: 'ZCOOL KuaiLe', sans-serif !important;
+
   font-weight: 600 !important;
+
   color: white !important;
+
   transition: all 0.3s ease !important;
+
   position: relative;
+
   padding: 8px 14px !important;
+
   border-radius: 6px;
+
 }
+
+
 
 #nav .menus_item a:hover {
+
   background: var(--mario-yellow) !important;
+
   color: var(--mario-red) !important;
+
   transform: translateY(-2px);
+
   box-shadow: 0 4px 0 var(--mario-brown);
+
 }
+
+
 
 /* 网站标题区 - 像素风 */
+
 #site-name {
+
   font-family: 'ZCOOL KuaiLe', sans-serif !important;
+
   color: var(--mario-yellow) !important;
+
   text-shadow: 3px 3px 0 var(--mario-red), 6px 6px 0 var(--mario-brown) !important;
+
   font-size: 1.5em !important;
+
 }
+
+
 
 /* ===============================
+
  * 横幅 - 首页白云飘动，内页文字完整显示
+
  * =============================== */
+
 #page-header {
+
   position: relative;
+
   overflow: hidden;
+
   background-size: cover !important;
+
   background-position: center center !important;
+
   background-repeat: no-repeat !important;
+
 }
 
-/* 首页横幅 - 确保文字完整不被裁剪 */
-#page-header.full_page {
-  max-height: 55vh !important;
-  min-height: 500px !important;
+
+
+/* 首页横幅 */
+
+#page-header:not(.not-top-img):not(.is-post) {
+
+  height: 320px !important;
+
+  max-height: 45vh !important;
+
+  min-height: 200px !important;
+
 }
 
-/* 首页 site-info 区域调整 */
-#page-header.full_page #site-info {
-  top: 40% !important;
-}
 
-/* 首页标题 - 取消文字截断限制 */
-#page-header.full_page #site-title {
-  -webkit-line-clamp: unset !important;
-  overflow: visible !important;
-  display: block !important;
-  max-height: none !important;
-  font-size: 2.2rem !important;
-}
 
 /* 内页横幅 - 确保文字完整显示 */
+
 #page-header.is-post {
+
   height: auto !important;
+
   min-height: 350px !important;
+
   max-height: none !important;
+
 }
 
-/* banner 背景图确保覆盖且居中 - center center确保文字完整显示 */
+
+
+/* banner 背景图确保覆盖且居中 */
+
 #page-header:not(.not-top-img) {
+
   background-size: cover !important;
-  background-position: center center !important;
+
+  background-position: center 30% !important;
+
 }
+
+
 
 /* 首页 banner 白云飘动动画 */
+
 #page-header:not(.not-top-img):not(.is-post)::before,
+
 #page-header:not(.not-top-img):not(.is-post)::after {
+
   content: '';
+
   position: absolute;
+
   top: 10%;
+
   width: 120px;
+
   height: 50px;
+
   background: rgba(255, 255, 255, 0.85);
+
   border-radius: 50px;
+
   z-index: 1;
+
   pointer-events: none;
+
   animation: cloudDrift 40s linear infinite;
+
 }
+
+
 
 #page-header:not(.not-top-img):not(.is-post)::before {
+
   top: 8%;
+
   width: 100px;
+
   height: 40px;
+
   animation-duration: 35s;
+
   box-shadow: 30px -10px 0 -5px rgba(255,255,255,0.85),
+
               60px -5px 0 -10px rgba(255,255,255,0.85),
+
               -25px -5px 0 -8px rgba(255,255,255,0.85);
+
 }
+
+
 
 #page-header:not(.not-top-img):not(.is-post)::after {
+
   top: 20%;
+
   width: 80px;
+
   height: 35px;
+
   animation-duration: 50s;
+
   animation-delay: -10s;
+
   opacity: 0.7;
+
   box-shadow: 25px -8px 0 -5px rgba(255,255,255,0.7),
+
               50px -3px 0 -10px rgba(255,255,255,0.7),
+
               -20px -3px 0 -8px rgba(255,255,255,0.7);
+
 }
+
+
 
 @keyframes cloudDrift {
+
   from { transform: translateX(-200px); }
+
   to { transform: translateX(calc(100vw + 200px)); }
+
 }
+
+
 
 /* 内页 banner 标题和副标题居中且完整 */
+
 #page-header #site-title,
+
 #page-header #site-subtitle,
+
 #page-header .site-info {
+
   padding-top: 20px !important;
+
   position: relative;
+
   z-index: 2;
+
 }
+
+
 
 #page-header:not(.not-top-img):before {
+
   background-color: transparent !important;
+
 }
+
+
 
 /* 网站标题动画 - 弹跳入场 */
+
 #site-title, #site-subtitle {
+
   text-shadow: 3px 3px 0 var(--mario-red), 6px 6px 0 rgba(0,0,0,0.3) !important;
+
   animation: marioJump 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+
 }
+
+
 
 @keyframes marioJump {
+
   0% {
+
     opacity: 0;
+
     transform: translateY(-40px) scale(0.8);
+
   }
+
   50% {
+
     opacity: 1;
+
     transform: translateY(10px) scale(1.05);
+
   }
+
   100% {
+
     opacity: 1;
+
     transform: translateY(0) scale(1);
+
   }
+
 }
 
+
+
 /* ===============================
+
  * "回到首页"按钮 - 固定在 rightside 最底部，"回到顶部"正下方
+
  * =============================== */
+
 #rightside > .float-home-btn,
 #rightside-config-show .float-home-btn,
 #rightside-config-hide .float-home-btn {
@@ -251,957 +446,1908 @@ body {
 #rightside > .float-home-btn i,
 #rightside-config-show .float-home-btn i,
 #rightside-config-hide .float-home-btn i {
-  position: relative;
-  z-index: 2;
+  font-size: 16px;
 }
 
+
+
 /* ===============================
+
  * 复制链接按钮样式
+
  * =============================== */
+
 .copy-link-btn {
+
   display: inline-flex;
+
   align-items: center;
+
   gap: 6px;
+
   padding: 9px 18px;
+
   border-radius: 25px;
+
   border: 2px solid var(--mario-blue);
+
   background: var(--mario-blue);
+
   color: white !important;
+
   font-size: 14px;
+
   font-weight: 600;
+
   cursor: pointer;
+
   transition: all 0.3s;
+
   text-decoration: none;
+
   box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+
   vertical-align: middle;
+
   margin-left: 8px;
+
 }
+
+
 
 .copy-link-btn:hover {
+
   background: #0378B4;
+
   border-color: #0378B4;
+
   transform: translateY(-2px);
+
   box-shadow: 0 5px 0 rgba(0,0,0,0.3);
+
 }
 
+
+
 /* ===============================
+
  * 文章卡片 - 问号砖块风格
+
  * =============================== */
+
 #recent-posts .recent-post-item {
+
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
   border-radius: 12px !important;
+
   overflow: hidden;
+
   background: var(--mario-card-bg) !important;
+
   border: 3px solid var(--mario-brown) !important;
+
   box-shadow: 0 4px 0 var(--mario-brown), 0 6px 15px rgba(0,0,0,0.15) !important;
+
   position: relative;
+
 }
+
+
 
 #recent-posts .recent-post-item:hover {
+
   transform: translateY(-6px);
+
   box-shadow: 0 8px 0 var(--mario-brown), 0 12px 30px rgba(0,0,0,0.25) !important;
+
   border-color: var(--mario-red) !important;
+
 }
+
+
 
 /* 文章卡片左上角装饰 - 问号砖块角标 */
+
 #recent-posts .recent-post-item::before {
+
   content: '?';
+
   position: absolute;
+
   top: -3px;
+
   left: -3px;
+
   width: 32px;
+
   height: 32px;
+
   background: var(--mario-question);
+
   border: 3px solid var(--mario-brown);
+
   border-radius: 0 0 8px 0;
+
   color: white;
+
   font-family: 'ZCOOL KuaiLe', sans-serif;
+
   font-weight: bold;
+
   font-size: 18px;
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
+
   z-index: 2;
+
   text-shadow: 1px 1px 0 var(--mario-brown);
+
 }
+
+
 
 /* 文章封面图 */
+
 .post_cover img {
+
   border-radius: 0 !important;
+
   transition: transform 0.5s ease;
+
   border-bottom: 4px solid var(--mario-brown);
+
 }
+
+
 
 .post_cover:hover img {
+
   transform: scale(1.08);
+
 }
 
+
+
 /* ===============================
+
  * 分类页面 - 马里奥管道风格
+
  * =============================== */
+
 #category #category-list .category-list-item {
+
   border-radius: 12px;
+
   transition: all 0.3s ease;
+
   background: var(--mario-card-bg) !important;
+
   border: 3px solid var(--mario-pipe) !important;
+
   box-shadow: 0 4px 0 var(--mario-pipe) !important;
+
   overflow: hidden;
+
 }
+
+
 
 #category #category-list .category-list-item:hover {
+
   transform: translateY(-4px);
+
   box-shadow: 0 8px 0 var(--mario-pipe), 0 10px 25px rgba(0,0,0,0.2) !important;
+
 }
+
+
 
 /* 分类图标 - 管道样式 */
+
 #category #category-list .category-list-item::before {
+
   content: '';
+
   display: inline-block;
+
   width: 20px;
+
   height: 20px;
+
   background: var(--mario-pipe);
+
   border-radius: 4px;
+
   border: 2px solid #006400;
+
   margin-right: 8px;
+
   vertical-align: middle;
+
 }
 
+
+
 /* ===============================
+
  * 标签云 - 马里奥金币球风格
+
  * =============================== */
+
 #tag #tag-tags .tag-cloud-list a {
+
   border-radius: 20px;
+
   padding: 8px 16px;
+
   margin: 5px;
+
   transition: all 0.3s ease;
+
   background: var(--mario-coin) !important;
+
   color: var(--mario-brown) !important;
+
   border: 2px solid #B8860B !important;
+
   font-weight: 600;
+
   box-shadow: 0 3px 0 #B8860B;
+
   display: inline-block;
+
 }
+
+
 
 #tag #tag-tags .tag-cloud-list a:hover {
+
   transform: scale(1.15) rotate(-3deg);
+
   background: var(--mario-red) !important;
+
   color: white !important;
+
   border-color: var(--mario-brown) !important;
+
   box-shadow: 0 5px 0 var(--mario-brown);
+
 }
 
+
+
 /* ===============================
+
  * 右下角按钮 - 马里奥彩色按钮风格
+
  * =============================== */
+
 #rightside #rightside-config-hide,
+
 #rightside #rightside-config-show {
+
   border-radius: 10px;
+
   background: rgba(255, 255, 255, 0.95);
+
   border: 2px solid var(--mario-brown);
+
   box-shadow: 0 3px 0 var(--mario-brown), 0 5px 15px rgba(0,0,0,0.2);
+
   overflow: hidden;
+
 }
+
+
 
 #rightside #rightside-config-hide button,
+
 #rightside #rightside-config-show button {
+
   width: 40px !important;
+
   height: 40px !important;
+
   font-size: 18px !important;
+
   transition: all 0.3s ease !important;
+
   border-bottom: 1px solid rgba(200, 76, 12, 0.2);
+
 }
+
+
 
 /* 每个按钮不同颜色 */
+
 #rightside #rightside-config-hide button:nth-child(1),
+
 #rightside #rightside-config-show button:nth-child(1) {
+
   color: #E52521 !important;
+
   background: rgba(229, 37, 33, 0.1);
+
 }
+
+
 
 #rightside #rightside-config-hide button:nth-child(2),
+
 #rightside #rightside-config-show button:nth-child(2) {
+
   color: #049CD8 !important;
+
   background: rgba(4, 156, 216, 0.1);
+
 }
+
+
 
 #rightside #rightside-config-hide button:nth-child(3),
+
 #rightside #rightside-config-show button:nth-child(3) {
+
   color: #43B047 !important;
+
   background: rgba(67, 176, 71, 0.1);
+
 }
+
+
 
 #rightside #rightside-config-hide button:nth-child(4),
+
 #rightside #rightside-config-show button:nth-child(4) {
+
   color: #FBD000 !important;
+
   background: rgba(251, 208, 0, 0.15);
+
 }
+
+
 
 #rightside #rightside-config-hide button:nth-child(5),
+
 #rightside #rightside-config-show button:nth-child(5) {
+
   color: #C84C0C !important;
+
   background: rgba(200, 76, 12, 0.1);
+
 }
+
+
 
 #rightside #rightside-config-hide button:nth-child(6),
+
 #rightside #rightside-config-show button:nth-child(6) {
+
   color: #9B59B6 !important;
+
   background: rgba(155, 89, 182, 0.1);
+
 }
+
+
 
 #rightside #rightside-config-hide button:nth-child(7),
+
 #rightside #rightside-config-show button:nth-child(7) {
+
   color: #E67E22 !important;
+
   background: rgba(230, 126, 34, 0.1);
+
 }
+
+
 
 #rightside #rightside-config-hide button:nth-child(8),
+
 #rightside #rightside-config-show button:nth-child(8) {
+
   color: #1ABC9C !important;
+
   background: rgba(26, 188, 156, 0.1);
+
 }
+
+
 
 /* 悬浮时高亮 */
+
 #rightside #rightside-config-hide button:hover,
+
 #rightside #rightside-config-show button:hover {
+
   background: var(--mario-yellow) !important;
+
   color: var(--mario-red) !important;
+
   transform: scale(1.15);
+
   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+
 }
+
+
 
 /* 右侧主切换按钮 - 彩色 */
+
 #rightside #rightside-config-show button,
+
 #rightside-config-hide > button:first-child {
+
   background: linear-gradient(135deg, #E52521, #FBD000) !important;
+
   color: white !important;
+
   border-radius: 8px;
+
   border: 2px solid #C84C0C;
+
   box-shadow: 0 3px 0 #C84C0C;
+
 }
+
+
 
 /* 暗黑模式适配 */
+
 [data-theme="dark"] #rightside #rightside-config-hide,
+
 [data-theme="dark"] #rightside #rightside-config-show {
+
   background: rgba(30, 35, 50, 0.95);
+
   border-color: var(--mario-yellow);
+
 }
+
+
 
 [data-theme="dark"] #rightside #rightside-config-hide button,
+
 [data-theme="dark"] #rightside #rightside-config-show button {
+
   border-bottom-color: rgba(251, 208, 0, 0.15);
+
 }
 
+
+
 /* ===============================
+
  * 文章页美化 - 马里奥风格
+
  * =============================== */
+
 #article-container {
+
   line-height: 1.9;
+
   background: var(--mario-card-bg);
+
   border-radius: 12px;
+
   padding: 20px;
+
 }
+
+
 
 #article-container h1 {
+
   border-bottom: 4px solid var(--mario-red);
+
   padding-bottom: 10px;
+
   color: var(--mario-red) !important;
+
   position: relative;
+
 }
+
+
 
 #article-container h1::before {
+
   content: '★';
+
   color: var(--mario-yellow);
+
   margin-right: 10px;
+
   text-shadow: 2px 2px 0 var(--mario-brown);
+
 }
+
+
 
 #article-container h2 {
+
   border-left: 6px solid var(--mario-blue);
+
   padding-left: 15px;
+
   color: var(--mario-blue) !important;
+
   background: linear-gradient(90deg, rgba(4, 156, 216, 0.1), transparent);
+
   padding: 8px 0 8px 15px;
+
   border-radius: 0 8px 8px 0;
+
 }
+
+
 
 #article-container h3 {
+
   border-left: 4px solid var(--mario-green);
+
   padding-left: 12px;
+
   color: var(--mario-green) !important;
+
 }
+
+
 
 /* 引用块 - 马里奥对话气泡风格 */
+
 #article-container blockquote {
+
   border-left: 4px solid var(--mario-red);
+
   background: linear-gradient(135deg, rgba(251, 208, 0, 0.1), rgba(229, 37, 33, 0.05));
+
   border-radius: 0 12px 12px 0;
+
   padding: 15px 20px;
+
   position: relative;
+
   border: 3px solid var(--mario-brown) !important;
+
   border-left: 6px solid var(--mario-red) !important;
+
   box-shadow: 0 3px 0 var(--mario-brown);
+
 }
+
+
 
 #article-container blockquote::before {
+
   content: '🍄';
+
   font-size: 1.5em;
+
   position: absolute;
+
   top: -8px;
+
   left: 10px;
+
   background: var(--mario-card-bg);
+
   padding: 0 5px;
+
   border-radius: 50%;
+
 }
+
+
 
 /* 代码块 - 绿色管道风格 */
+
 figure.highlight, pre {
+
   border-radius: 8px !important;
+
   border: 3px solid var(--mario-pipe) !important;
+
   box-shadow: 0 4px 0 #006400 !important;
+
   background: #1a1a2e !important;
+
 }
+
+
 
 figure.highlight::before,
+
 .highlight-container .code-lang::before {
+
   content: '🟢';
+
 }
+
+
 
 /* 表格美化 - 马里奥棋盘格风格 */
+
 #article-container table {
+
   border-radius: 8px;
+
   overflow: hidden;
+
   border: 3px solid var(--mario-brown) !important;
+
   box-shadow: 0 4px 0 var(--mario-brown);
+
 }
+
+
 
 #article-container table th {
+
   background: var(--mario-red) !important;
+
   color: #fff !important;
+
   border: 2px solid var(--mario-brown) !important;
+
 }
+
+
 
 #article-container table td {
+
   border: 2px solid #D4A574 !important;
+
 }
+
+
 
 #article-container table tr:nth-child(even) td {
+
   background: rgba(251, 208, 0, 0.1) !important;
+
 }
+
+
 
 #article-container table tr:nth-child(odd) td {
+
   background: rgba(93, 148, 252, 0.05) !important;
+
 }
 
+
+
 /* ===============================
+
  * 滚动条 - 金币滚动条
+
  * =============================== */
+
 ::-webkit-scrollbar {
+
   width: 12px;
+
   height: 12px;
+
 }
+
+
 
 ::-webkit-scrollbar-track {
+
   background: var(--mario-bg);
+
   border-radius: 0;
+
   border-left: 2px solid var(--mario-brown);
+
 }
+
+
 
 ::-webkit-scrollbar-thumb {
+
   background: var(--mario-coin);
+
   border-radius: 6px;
+
   border: 2px solid #B8860B;
+
   box-shadow: inset 0 0 0 2px rgba(255,255,255,0.3);
+
 }
+
+
 
 ::-webkit-scrollbar-thumb:hover {
+
   background: var(--mario-red);
+
   border-color: var(--mario-brown);
+
 }
 
+
+
 /* ===============================
+
  * 页脚 - 马里奥城堡风格
+
  * =============================== */
+
 #footer {
+
   background: linear-gradient(135deg, var(--mario-brown) 0%, var(--mario-red) 100%) !important;
+
   border-top: 6px solid var(--mario-yellow) !important;
+
   position: relative;
+
 }
+
+
 
 #footer::before {
+
   content: '';
+
   position: absolute;
+
   top: -6px;
+
   left: 0;
+
   right: 0;
+
   height: 6px;
+
   background: repeating-linear-gradient(
+
     90deg,
+
     var(--mario-yellow) 0,
+
     var(--mario-yellow) 20px,
+
     var(--mario-brown) 20px,
+
     var(--mario-brown) 40px
+
   );
+
 }
+
+
 
 #footer-wrap {
+
   color: #fff !important;
+
 }
+
+
 
 #footer-wrap a {
+
   color: var(--mario-yellow) !important;
+
   transition: all 0.3s ease;
+
 }
+
+
 
 #footer-wrap a:hover {
+
   color: white !important;
+
   text-shadow: 2px 2px 0 var(--mario-red);
+
 }
 
+
+
 /* ===============================
+
  * 加载动画 - 马里奥金币旋转
+
  * =============================== */
+
 .loading-bg {
+
   background: var(--mario-bg) !important;
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
+
 }
+
+
 
 .loading-bg .loading-image {
+
   animation: coinSpin 0.8s linear infinite !important;
+
 }
+
+
 
 @keyframes coinSpin {
+
   0% { transform: rotateY(0deg) scale(1); }
+
   50% { transform: rotateY(180deg) scale(0.8); }
+
   100% { transform: rotateY(360deg) scale(1); }
+
 }
 
+
+
 /* ===============================
+
  * 分页器 - 清晰可见的数字
+
  * =============================== */
+
 #pagination .page-number,
+
 #pagination .pagination_info {
+
   background: var(--mario-card-bg) !important;
+
   border: 3px solid var(--mario-pipe) !important;
+
   border-radius: 8px !important;
+
   box-shadow: 0 3px 0 var(--mario-pipe) !important;
+
   color: var(--mario-text) !important;
+
   font-weight: 700 !important;
+
   padding: 8px 14px !important;
+
   min-width: 40px !important;
+
   text-align: center !important;
+
   display: inline-flex !important;
+
   align-items: center !important;
+
   justify-content: center !important;
+
 }
+
+
 
 #pagination .page-number.current {
+
   background: var(--mario-red) !important;
+
   color: white !important;
+
   border-color: var(--mario-brown) !important;
+
   font-size: 1.1em !important;
+
 }
+
+
 
 #pagination a {
+
   background: var(--mario-blue) !important;
+
   color: white !important;
+
   border: 3px solid #003d7a !important;
+
   border-radius: 8px !important;
+
   box-shadow: 0 3px 0 #003d7a !important;
+
   transition: all 0.2s ease;
+
 }
+
+
 
 #pagination a:hover {
+
   background: var(--mario-red) !important;
+
   transform: translateY(-2px);
+
   box-shadow: 0 5px 0 var(--mario-brown) !important;
+
   border-color: var(--mario-brown) !important;
+
 }
 
+
+
 /* ===============================
+
  * TOC 目录 - 马里奥菜单风格
+
  * =============================== */
+
 #card-toc {
+
   background: var(--mario-card-bg) !important;
+
   border: 3px solid var(--mario-brown) !important;
+
   border-radius: 12px !important;
+
   box-shadow: 0 4px 0 var(--mario-brown) !important;
+
 }
+
+
 
 #card-toc .item-head {
+
   color: var(--mario-red) !important;
+
   font-family: 'ZCOOL KuaiLe', sans-serif !important;
+
 }
 
+
+
 /* ===============================
+
  * 按钮通用样式 - 马里奥风格
+
  * =============================== */
+
 button, .btn, input[type="submit"], input[type="button"] {
+
   border-radius: 8px !important;
+
   transition: all 0.2s ease !important;
+
 }
+
+
 
 button:hover, .btn:hover {
+
   transform: translateY(-2px) !important;
+
 }
 
+
+
 /* ===============================
+
  * 双胞胎专属标签
+
  * =============================== */
+
 /* 亦然 - 蓝色马里奥（路易吉色） */
+
 .tag-yr {
+
   display: inline-block;
+
   background: var(--mario-blue);
+
   color: white;
+
   padding: 2px 12px;
+
   border-radius: 12px;
+
   font-size: 0.85em;
+
   margin: 0 3px;
+
   border: 2px solid #003d7a;
+
   box-shadow: 0 2px 0 #003d7a;
+
   font-weight: 600;
+
 }
+
+
 
 /* 亦航 - 红色马里奥（马力欧色） */
+
 .tag-yh {
+
   display: inline-block;
+
   background: var(--mario-red);
+
   color: white;
+
   padding: 2px 12px;
+
   border-radius: 12px;
+
   font-size: 0.85em;
+
   margin: 0 3px;
+
   border: 2px solid #8B0000;
+
   box-shadow: 0 2px 0 #8B0000;
+
   font-weight: 600;
+
 }
 
+
+
 /* ===============================
+
  * 成长里程碑 - 星星标记
+
  * =============================== */
+
 .milestone {
+
   background: linear-gradient(135deg, var(--mario-yellow), #FFA500);
+
   color: var(--mario-brown);
+
   padding: 3px 15px;
+
   border-radius: 20px;
+
   font-weight: bold;
+
   display: inline-block;
+
   margin: 5px 0;
+
   border: 2px solid var(--mario-brown);
+
   box-shadow: 0 3px 0 var(--mario-brown);
+
 }
 
+
+
 /* ===============================
+
  * 动画效果
+
  * =============================== */
+
 .fade-in-up {
+
   animation: fadeInUp 0.8s ease;
+
 }
+
+
 
 @keyframes fadeInUp {
+
   from {
+
     opacity: 0;
+
     transform: translateY(20px);
+
   }
+
   to {
+
     opacity: 1;
+
     transform: translateY(0);
+
   }
+
 }
+
+
 
 /* 管道出现动画 */
+
 @keyframes pipeRise {
+
   from {
+
     opacity: 0;
+
     transform: translateY(30px) scaleY(0.5);
+
   }
+
   to {
+
     opacity: 1;
+
     transform: translateY(0) scaleY(1);
+
   }
+
 }
+
+
 
 /* 金币弹跳动画 */
+
 @keyframes coinBounce {
+
   0%, 100% { transform: translateY(0); }
+
   50% { transform: translateY(-10px); }
+
 }
 
+
+
 /* ===============================
+
  * 移动端适配
+
  * =============================== */
+
 @media (max-width: 768px) {
+
   #recent-posts .recent-post-item {
+
     border-radius: 8px !important;
+
     border-width: 2px !important;
+
   }
+
+
 
   #recent-posts .recent-post-item::before {
+
     width: 24px;
+
     height: 24px;
+
     font-size: 14px;
+
   }
+
+
 
   #article-container h2 {
+
     font-size: 1.4em;
+
   }
+
+
 
   #article-container h3 {
+
     font-size: 1.2em;
+
   }
+
+
 
   #site-name {
+
     font-size: 1.2em !important;
+
     text-shadow: 2px 2px 0 var(--mario-red), 4px 4px 0 var(--mario-brown) !important;
+
   }
+
 }
 
+
+
 /* ===============================
+
  * 马里奥像素装饰元素
+
  * =============================== */
+
+
 
 /* 隐藏的管道装饰（左下角） */
+
 #body-wrap::after {
+
   content: '';
+
   position: fixed;
+
   bottom: 0;
+
   left: 0;
+
   width: 60px;
+
   height: 40px;
+
   background: var(--mario-pipe);
+
   border: 3px solid #006400;
+
   border-radius: 8px 8px 0 0;
+
   z-index: -1;
+
   opacity: 0.3;
+
   pointer-events: none;
+
 }
+
+
 
 /* 选中文字颜色 */
+
 ::selection {
+
   background: var(--mario-yellow);
+
   color: var(--mario-red);
+
 }
+
+
 
 /* 链接颜色 - 马里奥蓝 */
+
 #article-container a {
+
   color: var(--mario-blue);
+
   border-bottom: 2px dashed var(--mario-blue);
+
   transition: all 0.3s ease;
+
 }
+
+
 
 #article-container a:hover {
+
   color: var(--mario-red);
+
   border-bottom-color: var(--mario-red);
+
   background: rgba(229, 37, 33, 0.05);
+
 }
+
+
 
 /* 文章信息栏 */
+
 #post-meta, .post-meta {
+
   color: #666 !important;
+
 }
+
+
 
 /* 通知提示 - 马里奥对话风格 */
+
 .snackbar-container {
+
   border-radius: 8px !important;
+
   border: 3px solid var(--mario-brown) !important;
+
   box-shadow: 0 4px 0 var(--mario-brown) !important;
+
   font-family: 'ZCOOL KuaiLe', sans-serif !important;
+
 }
+
+
 
 /* ===============================
+
  * 自定义评论留言区 + 分享转发
+
  * =============================== */
+
 .custom-comment-section {
+
   margin-top: 40px;
+
   padding: 30px;
+
   background: var(--mario-card-bg);
+
   border-radius: 16px;
+
   border: 3px solid var(--mario-brown);
+
   box-shadow: 0 4px 0 var(--mario-brown);
+
 }
+
+
 
 .custom-comment-section h3 {
+
   font-family: 'ZCOOL KuaiLe', sans-serif !important;
+
   color: var(--mario-red) !important;
+
   font-size: 1.5em;
+
   margin-bottom: 20px;
+
   display: flex;
+
   align-items: center;
+
   gap: 10px;
+
 }
+
+
 
 .comment-form .form-row {
+
   display: flex;
+
   gap: 15px;
+
   margin-bottom: 15px;
+
 }
+
+
 
 .comment-form .form-row input {
+
   flex: 1;
+
   padding: 12px 15px;
+
   border: 2px solid var(--mario-brown);
+
   border-radius: 8px;
+
   font-size: 14px;
+
   font-family: inherit;
+
   background: var(--mario-card-bg);
+
   transition: all 0.3s;
+
   color: var(--mario-text);
+
 }
+
+
 
 .comment-form .form-row input:focus {
+
   border-color: var(--mario-yellow);
+
   outline: none;
+
   box-shadow: 0 0 0 3px rgba(251,208,0,0.2);
+
 }
+
+
 
 .comment-form textarea {
+
   width: 100%;
+
   padding: 15px;
+
   border: 2px solid var(--mario-brown);
+
   border-radius: 8px;
+
   min-height: 120px;
+
   font-size: 14px;
+
   font-family: inherit;
+
   resize: vertical;
+
   background: var(--mario-card-bg);
+
   color: var(--mario-text);
+
   transition: all 0.3s;
+
 }
+
+
 
 .comment-form textarea:focus {
+
   border-color: var(--mario-yellow);
+
   outline: none;
+
   box-shadow: 0 0 0 3px rgba(251,208,0,0.2);
+
 }
+
+
 
 .comment-submit {
+
   padding: 10px 30px;
+
   background: var(--mario-red);
+
   color: white;
+
   border: none;
+
   border-radius: 8px;
+
   font-size: 16px;
+
   font-weight: 600;
+
   cursor: pointer;
+
   transition: all 0.3s;
+
   font-family: inherit;
+
   box-shadow: 0 3px 0 var(--mario-brown);
+
 }
+
+
 
 .comment-submit:hover {
+
   background: var(--mario-yellow);
+
   color: var(--mario-brown);
+
   transform: translateY(-2px);
+
   box-shadow: 0 5px 0 var(--mario-brown);
+
 }
+
+
 
 .comment-list {
+
   margin-top: 30px;
+
 }
+
+
 
 .comment-item {
+
   padding: 15px;
+
   border-bottom: 1px dashed #ddd;
+
   margin-bottom: 10px;
+
   border-radius: 8px;
+
   transition: all 0.3s;
+
 }
+
+
 
 .comment-item:hover {
+
   background: rgba(251,208,0,0.05);
+
 }
+
+
 
 .comment-item .comment-author {
+
   font-weight: 700;
+
   color: var(--mario-blue);
+
   margin-bottom: 5px;
+
 }
+
+
 
 .comment-item .comment-time {
+
   font-size: 12px;
+
   color: #999;
+
   margin-left: 10px;
+
 }
+
+
 
 .comment-item .comment-body {
+
   color: var(--mario-text);
+
   line-height: 1.6;
+
   margin-top: 8px;
+
 }
+
+
 
 /* 社交分享转发 */
+
 .share-container {
+
   margin-top: 30px;
+
   padding: 20px;
+
   background: rgba(251,208,0,0.08);
+
   border-radius: 12px;
+
   border: 2px dashed var(--mario-yellow);
+
 }
+
+
 
 .share-container h4 {
+
   font-family: 'ZCOOL KuaiLe', sans-serif !important;
+
   color: var(--mario-brown) !important;
+
   margin-bottom: 15px;
+
   font-size: 1.1em;
+
 }
+
+
 
 .share-buttons {
+
   display: flex;
+
   flex-wrap: wrap;
+
   gap: 10px;
+
   justify-content: center;
+
 }
+
+
 
 .share-btn {
+
   display: inline-flex;
+
   align-items: center;
+
   gap: 6px;
+
   padding: 9px 18px;
+
   border-radius: 25px;
+
   border: none;
+
   font-size: 14px;
+
   font-weight: 600;
+
   cursor: pointer;
+
   transition: all 0.3s;
+
   color: white;
+
   font-family: inherit;
+
   text-decoration: none;
+
   box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+
 }
+
+
 
 .share-btn:hover {
+
   transform: translateY(-2px);
+
   box-shadow: 0 5px 0 rgba(0,0,0,0.3);
+
 }
+
+
 
 .share-btn-wechat { background: #07C160; border: 2px solid #06AD56; }
+
 .share-btn-wechat:hover { background: #06AD56; }
+
 .share-btn-qq { background: #12B7F5; border: 2px solid #0EA1D9; }
+
 .share-btn-qq:hover { background: #0EA1D9; }
+
 .share-btn-weibo { background: #E6162D; border: 2px solid #CF1428; }
+
 .share-btn-weibo:hover { background: #CF1428; }
+
 .share-btn-douyin { background: #111; border: 2px solid #000; }
+
 .share-btn-douyin:hover { background: #000; }
+
 .share-btn-copy { background: var(--mario-blue); border: 2px solid #0378B4; }
+
 .share-btn-copy:hover { background: #0378B4; }
+
 .share-btn-url { background: var(--mario-green); border: 2px solid #369A3A; }
+
 .share-btn-url:hover { background: #369A3A; }
 
+
+
 /* 二维码弹窗 */
+
 .qr-popup {
+
   display: none;
+
   position: fixed;
+
   top: 0; left: 0; right: 0; bottom: 0;
+
   background: rgba(0,0,0,0.6);
+
   z-index: 10000;
+
   justify-content: center;
+
   align-items: center;
+
 }
+
+
 
 .qr-popup.show {
+
   display: flex;
+
 }
+
+
 
 .qr-popup-content {
+
   background: white;
+
   padding: 30px;
+
   border-radius: 16px;
+
   text-align: center;
+
   border: 4px solid var(--mario-brown);
+
   box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+
   max-width: 90vw;
+
 }
+
+
 
 .qr-popup-content canvas {
+
   border: 2px solid #eee;
+
   border-radius: 8px;
+
   margin: 15px 0;
+
 }
+
+
 
 .qr-popup-content button {
+
   padding: 8px 24px;
+
   background: var(--mario-red);
+
   color: white;
+
   border: none;
+
   border-radius: 8px;
+
   cursor: pointer;
+
   font-size: 14px;
+
   font-family: inherit;
+
 }
+
+
 
 /* 分享Toast */
+
 .toast-share {
+
   position: fixed;
+
   top: 20px;
+
   left: 50%;
+
   transform: translateX(-50%);
+
   background: var(--mario-green);
+
   color: white;
+
   padding: 12px 30px;
+
   border-radius: 25px;
+
   font-size: 15px;
+
   font-weight: 600;
+
   z-index: 10001;
+
   opacity: 0;
+
   transition: all 0.4s;
+
   pointer-events: none;
+
 }
+
+
 
 .toast-share.show {
+
   opacity: 1;
+
   top: 40px;
+
 }
+
+
 
 /* 右侧额外按钮 */
+
 #rightside button.go-home-btn,
+
 #rightside a.go-home-btn {
+
   color: var(--mario-red) !important;
+
 }
+
+
 
 #rightside button.go-comment-btn,
+
 #rightside a.go-comment-btn {
+
   color: var(--mario-green) !important;
+
 }
+
+
 
 /* 搜索框 */
+
 #search-input, .ais-search-box--input, #local-search-input {
+
   border: 3px solid var(--mario-brown) !important;
+
   border-radius: 8px !important;
+
   box-shadow: 0 3px 0 var(--mario-brown) !important;
+
   background: var(--mario-card-bg) !important;
+
 }
+
+
 
 #search-input:focus, .ais-search-box--input:focus, #local-search-input:focus {
+
   border-color: var(--mario-red) !important;
+
   outline: none;
+
   box-shadow: 0 3px 0 var(--mario-red) !important;
+
 }
+
+
 
 /* 关于页面卡片 */
+
 #about-page, .about-content {
+
   background: var(--mario-card-bg);
+
   border-radius: 12px;
+
   padding: 30px;
+
   border: 3px solid var(--mario-brown);
+
   box-shadow: 0 4px 0 var(--mario-brown);
+
 }
+
+
 
 /* 归档页面时间线 */
+
 #archive .article-sort-item-title {
+
   color: var(--mario-blue) !important;
+
   transition: all 0.3s ease;
+
 }
+
+
 
 #archive .article-sort-item-title:hover {
+
   color: var(--mario-red) !important;
+
   text-shadow: 1px 1px 0 var(--mario-yellow);
+
 }
 
+
+
 /* 通知提示 */
+
 .snackbar-container {
+
   border-radius: 8px !important;
+
   border: 3px solid var(--mario-brown) !important;
+
   box-shadow: 0 4px 0 var(--mario-brown) !important;
+
   font-family: 'ZCOOL KuaiLe', sans-serif !important;
+
 }
+
