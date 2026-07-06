@@ -461,7 +461,7 @@ document.addEventListener('pjax:success', function() {
 });
 
 // ===============================
-// 11. 独立浮动"回到首页"按钮 - 不依赖rightside容器
+// 11. 独立浮动"回到首页"按钮 - 固定右下角始终可见
 // ===============================
 function createFloatHomeButton() {
   if (document.querySelector('.float-home-btn')) return;
@@ -472,15 +472,23 @@ function createFloatHomeButton() {
   homeBtn.title = '回到首页';
   homeBtn.innerHTML = '<i class="fas fa-home"></i>';
   
-  // 注入到 rightside 面板中，位于"回到顶部"按钮下方
-  var rightsideHide = document.querySelector('#rightside-config-hide');
-  if (rightsideHide) {
-    rightsideHide.appendChild(homeBtn);
-  } else {
-    // 兜底：直接挂到 body，用内联样式定位
-    homeBtn.style.cssText = 'position:fixed;right:20px;bottom:85px;z-index:100;width:35px;height:35px;background-color:#E52521;color:#fff;text-align:center;line-height:35px;border-radius:5px;';
-    document.body.appendChild(homeBtn);
-  }
+  // 固定定位在右下角，不依赖 rightside 面板展开
+  homeBtn.style.cssText = 'position:fixed;right:20px;bottom:85px;z-index:100;width:35px;height:35px;background-color:#E52521;color:#fff;text-align:center;line-height:35px;border-radius:5px;text-decoration:none;font-size:16px;box-shadow:0 2px 8px rgba(0,0,0,0.3);transition:all 0.3s;';
+  document.body.appendChild(homeBtn);
+  
+  // hover 效果
+  homeBtn.addEventListener('mouseenter', function() {
+    this.style.backgroundColor = '#FBD000';
+    this.style.color = '#E52521';
+    this.style.transform = 'translateY(-2px)';
+    this.style.boxShadow = '0 4px 12px rgba(0,0,0,0.4)';
+  });
+  homeBtn.addEventListener('mouseleave', function() {
+    this.style.backgroundColor = '#E52521';
+    this.style.color = '#fff';
+    this.style.transform = '';
+    this.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
+  });
 }
 
 // 添加评论按钮到 rightside（如果存在）

@@ -107,10 +107,23 @@ body {
   background-repeat: no-repeat !important;
 }
 
-/* 首页横幅 - 增加高度避免文字被裁剪 */
-#page-header:not(.not-top-img):not(.is-post) {
-  height: 400px !important;
-  min-height: 280px !important;
+/* 首页横幅 - 确保文字完整不被裁剪 */
+#page-header.full_page {
+  height: 100vh !important;
+  min-height: 500px !important;
+}
+
+/* 首页 site-info 区域调整 */
+#page-header.full_page #site-info {
+  top: 40% !important;
+}
+
+/* 首页标题 - 取消文字截断限制 */
+#page-header.full_page #site-title {
+  -webkit-line-clamp: unset !important;
+  overflow: visible !important;
+  display: block !important;
+  max-height: none !important;
 }
 
 /* 内页横幅 - 确保文字完整显示 */
