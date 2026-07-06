@@ -196,7 +196,7 @@ body {
 
 /* ===============================
 
- * 横幅 - 首页白云飘动，内页文字完整显示
+ * 横幅 - 首页清新分层设计，内页文字完整显示
 
  * =============================== */
 
@@ -220,11 +220,11 @@ body {
 
 #page-header:not(.not-top-img):not(.is-post) {
 
-  height: 320px !important;
+  height: 350px !important;
 
-  max-height: 45vh !important;
+  max-height: 50vh !important;
 
-  min-height: 200px !important;
+  min-height: 240px !important;
 
 }
 
@@ -256,9 +256,37 @@ body {
 
 
 
-/* 首页 banner 白云飘动动画 */
+/* 首页 banner 遮罩 - 柔和的半透明渐变，让文字更清晰 */
 
-#page-header:not(.not-top-img):not(.is-post)::before,
+#page-header:not(.not-top-img):not(.is-post)::before {
+
+  content: '';
+
+  position: absolute;
+
+  inset: 0;
+
+  background: linear-gradient(
+
+    180deg,
+
+    rgba(92,148,252,0.25) 0%,
+
+    rgba(92,148,252,0.15) 40%,
+
+    rgba(92,148,252,0.45) 100%
+
+  );
+
+  z-index: 1;
+
+  pointer-events: none;
+
+}
+
+
+
+/* 首页 banner 装饰星星 - 左右各一颗 */
 
 #page-header:not(.not-top-img):not(.is-post)::after {
 
@@ -266,133 +294,191 @@ body {
 
   position: absolute;
 
-  top: 10%;
+  top: 50%;
 
-  width: 120px;
+  left: 50%;
 
-  height: 50px;
+  transform: translate(-50%, -50%);
 
-  background: rgba(255, 255, 255, 0.85);
+  width: 340px;
 
-  border-radius: 50px;
+  height: 120px;
 
   z-index: 1;
 
   pointer-events: none;
 
-  animation: cloudDrift 40s linear infinite;
+  background:
+
+    /* 左星星 */
+
+    radial-gradient(circle at 40px 50px, 3px, rgba(251,208,0,0.6) 2px, transparent 3px),
+
+    radial-gradient(circle at 48px 42px, 2px, rgba(251,208,0,0.4) 1.5px, transparent 2px),
+
+    radial-gradient(circle at 32px 44px, 2px, rgba(251,208,0,0.4) 1.5px, transparent 2px),
+
+    radial-gradient(circle at 38px 39px, 1.5px, rgba(251,208,0,0.3) 1px, transparent 1.5px),
+
+    /* 右星星 */
+
+    radial-gradient(circle at 300px 50px, 3px, rgba(251,208,0,0.6) 2px, transparent 3px),
+
+    radial-gradient(circle at 308px 42px, 2px, rgba(251,208,0,0.4) 1.5px, transparent 2px),
+
+    radial-gradient(circle at 292px 44px, 2px, rgba(251,208,0,0.4) 1.5px, transparent 2px),
+
+    radial-gradient(circle at 298px 39px, 1.5px, rgba(251,208,0,0.3) 1px, transparent 1.5px);
+
+  animation: starTwinkle 2s ease-in-out infinite alternate;
+
+  opacity: 0.8;
 
 }
 
 
 
-#page-header:not(.not-top-img):not(.is-post)::before {
+@keyframes starTwinkle {
 
-  top: 8%;
+  0% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.95); }
 
-  width: 100px;
-
-  height: 40px;
-
-  animation-duration: 35s;
-
-  box-shadow: 30px -10px 0 -5px rgba(255,255,255,0.85),
-
-              60px -5px 0 -10px rgba(255,255,255,0.85),
-
-              -25px -5px 0 -8px rgba(255,255,255,0.85);
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
 
 }
 
 
 
-#page-header:not(.not-top-img):not(.is-post)::after {
+/* 内页 banner 不显示星装饰 */
 
-  top: 20%;
+#page-header.is-post::after,
 
-  width: 80px;
+#page-header.not-top-img::after {
 
-  height: 35px;
-
-  animation-duration: 50s;
-
-  animation-delay: -10s;
-
-  opacity: 0.7;
-
-  box-shadow: 25px -8px 0 -5px rgba(255,255,255,0.7),
-
-              50px -3px 0 -10px rgba(255,255,255,0.7),
-
-              -20px -3px 0 -8px rgba(255,255,255,0.7);
+  display: none;
 
 }
 
 
 
-@keyframes cloudDrift {
+/* ===============================
 
-  from { transform: translateX(-200px); }
+ * 标题区域 - 分层清晰的设计
 
-  to { transform: translateX(calc(100vw + 200px)); }
-
-}
+ * =============================== */
 
 
 
-/* 内页 banner 标题和副标题居中且完整 */
+/* 标题容器 */
 
-#page-header #site-title,
-
-#page-header #site-subtitle,
-
-#page-header .site-info {
-
-  padding-top: 20px !important;
+#page-header #site-info {
 
   position: relative;
 
-  z-index: 2;
+  z-index: 3;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  height: 100%;
+
+  padding-top: 0 !important;
 
 }
 
 
 
-#page-header:not(.not-top-img):before {
+/* 大标题 "亦然亦航" - 渐变文字 + 投影 */
 
-  background-color: transparent !important;
+#site-title {
+
+  font-family: 'ZCOOL KuaiLe', 'Noto Sans SC', sans-serif !important;
+
+  font-size: 3.2em !important;
+
+  font-weight: 700 !important;
+
+  letter-spacing: 0.15em !important;
+
+  line-height: 1.2 !important;
+
+  margin-bottom: 12px !important;
+
+  /* 渐变文字效果 */
+
+  background: linear-gradient(135deg, #FF6B35 0%, #E52521 40%, #FF4444 100%);
+
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+  background-clip: text;
+
+  /* 柔和投影 */
+
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.25));
+
+  /* 入场动画 */
+
+  animation: titleFadeIn 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+
+  opacity: 0;
+
+  transform: translateY(20px);
 
 }
 
 
 
-/* 网站标题动画 - 弹跳入场 */
+/* 小副标题 - 轻盈优雅 */
 
-#site-title, #site-subtitle {
+#site-subtitle {
 
-  text-shadow: 3px 3px 0 var(--mario-red), 6px 6px 0 rgba(0,0,0,0.3) !important;
+  font-family: 'Noto Sans SC', 'ZCOOL KuaiLe', sans-serif !important;
 
-  animation: marioJump 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 1.05em !important;
+
+  font-weight: 400 !important;
+
+  letter-spacing: 0.08em !important;
+
+  color: rgba(255,255,255,0.92) !important;
+
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+
+  /* 顶部装饰线 */
+
+  border-top: 1px solid rgba(255,255,255,0.35);
+
+  padding-top: 14px;
+
+  max-width: 380px;
+
+  margin: 0 auto;
+
+  /* 入场动画 - 稍延迟 */
+
+  animation: titleFadeIn 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 0.15s forwards;
+
+  opacity: 0;
+
+  transform: translateY(15px);
 
 }
 
 
 
-@keyframes marioJump {
+@keyframes titleFadeIn {
 
   0% {
 
     opacity: 0;
 
-    transform: translateY(-40px) scale(0.8);
-
-  }
-
-  50% {
-
-    opacity: 1;
-
-    transform: translateY(10px) scale(1.05);
+    transform: translateY(20px);
 
   }
 
@@ -400,7 +486,59 @@ body {
 
     opacity: 1;
 
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
+
+  }
+
+}
+
+
+
+/* ===============================
+
+ * 移动端 banner 适配
+
+ * =============================== */
+
+@media (max-width: 768px) {
+
+  #page-header:not(.not-top-img):not(.is-post) {
+
+    height: 260px !important;
+
+    min-height: 200px !important;
+
+  }
+
+
+
+  #site-title {
+
+    font-size: 2.2em !important;
+
+    letter-spacing: 0.1em !important;
+
+  }
+
+
+
+  #site-subtitle {
+
+    font-size: 0.9em !important;
+
+    max-width: 280px;
+
+    padding-top: 10px;
+
+  }
+
+
+
+  #page-header:not(.not-top-img):not(.is-post)::after {
+
+    width: 260px;
+
+    height: 100px;
 
   }
 
