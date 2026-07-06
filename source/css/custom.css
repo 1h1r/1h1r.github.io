@@ -110,7 +110,6 @@ body {
 /* 首页横幅 - 增加高度避免文字被裁剪 */
 #page-header:not(.not-top-img):not(.is-post) {
   height: 400px !important;
-  max-height: 55vh !important;
   min-height: 280px !important;
 }
 
@@ -206,9 +205,11 @@ body {
 /* ===============================
  * "回到首页"按钮 - 集成到rightside面板，位于"回到顶部"下方
  * =============================== */
-#rightside-config-show .float-home-btn {
+#rightside-config-show .float-home-btn,
+#rightside-config-hide .float-home-btn {
   display: block;
   margin-bottom: 5px;
+  margin-top: 3px;
   width: 35px;
   height: 35px;
   background-color: var(--mario-red) !important;
@@ -221,12 +222,14 @@ body {
   transition: all 0.3s;
 }
 
-#rightside-config-show .float-home-btn:hover {
+#rightside-config-show .float-home-btn:hover,
+#rightside-config-hide .float-home-btn:hover {
   background-color: var(--mario-yellow) !important;
   color: var(--mario-red) !important;
 }
 
-#rightside-config-show .float-home-btn i {
+#rightside-config-show .float-home-btn i,
+#rightside-config-hide .float-home-btn i {
   position: relative;
   z-index: 2;
 }

@@ -471,7 +471,16 @@ function createFloatHomeButton() {
   homeBtn.href = '/';
   homeBtn.title = '回到首页';
   homeBtn.innerHTML = '<i class="fas fa-home"></i>';
-  document.body.appendChild(homeBtn);
+  
+  // 注入到 rightside 面板中，位于"回到顶部"按钮下方
+  var rightsideHide = document.querySelector('#rightside-config-hide');
+  if (rightsideHide) {
+    rightsideHide.appendChild(homeBtn);
+  } else {
+    // 兜底：直接挂到 body，用内联样式定位
+    homeBtn.style.cssText = 'position:fixed;right:20px;bottom:85px;z-index:100;width:35px;height:35px;background-color:#E52521;color:#fff;text-align:center;line-height:35px;border-radius:5px;';
+    document.body.appendChild(homeBtn);
+  }
 }
 
 // 添加评论按钮到 rightside（如果存在）
