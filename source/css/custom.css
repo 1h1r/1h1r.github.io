@@ -109,7 +109,7 @@ body {
 
 /* 首页横幅 - 确保文字完整不被裁剪 */
 #page-header.full_page {
-  height: 100vh !important;
+  max-height: 55vh !important;
   min-height: 500px !important;
 }
 
@@ -124,6 +124,7 @@ body {
   overflow: visible !important;
   display: block !important;
   max-height: none !important;
+  font-size: 2.2rem !important;
 }
 
 /* 内页横幅 - 确保文字完整显示 */
@@ -216,13 +217,13 @@ body {
 }
 
 /* ===============================
- * "回到首页"按钮 - 集成到rightside面板，位于"回到顶部"下方
+ * "回到首页"按钮 - 固定在右下角，rightside面板正下方
  * =============================== */
+#rightside > .float-home-btn,
 #rightside-config-show .float-home-btn,
 #rightside-config-hide .float-home-btn {
   display: block;
-  margin-bottom: 5px;
-  margin-top: 3px;
+  margin-top: 5px;
   width: 35px;
   height: 35px;
   background-color: var(--mario-red) !important;
@@ -233,14 +234,19 @@ body {
   border-radius: 5px;
   text-decoration: none;
   transition: all 0.3s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
+#rightside > .float-home-btn:hover,
 #rightside-config-show .float-home-btn:hover,
 #rightside-config-hide .float-home-btn:hover {
   background-color: var(--mario-yellow) !important;
   color: var(--mario-red) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
 }
 
+#rightside > .float-home-btn i,
 #rightside-config-show .float-home-btn i,
 #rightside-config-hide .float-home-btn i {
   position: relative;
