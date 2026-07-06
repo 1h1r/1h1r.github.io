@@ -461,10 +461,15 @@ document.addEventListener('pjax:success', function() {
 });
 
 // ===============================
-// 11. 独立浮动"回到首页"按钮 - 固定右下角始终可见
+// 11. 独立浮动"回到首页"按钮 - 固定在 rightside 最底部，"回到顶部"正下方
 // ===============================
 function createFloatHomeButton() {
-  if (document.querySelector('.float-home-btn')) return;
+  var existingBtn = document.querySelector('.float-home-btn');
+  if (existingBtn) {
+    // 已存在，重新定位确保在"回到顶部"正下方
+    positionHomeButtonBelowBackToTop(existingBtn);
+    return;
+  }
   
   var homeBtn = document.createElement('a');
   homeBtn.className = 'float-home-btn';
@@ -472,15 +477,7 @@ function createFloatHomeButton() {
   homeBtn.title = '回到首页';
   homeBtn.innerHTML = '<i class="fas fa-home"></i>';
   
-  // 追加到 rightside 底部，"回到顶部"按钮正下方
-  var rightside = document.getElementById('rightside');
-  if (rightside) {
-    rightside.appendChild(homeBtn);
-  } else {
-    // 兜底：如果 rightside 不存在，追加到 body
-    homeBtn.style.cssText = 'position:fixed;right:20px;bottom:0;z-index:100;width:35px;height:35px;background-color:#E52521;color:#fff;text-align:center;line-height:35px;border-radius:5px;text-decoration:none;font-size:16px;box-shadow:0 2px 8px rgba(0,0,0,0.3);transition:all 0.3s;';
-    document.body.appendChild(homeBtn);
-  }
+  insertHomeButton(homeBtn);
   
   // hover 效果
   homeBtn.addEventListener('mouseenter', function() {
@@ -495,6 +492,55 @@ function createFloatHomeButton() {
     this.style.transform = '';
     this.style.boxShadow = '0 2px 8px rgba(0,0,0,0.3)';
   });
+}
+
+// 将首页按钮精确插入到"回到顶部"按钮正下方
+function insertHomeButton(homeBtn) {
+  var rightside = document.getElementById('rightside');
+  if (!rightside) {
+    // 兜底：rightside 不存在时 append 到 body
+    homeBtn.style.cssText = 'position:fixed;right:20px;bottom:0;z-index:100;width:35px;height:35px;background-color:#E52521;color:#fff;text-align:center;line-height:35px;border-radius:5px;text-decoration:none;font-size:16px;box-shadow:0 2px 8px rgba(0,0,0,0.3);transition:all 0.3s;';
+    document.body.appendChild(homeBtn);
+    return;
+  }
+
+  positionHomeButtonBelowBackToTop(homeBtn);
+}
+
+// 查找"回到顶部"按钮并将首页按钮插入到它之后
+function positionHomeButtonBelowBackToTop(homeBtn) {
+  var rightside = document.getElementById('rightside');
+  if (!rightside) return;
+
+  // 查找 rightside 中所有的 "回到顶部" 相关按钮
+  var backToTopBtn = document.getElementById('rightside__back-to-top') 
+    || rightside.querySelector('a[title*="top"], button[title*="top"], #go-up')
+    || rightside.querySelector('.rightside__back-to-top')
+    || rightside.querySelector('[href="#top-body-wrap"]')
+    || rightside.querySelector('[href="#page-header"]')
+    || rightside.querySelector('[id$="__back-to-top"]');
+
+  // 如果找到了回到顶部按钮，插入到它后面
+  if (backToTopBtn && backToTopBtn.parentNode === rightside) {
+    backToTopBtn.parentNode.insertBefore(homeBtn, backToTopBtn.nextSibling);
+    return;
+  }
+
+  // 备选：查找作为最底部元素的按钮（通常是没有上级菜单的独立按钮）
+  // 排除 config-hide 和 config-show 中的按钮
+  var directBtns = Array.from(rightside.children).filter(function(el) {
+    return el !== homeBtn
+      && !el.id || (el.id !== 'rightside-config-hide' && el.id !== 'rightside-config-show');
+  });
+  
+  if (directBtns.length > 0) {
+    var lastBtn = directBtns[directBtns.length - 1];
+    lastBtn.parentNode.insertBefore(homeBtn, lastBtn.nextSibling);
+    return;
+  }
+
+  // 最后兜底：直接 append 到 rightside 末尾
+  rightside.appendChild(homeBtn);
 }
 
 // 添加评论按钮到 rightside（如果存在）
@@ -776,46 +822,72 @@ if (document.readyState === 'loading') {
 }
 
 // ===============================
-// 13. 图片加载加速 - 原生懒加载 + jsDelivr CDN
+// 13. 图片加载加速 - 原生懒加载 + jsDelivr CDN + 异步解码
 // ===============================
 (function enhanceImageLoading() {
-  // 13a. 给所有图片添加原生 lazy loading 属性
-  document.addEventListener('DOMContentLoaded', function() {
-    var images = document.querySelectorAll('img:not([loading])');
+  var CDN_BASE = 'https://cdn.jsdelivr.net/gh/1h1r/1h1r.github.io@source/source';
+  
+  function imageShouldOptimize(img) {
+    var src = img.src || img.getAttribute('data-src') || img.getAttribute('data-lazy-src') || '';
+    return src && !src.includes('data:') && !src.includes('favicon') && !src.includes('.svg') && src.indexOf('cdn.jsdelivr.net') === -1;
+  }
+  
+  // 13a. 给所有图片添加原生 lazy loading + 异步解码
+  function applyLazyAndAsync(img) {
+    if (imageShouldOptimize(img)) {
+      if (!img.loading) img.loading = 'lazy';
+      if (!img.decoding) img.decoding = 'async';
+    }
+  }
+
+  // 13b. jsDelivr CDN 加速 - 将本站大图代理到 CDN
+  function useCDN(img) {
+    var src = img.src;
+    if (src && src.indexOf(window.location.host) !== -1 && src.indexOf('cdn.jsdelivr.net') === -1 && imageShouldOptimize(img)) {
+      var url = new URL(src, window.location.origin);
+      img.src = CDN_BASE + url.pathname;
+    }
+    var dataSrc = img.getAttribute('data-src');
+    if (dataSrc && dataSrc.indexOf(window.location.host) !== -1 && dataSrc.indexOf('cdn.jsdelivr.net') === -1) {
+      var url2 = new URL(dataSrc, window.location.origin);
+      img.setAttribute('data-src', CDN_BASE + url2.pathname);
+    }
+    var dataLazySrc = img.getAttribute('data-lazy-src');
+    if (dataLazySrc && dataLazySrc.indexOf(window.location.host) !== -1 && dataLazySrc.indexOf('cdn.jsdelivr.net') === -1) {
+      var url3 = new URL(dataLazySrc, window.location.origin);
+      img.setAttribute('data-lazy-src', CDN_BASE + url3.pathname);
+    }
+  }
+
+  // 初始化所有图片
+  function initAllImages() {
+    var images = document.querySelectorAll('img');
     images.forEach(function(img) {
-      // 只对正文图片和内容图片加懒加载，跳过 icon/logo 等小图
-      var src = img.src || img.getAttribute('data-src') || '';
-      if (src && !src.includes('data:') && !src.includes('favicon') && !src.includes('avatar') && !src.includes('.svg')) {
-        img.loading = 'lazy';
-      }
+      applyLazyAndAsync(img);
+      useCDN(img);
     });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    initAllImages();
   });
 
-  // 13b. jsDelivr CDN 加速 - 将本站图片代理到 CDN
-  // 说明：GitHub Pages 国内访问慢，通过 jsDelivr 代理站内图片
-  // 使用方式：访问 https://cdn.jsdelivr.net/gh/1h1r/1h1r.github.io@master/ + 图片路径
-  // 
-  // 如果想启用 CDN 代理，取消下面注释即可：
-  // var CDN_BASE = 'https://cdn.jsdelivr.net/gh/1h1r/1h1r.github.io@master';
-  // function useCDN(img) {
-  //   var src = img.src || img.getAttribute('data-src');
-  //   if (src && src.indexOf(window.location.host) !== -1 && src.indexOf('cdn.jsdelivr.net') === -1) {
-  //     var url = new URL(src);
-  //     img.src = CDN_BASE + url.pathname;
-  //     var dataSrc = img.getAttribute('data-src');
-  //     if (dataSrc && dataSrc.indexOf(window.location.host) !== -1) {
-  //       var url2 = new URL(dataSrc);
-  //       img.setAttribute('data-src', CDN_BASE + url2.pathname);
-  //     }
-  //   }
-  // }
-  // document.querySelectorAll('img').forEach(useCDN);
-  // new MutationObserver(function(mutations) {
-  //   mutations.forEach(function(m) {
-  //     m.addedNodes.forEach(function(node) {
-  //       if (node.tagName === 'IMG') useCDN(node);
-  //       if (node.querySelectorAll) node.querySelectorAll('img').forEach(useCDN);
-  //     });
-  //   });
-  // }).observe(document.body, { childList: true, subtree: true });
+  // 监听新加入的图片（Pjax 切换 / 动态加载）
+  var imgObserver = new MutationObserver(function(mutations) {
+    mutations.forEach(function(m) {
+      m.addedNodes.forEach(function(node) {
+        if (node.tagName === 'IMG') {
+          applyLazyAndAsync(node);
+          useCDN(node);
+        }
+        if (node.querySelectorAll) {
+          node.querySelectorAll('img').forEach(function(img) {
+            applyLazyAndAsync(img);
+            useCDN(img);
+          });
+        }
+      });
+    });
+  });
+  imgObserver.observe(document.body, { childList: true, subtree: true });
 })();
