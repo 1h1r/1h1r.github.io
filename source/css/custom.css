@@ -217,7 +217,7 @@ body {
 }
 
 /* ===============================
- * "回到首页"按钮 - 固定在右下角，rightside面板正下方
+ * "回到首页"按钮 - 固定在 rightside 最底部，"回到顶部"正下方
  * =============================== */
 #rightside > .float-home-btn,
 #rightside-config-show .float-home-btn,
@@ -235,6 +235,8 @@ body {
   text-decoration: none;
   transition: all 0.3s;
   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  /* 确保排在 rightside 最后 */
+  order: 9999;
 }
 
 #rightside > .float-home-btn:hover,
