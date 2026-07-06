@@ -12,21 +12,21 @@
 
 document.addEventListener('DOMContentLoaded', function() {
 
-  // 先插入小太阳到 banner 两侧（避免被任何父级裁切）
+  // 先插入小太阳到标题内（贴紧文字两侧，亲切不遮挡白云）
   function addSunEmojis() {
-    var pageHeader = document.querySelector('#page-header:not(.not-top-img):not(.is-post)');
-    if (!pageHeader) return;
-    if (pageHeader.querySelector('.banner-sun-left')) return;
+    var siteTitle = document.getElementById('site-title');
+    if (!siteTitle) return;
+    if (siteTitle.querySelector('.banner-sun-left')) return;
 
     var leftSun = document.createElement('span');
     leftSun.className = 'banner-sun-left';
-    leftSun.textContent = '\u2600\uFE0F'; // ☀️
-    pageHeader.appendChild(leftSun);
+    leftSun.textContent = '\u2600\uFE0F';
+    siteTitle.appendChild(leftSun);
 
     var rightSun = document.createElement('span');
     rightSun.className = 'banner-sun-right';
-    rightSun.textContent = '\u2600\uFE0F'; // ☀️
-    pageHeader.appendChild(rightSun);
+    rightSun.textContent = '\u2600\uFE0F';
+    siteTitle.appendChild(rightSun);
   }
   addSunEmojis();
 
