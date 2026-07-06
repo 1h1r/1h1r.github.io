@@ -97,6 +97,60 @@ body {
 }
 
 /* ===============================
+ * Banner - 紧凑高度，标题在大星星上方
+ * =============================== */
+#page-header.full_page {
+  height: 380px !important;
+  min-height: 380px !important;
+  max-height: 380px !important;
+  background-position: center 25% !important;
+}
+
+#page-header.full_page #site-info {
+  top: 32% !important;
+  text-align: center;
+}
+
+/* 标题 - 亦然亦航☀️☀️🌻 */
+#page-header.full_page #site-title {
+  font-family: 'ZCOOL KuaiLe', sans-serif !important;
+  font-size: 3.2em !important;
+  color: #fff !important;
+  text-shadow: 2px 2px 0 #C84C0C, 4px 4px 0 rgba(0,0,0,0.3) !important;
+  margin-bottom: 10px !important;
+  -webkit-line-clamp: unset !important;
+  overflow: visible !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* 标题左右小太阳 */
+#page-header.full_page #site-title::before {
+  content: '☀️';
+  font-size: 0.55em;
+}
+#page-header.full_page #site-title::after {
+  content: '☀️🌻';
+  font-size: 0.55em;
+}
+
+/* 副标题 */
+#page-header.full_page #site-subtitle {
+  font-family: 'ZCOOL KuaiLe', sans-serif !important;
+  font-size: 1.1em !important;
+  color: #FBD000 !important;
+  text-shadow: 1px 1px 0 #C84C0C !important;
+}
+
+/* 内页banner也缩小 */
+#page-header:not(.full_page):not(.not-top-img) {
+  height: 280px !important;
+  min-height: 280px !important;
+}
+
+/* ===============================
  * "回到首页"按钮 - 集成到rightside面板，位于"回到顶部"下方
  * =============================== */
 #rightside-config-show .float-home-btn,
