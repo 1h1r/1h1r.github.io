@@ -12,7 +12,23 @@
 
 document.addEventListener('DOMContentLoaded', function() {
 
+  // 先插入小太阳到 banner 两侧（避免被任何父级裁切）
+  function addSunEmojis() {
+    var pageHeader = document.querySelector('#page-header:not(.not-top-img):not(.is-post)');
+    if (!pageHeader) return;
+    if (pageHeader.querySelector('.banner-sun-left')) return;
 
+    var leftSun = document.createElement('span');
+    leftSun.className = 'banner-sun-left';
+    leftSun.textContent = '\u2600\uFE0F'; // ☀️
+    pageHeader.appendChild(leftSun);
+
+    var rightSun = document.createElement('span');
+    rightSun.className = 'banner-sun-right';
+    rightSun.textContent = '\u2600\uFE0F'; // ☀️
+    pageHeader.appendChild(rightSun);
+  }
+  addSunEmojis();
 
   // ===============================
 
@@ -749,9 +765,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
   // ===============================
-
   // 8. 季节装饰 - 马里奥风格
-
   // ===============================
 
   const month = new Date().getMonth() + 1;
@@ -768,15 +782,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-  // 在网站标题旁添加季节emoji
+  // 在网站标题旁添加季节emoji（不覆盖 innerHTML，避免干掉小太阳）
 
   const siteTitle = document.querySelector('#site-title, #site-name');
 
   if (siteTitle && seasonalEmoji) {
 
-    const originalTitle = siteTitle.textContent;
+    // 查找现有的季节 emoji，避免重复添加
 
-    siteTitle.innerHTML = originalTitle + ' ' + seasonalEmoji;
+    if (!siteTitle.querySelector('.season-emoji')) {
+
+      const span = document.createElement('span');
+
+      span.className = 'season-emoji';
+
+      span.textContent = ' ' + seasonalEmoji;
+
+      span.style.fontSize = '0.5em';
+
+      span.style.verticalAlign = 'middle';
+
+      span.style.marginLeft = '0.2em';
+
+      siteTitle.appendChild(span);
+
+    }
 
   }
 
@@ -989,6 +1019,8 @@ document.addEventListener('pjax:success', function() {
   initCommentSection();
 
   initShareButtons();
+
+  addSunEmojis();
 
   setTimeout(fixBrokenImages, 300);
 
