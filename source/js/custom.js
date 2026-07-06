@@ -472,9 +472,15 @@ function createFloatHomeButton() {
   homeBtn.title = '回到首页';
   homeBtn.innerHTML = '<i class="fas fa-home"></i>';
   
-  // 固定定位在右下角，不依赖 rightside 面板展开
-  homeBtn.style.cssText = 'position:fixed;right:20px;bottom:85px;z-index:100;width:35px;height:35px;background-color:#E52521;color:#fff;text-align:center;line-height:35px;border-radius:5px;text-decoration:none;font-size:16px;box-shadow:0 2px 8px rgba(0,0,0,0.3);transition:all 0.3s;';
-  document.body.appendChild(homeBtn);
+  // 追加到 rightside 底部，"回到顶部"按钮正下方
+  var rightside = document.getElementById('rightside');
+  if (rightside) {
+    rightside.appendChild(homeBtn);
+  } else {
+    // 兜底：如果 rightside 不存在，追加到 body
+    homeBtn.style.cssText = 'position:fixed;right:20px;bottom:0;z-index:100;width:35px;height:35px;background-color:#E52521;color:#fff;text-align:center;line-height:35px;border-radius:5px;text-decoration:none;font-size:16px;box-shadow:0 2px 8px rgba(0,0,0,0.3);transition:all 0.3s;';
+    document.body.appendChild(homeBtn);
+  }
   
   // hover 效果
   homeBtn.addEventListener('mouseenter', function() {
@@ -768,3 +774,48 @@ if (document.readyState === 'loading') {
     initShareButtons();
   }, 500);
 }
+
+// ===============================
+// 13. 图片加载加速 - 原生懒加载 + jsDelivr CDN
+// ===============================
+(function enhanceImageLoading() {
+  // 13a. 给所有图片添加原生 lazy loading 属性
+  document.addEventListener('DOMContentLoaded', function() {
+    var images = document.querySelectorAll('img:not([loading])');
+    images.forEach(function(img) {
+      // 只对正文图片和内容图片加懒加载，跳过 icon/logo 等小图
+      var src = img.src || img.getAttribute('data-src') || '';
+      if (src && !src.includes('data:') && !src.includes('favicon') && !src.includes('avatar') && !src.includes('.svg')) {
+        img.loading = 'lazy';
+      }
+    });
+  });
+
+  // 13b. jsDelivr CDN 加速 - 将本站图片代理到 CDN
+  // 说明：GitHub Pages 国内访问慢，通过 jsDelivr 代理站内图片
+  // 使用方式：访问 https://cdn.jsdelivr.net/gh/1h1r/1h1r.github.io@master/ + 图片路径
+  // 
+  // 如果想启用 CDN 代理，取消下面注释即可：
+  // var CDN_BASE = 'https://cdn.jsdelivr.net/gh/1h1r/1h1r.github.io@master';
+  // function useCDN(img) {
+  //   var src = img.src || img.getAttribute('data-src');
+  //   if (src && src.indexOf(window.location.host) !== -1 && src.indexOf('cdn.jsdelivr.net') === -1) {
+  //     var url = new URL(src);
+  //     img.src = CDN_BASE + url.pathname;
+  //     var dataSrc = img.getAttribute('data-src');
+  //     if (dataSrc && dataSrc.indexOf(window.location.host) !== -1) {
+  //       var url2 = new URL(dataSrc);
+  //       img.setAttribute('data-src', CDN_BASE + url2.pathname);
+  //     }
+  //   }
+  // }
+  // document.querySelectorAll('img').forEach(useCDN);
+  // new MutationObserver(function(mutations) {
+  //   mutations.forEach(function(m) {
+  //     m.addedNodes.forEach(function(node) {
+  //       if (node.tagName === 'IMG') useCDN(node);
+  //       if (node.querySelectorAll) node.querySelectorAll('img').forEach(useCDN);
+  //     });
+  //   });
+  // }).observe(document.body, { childList: true, subtree: true });
+})();
