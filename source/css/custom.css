@@ -410,18 +410,18 @@ body {
   }
 }
 
-/* 内页banner - 七彩字下移40px（内页没有大星星装饰） */
+/* 内页banner - 七彩字下移60px（内页没有大星星装饰） */
 #page-header.is-post #site-info,
 #page-header.is-page #site-info,
 #page-header:not(.full_page) #site-info {
-  transform: translateY(-25px) !important;
+  transform: translateY(-5px) !important;
 }
 
 @media screen and (max-width: 768px) {
   #page-header.is-post #site-info,
   #page-header.is-page #site-info,
   #page-header:not(.full_page) #site-info {
-    transform: translateY(-30px) !important;
+    transform: translateY(-10px) !important;
   }
 }
 
