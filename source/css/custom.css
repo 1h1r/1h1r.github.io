@@ -375,7 +375,8 @@ body {
   justify-content: flex-start;
   height: 100%;
   width: 100%;
-  padding: 20px 0 0 0 !important;
+  padding: 0 !important;
+  transform: translateY(-20px);
   /* 无背景、无遮罩，让白云飘过 */
 }
 
@@ -384,7 +385,8 @@ body {
 /* 移动端标题容器 - 文字也靠上 */
 @media screen and (max-width: 768px) {
   #page-header #site-info {
-    padding: 15px 0 0 0 !important;
+    padding: 0 !important;
+    transform: translateY(-25px);
     justify-content: flex-start;
     max-width: none;
   }
