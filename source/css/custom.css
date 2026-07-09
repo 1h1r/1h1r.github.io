@@ -376,7 +376,7 @@ body {
   height: 100%;
   width: 100%;
   padding: 0 !important;
-  transform: translateY(-100px);
+  transform: translateY(-80px);
   /* 无背景、无遮罩，让白云飘过 */
 }
 
@@ -386,7 +386,7 @@ body {
 @media screen and (max-width: 768px) {
   #page-header #site-info {
     padding: 0 !important;
-    transform: translateY(-105px);
+    transform: translateY(-85px);
     justify-content: flex-start;
     max-width: none;
   }
