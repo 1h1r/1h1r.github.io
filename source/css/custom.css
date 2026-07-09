@@ -364,7 +364,7 @@ body {
 
 
 
-/* 标题容器 - 纯透明，不遮挡白云，满宽居中 */
+/* 标题容器 - 纯透明，不遮挡白云，满宽，文字靠上给星星留空间 */
 
 #page-header #site-info {
   position: relative;
@@ -372,19 +372,20 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   height: 100%;
   width: 100%;
-  padding: 0 !important;
+  padding: 60px 0 0 0 !important;
   /* 无背景、无遮罩，让白云飘过 */
 }
 
 
 
-/* 移动端标题容器 - 维持满宽居中 */
+/* 移动端标题容器 - 文字也靠上 */
 @media screen and (max-width: 768px) {
   #page-header #site-info {
-    padding: 0 !important;
+    padding: 40px 0 0 0 !important;
+    justify-content: flex-start;
     max-width: none;
   }
 }
