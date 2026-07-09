@@ -28,7 +28,7 @@ h1, h2, h3, h4, h5, h6,
 
 #page-header #site-title,
 
-#site-name {
+#blog-info .site-name {
 
   font-family: 'ZCOOL KuaiLe', 'Noto Sans SC', sans-serif !important;
 
@@ -146,6 +146,7 @@ body {
 #nav .container,
 #nav > div,
 #nav .nav-container,
+#blog-info,
 #nav-group,
 #nav [class*="container"],
 #nav [class*="inner"],
@@ -191,7 +192,7 @@ body {
 
 /* 网站标题区 - 像素风 */
 
-#site-name {
+#blog-info .site-name {
 
   font-family: 'ZCOOL KuaiLe', sans-serif !important;
 
@@ -1857,7 +1858,7 @@ button:hover, .btn:hover {
 
 
 
-  #site-name {
+  #blog-info .site-name {
 
     font-size: 1.2em !important;
 
