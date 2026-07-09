@@ -142,6 +142,14 @@ body {
 
 }
 
+/* 导航内部容器靠左，无padding */
+#nav .container,
+#nav > div,
+#nav .nav-container {
+  padding-left: 0 !important;
+  padding-right: 12px !important;
+}
+
 
 
 #nav .menus_item a {
@@ -191,6 +199,8 @@ body {
   font-size: 1.5em !important;
 
   /* 靠左，与右边菜单对应 */
+  margin-left: 0 !important;
+  padding-left: 0 !important;
   margin-right: auto !important;
   text-align: left !important;
 
@@ -393,6 +403,19 @@ body {
     transform: translateY(-70px);
     justify-content: flex-start;
     max-width: none;
+  }
+}
+
+/* 内页banner - 七彩字下移20px（内页没有大星星装饰 */
+#page-header.is-post #site-info,
+#page-header:not(.full_page) #site-info {
+  transform: translateY(-45px);
+}
+
+@media screen and (max-width: 768px) {
+  #page-header.is-post #site-info,
+  #page-header:not(.full_page) #site-info {
+    transform: translateY(-50px);
   }
 }
 
