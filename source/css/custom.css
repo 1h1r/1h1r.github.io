@@ -410,18 +410,17 @@ body {
   }
 }
 
-/* 内页banner - 七彩字下移60px（内页没有大星星装饰） */
-#page-header.is-post #site-info,
-#page-header.is-page #site-info,
-#page-header:not(.full_page) #site-info {
-  transform: translateY(-5px) !important;
+/* 内页banner - 七彩字下移100px
+   注意：内页容器ID是 #page-site-info（不是 #site-info）！
+   内页 #page-header 的 class 是 not-home-page（不是 is-post/is-page）！
+   之前用 #site-info 选择器完全没命中，导致所有下移操作无效 */
+#page-header.not-home-page #page-site-info {
+  transform: translateY(100px) !important;
 }
 
 @media screen and (max-width: 768px) {
-  #page-header.is-post #site-info,
-  #page-header.is-page #site-info,
-  #page-header:not(.full_page) #site-info {
-    transform: translateY(-10px) !important;
+  #page-header.not-home-page #page-site-info {
+    transform: translateY(80px) !important;
   }
 }
 
