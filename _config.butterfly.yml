@@ -778,7 +778,7 @@ comments:
 
 
 
-  use: giscus
+  use: giscus
 giscus
   text: true
 
