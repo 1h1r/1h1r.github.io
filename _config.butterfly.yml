@@ -1,1938 +1,1936 @@
-# butterfly主题配置 - 亦然亦航双胞胎成长博客
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 导航菜单
-
-
-
-# ===============================
-
-
-
-menu:
-
-
-
-  首页: / || fas fa-home
-
-
-
-  成长日记: /categories/ || fas fa-book-open
-
-
-
-  兴趣爱好: /tags/ || fas fa-heart
-
-
-
-  时间线: /archives/ || fas fa-timeline
-
-
-
-  相册: /gallery/ || fas fa-images
-
-
-
-  关于我们: /about/ || fas fa-info-circle
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 网站基本信息
-
-
-
-# ===============================
-
-
-
-title: 亦然亦航
-
-
-
-subtitle: 记录双胞胎的快乐成长 · 每一刻都值得珍藏
-
-
-
-description: 亦然亦航 - 记录双胞胎的快乐成长，每一刻都值得珍藏
-
-
-
-keywords: 双胞胎,成长博客,儿童成长,亦然亦航
-
-
-
-author: 亦然亦航
-
-
-
-language: zh-CN
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 主题色 - 马里奥兄弟经典配色
-
-
-
-# ===============================
-
-
-
-theme_color:
-
-
-
-  enable: true
-
-
-
-  main: "#E52521"
-
-
-
-  paginator: "#E52521"
-
-
-
-  button_hover: "#FBD000"
-
-
-
-  text_selection: "#FBD000"
-
-
-
-  link_color: "#049CD8"
-
-
-
-  link_hover: "#E52521"
-
-
-
-  dark_mode:
-
-
-
-    main: "#E52521"
-
-
-
-    paginator: "#E52521"
-
-
-
-    button_hover: "#FBD000"
-
-
-
-    text_selection: "#FBD000"
-
-
-
-    link_color: "#049CD8"
-
-
-
-    link_hover: "#FBD000"
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 网站图标
-
-
-
-# ===============================
-
-
-
-favicon: /img/favicon.svg
-
-
-
-avatar:
-
-
-
-  img: /img/avatar.svg
-
-
-
-  effect: false
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 错误图片
-
-
-
-# ===============================
-
-
-
-error_img:
-
-
-
-  flink: /img/friend_404.svg
-
-
-
-  post_page: /img/friend_404.svg
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 顶部图
-
-
-
-# ===============================
-
-
-
-# 首页banner
-
-
-
-index_img: /img/index_bg.svg
-
-
-
-# 分类页banner
-
-
-
-category_img: /img/banner/category.svg
-
-
-
-# 标签页banner
-
-
-
-tag_img: /img/banner/tag.svg
-
-
-
-# 归档页banner
-
-
-
-archive_img: /img/banner/archive.svg
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 文章页配置
-
-
-
-# ===============================
-
-
-
-post:
-
-
-
-  enable: true
-
-
-
-  default_index_img: /img/post-default.svg
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 代码高亮
-
-
-
-# ===============================
-
-
-
-highlight_theme: mac
-
-
-
-highlight_copy: true
-
-
-
-highlight_lang: true
-
-
-
-highlight_shrink: false
-
-
-
-highlight_height_limit: 200
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 代码字体
-
-
-
-# ===============================
-
-
-
-code_word_wrap: false
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 社交图标
-
-
-
-# ===============================
-
-
-
-social:
-
-
-
-  fas fa-home: http://www.1r1h.com || 亦然亦航
-
-
-
-  fab fa-github: https://github.com/1h1r || GitHub
-
-
-
-  fas fa-envelope: mailto:contact@1r1h.com || 邮箱
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 分类与标签
-
-
-
-# ===============================
-
-
-
-category_ui: 
-
-
-
-  enable: true
-
-
-
-  type: card
-
-
-
-
-
-
-
-tag_ui:
-
-
-
-  enable: true
-
-
-
-  type: cloud
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 文章元信息
-
-
-
-# ===============================
-
-
-
-post_meta:
-
-
-
-  page:
-
-
-
-    date_type: both
-
-
-
-    date_format: relative
-
-
-
-    categories: true
-
-
-
-    tags: true
-
-
-
-    label: true
-
-
-
-  post:
-
-
-
-    date_type: both
-
-
-
-    date_format: relative
-
-
-
-    categories: true
-
-
-
-    tags: true
-
-
-
-    label: true
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 字数统计
-
-
-
-# ===============================
-
-
-
-wordcount:
-
-
-
-  enable: true
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 相关文章推荐
-
-
-
-# ===============================
-
-
-
-related_post:
-
-
-
-  enable: true
-
-
-
-  limit: 6
-
-
-
-  date_type: created
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 文章过期提醒
-
-
-
-# ===============================
-
-
-
-post_outdated:
-
-
-
-  enable: true
-
-
-
-  message: 本文最后更新于[x]天前，内容可能已经过时
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# TOC目录
-
-
-
-# ===============================
-
-
-
-toc:
-
-
-
-  enable: true
-
-
-
-  number: true
-
-
-
-  auto_open: true
-
-
-
-  expand: true
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 版权声明
-
-
-
-# ===============================
-
-
-
-copyright:
-
-
-
-  enable: true
-
-
-
-  license: CC BY-NC-SA 4.0
-
-
-
-  license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 暗黑模式
-
-
-
-# ===============================
-
-
-
-darkmode:
-
-
-
-  enable: true
-
-
-
-  default: auto
-
-
-
-  button: true
-
-
-
-  autoChangeMode: 1
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 阅读模式
-
-
-
-# ===============================
-
-
-
-readmode:
-
-
-
-  enable: true
-
-
-
-  auto_open: false
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 搜索
-
-
-
-# ===============================
-
-
-
-search:
-
-
-
-  enable: true
-
-
-
-  type: local
-
-
-
-  tag:
-
-
-
-    enable: true
-
-
-
-  preload: true
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 评论系统 - 使用自定义本地留言系统
-
-
-
-# ===============================
-
-
-
-comments:
-
-
-
-  enable: true
-
-
-
-  use: 
-
-
-giscus
-  text: true
-
-
-
-  lazyload: true
-
-
-
-  count: false
-
-
-
-  card_post_count: false
-
-
-
-
-
-
-
-# Giscus评论 - 已禁用（未配置 repo_id 和 category_id）
-
-
-
-giscus:
-
-
-
-  repo: 1h1r/1h1r.github.io
-
-
-
-  repo_id: R_kgDOTOB-Nw
-
-
-
-  category: Announcements
-
-
-
-  category_id: DIC_kwDOTOB-N84DBcrw
-
-
-
-  mapping: pathname
-
-
-
-  reactions_enabled: 1
-
-
-
-  emit_metadata: 0
-
-
-
-  input_position: bottom
-
-
-
-  theme: light
-
-
-
-  lang: zh-CN
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 分享
-
-
-
-# ===============================
-
-
-
-share:
-
-
-
-  enable: true
-
-
-
-  use: sharejs
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 侧边栏公告
-
-
-
-# ===============================
-
-
-
-announcement:
-
-
-
-  content: This is OUR Blog ✨
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 侧边栏配置
-
-
-
-# ===============================
-
-
-
-aside:
-
-
-
-  enable: true
-
-
-
-  hide: false
-
-
-
-  button: true
-
-
-
-  mobile: true
-
-
-
-  position: right
-
-
-
-  display:
-
-
-
-    archive: true
-
-
-
-    tag: true
-
-
-
-    category: true
-
-
-
-  card_author:
-
-
-
-    enable: true
-
-
-
-    description: 记录双胞胎帅哥亦然与亦航的日常
-
-
-
-    button:
-
-
-
-      enable: true
-
-
-
-      icon: fas fa-home
-
-
-
-      text: Follow Me
-
-
-
-      link: http://www.1r1h.com
-
-
-
-  card_announcement:
-
-
-
-    enable: true
-
-
-
-    content: This is OUR Blog ✨
-
-
-
-  card_recent_post:
-
-
-
-    enable: true
-
-
-
-    limit: 5
-
-
-
-    sort: date
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 右下角按钮
-
-
-
-# ===============================
-
-
-
-rightside:
-
-
-
-  enable: true
-
-
-
-  position: bottom
-
-
-
-  percent: true
-
-
-
-  hide: true
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# Pjax - 无刷新加载
-
-
-
-# ===============================
-
-
-
-pjax:
-
-
-
-  enable: true
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 页脚
-
-
-
-# ===============================
-
-
-
-footer:
-
-
-
-  owner:
-
-
-
-    enable: true
-
-
-
-    since: 2026
-
-
-
-  custom_text: 亦然亦航 | 🍄 用爱记录双胞胎的每一天 | Let's-a go!
-
-
-
-  copyright: true
-
-
-
-  license: CC BY-NC-SA 4.0
-
-
-
-  license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 页面加载动画
-
-
-
-# ===============================
-
-
-
-preloader:
-
-
-
-  enable: true
-
-
-
-  source: 1
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# PWA - 渐进式Web应用
-
-
-
-# ===============================
-
-
-
-pwa:
-
-
-
-  enable: false
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 打字效果
-
-
-
-# ===============================
-
-
-
-activate_power_mode:
-
-
-
-  enable: true
-
-
-
-  colorful: true
-
-
-
-  shake: false
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 背景效果
-
-
-
-# ===============================
-
-
-
-canvas_ribbon:
-
-
-
-  enable: false
-
-
-
-  size: 300
-
-
-
-  alpha: 0.6
-
-
-
-  zIndex: -1
-
-
-
-
-
-
-
-canvas_ribbon_polar:
-
-
-
-  enable: false
-
-
-
-
-
-
-
-canvas_nest:
-
-
-
-  enable: true
-
-
-
-  color: "0,0,255"
-
-
-
-  pointColor: "0,0,255"
-
-
-
-  opacity: 0.5
-
-
-
-  count: 50
-
-
-
-  zIndex: -1
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 鼠标点击效果
-
-
-
-# ===============================
-
-
-
-fireworks:
-
-
-
-  enable: true
-
-
-
-  zIndex: 9999
-
-
-
-  defaultIndex: 6
-
-
-
-  path: /img/fireworks.min.js
-
-
-
-
-
-
-
-click_heart:
-
-
-
-  enable: false
-
-
-
-
-
-
-
-clickShowText:
-
-
-
-  enable: true
-
-
-
-  text:
-
-
-
-    - 🪙
-
-
-
-    - ⭐
-
-
-
-    - 🍄
-
-
-
-    - 1-Up!
-
-
-
-    - Wahoo!
-
-
-
-    - 亦然亦航
-
-
-
-    - 快乐成长
-
-
-
-  fontSize: 20px
-
-
-
-  random: true
-
-
-
-  position: center
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 图片懒加载
-
-
-
-# ===============================
-
-
-
-lazyload:
-
-
-
-  enable: true
-
-
-
-  field: site
-
-
-
-  placeholder: /img/loading.svg
-
-
-
-  blur: true
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 图片放大
-
-
-
-# ===============================
-
-
-
-fancybox:
-
-
-
-  enable: true
-
-
-
-  options:
-
-
-
-    animationEffect: zoom
-
-
-
-    transitionEffect: slide
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 中英文切换
-
-
-
-# ===============================
-
-
-
-translate:
-
-
-
-  enable: false
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 简繁切换
-
-
-
-# ===============================
-
-
-
-traditional_and_simplified_chinese:
-
-
-
-  enable: false
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 网站统计
-
-
-
-# ===============================
-
-
-
-busuanzi:
-
-
-
-  enable: true
-
-
-
-  page_pv: true
-
-
-
-  site_pv: true
-
-
-
-  site_uv: true
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 图表支持
-
-
-
-# ===============================
-
-
-
-mermaid:
-
-
-
-  enable: true
-
-
-
-  theme: default
-
-
-
-  code_word_wrap: false
-
-
-
-
-
-
-
-chart:
-
-
-
-  enable: true
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 音乐播放器
-
-
-
-# ===============================
-
-
-
-aplayer:
-
-
-
-  enable: true
-
-
-
-  audio:
-
-
-
-    - name: 小星星
-
-
-
-      artist: 儿歌
-
-
-
-      url: 
-
-
-
-      cover: 
-
-
-
-    - name: 虫儿飞
-
-
-
-      artist: 儿歌
-
-
-
-      url: 
-
-
-
-      cover: 
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 数学公式
-
-
-
-# ===============================
-
-
-
-mathjax:
-
-
-
-  enable: true
-
-
-
-  per_page: false
-
-
-
-
-
-
-
-katex:
-
-
-
-  enable: true
-
-
-
-  per_page: false
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 文章封面
-
-
-
-# ===============================
-
-
-
-cover:
-
-
-
-  enable: true
-
-
-
-  index_default: /img/cover/default.svg
-
-
-
-  archive_default: /img/cover/archive.svg
-
-
-
-  default: /img/cover/default.svg
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 文章系列
-
-
-
-# ===============================
-
-
-
-series:
-
-
-
-  enable: true
-
-
-
-  group: 
-
-
-
-    - name: 幼儿园时光
-
-
-
-      cover: /img/cover/kindergarten.svg
-
-
-
-      description: 亦然亦航的幼儿园快乐时光
-
-
-
-    - name: 小学成长
-
-
-
-      cover: /img/cover/primary.svg
-
-
-
-      description: 小学六年的成长故事
-
-
-
-    - name: 初中岁月
-
-
-
-      cover: /img/cover/junior.svg
-
-
-
-      description: 青春期的初中三年
-
-
-
-    - name: 高中冲刺
-
-
-
-      cover: /img/cover/high.svg
-
-
-
-      description: 高中三年的拼搏与收获
-
-
-
-    - name: 大学殿堂
-
-
-
-      cover: /img/cover/college.svg
-
-
-
-      description: 大学四年的精彩篇章
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 即时页面预加载
-
-
-
-# ===============================
-
-
-
-instantpage:
-
-
-
-  enable: true
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# 通知
-
-
-
-# ===============================
-
-
-
-snackbar:
-
-
-
-  enable: true
-
-
-
-  position: bottom-right
-
-
-
-  bglight: '#49B1F5'
-
-
-
-  bgdark: '#1f1f1f'
-
-
-
-
-
-
-
-# ===============================
-
-
-
-# CSS自定义
-
-
-
-# ===============================
-
-
-
-inject:
-
-
-
-  head:
-
-
-
-    - <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
-
-
-
-    - <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-
-
-
-    - <link rel="stylesheet" href="/css/custom.css">
-
-
-
-    - <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
-
-
-
-  bottom:
-
-
-
-    - <script src="/js/custom.js"></script>
-
-
-
-
-
-version: 5.5.5
-
-
-
+# butterfly主题配置 - 亦然亦航双胞胎成长博客
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 导航菜单
+
+
+
+# ===============================
+
+
+
+menu:
+
+
+
+  首页: / || fas fa-home
+
+
+
+  成长日记: /categories/ || fas fa-book-open
+
+
+
+  兴趣爱好: /tags/ || fas fa-heart
+
+
+
+  时间线: /archives/ || fas fa-timeline
+
+
+
+  相册: /gallery/ || fas fa-images
+
+
+
+  关于我们: /about/ || fas fa-info-circle
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 网站基本信息
+
+
+
+# ===============================
+
+
+
+title: 亦然亦航
+
+
+
+subtitle: 记录双胞胎的快乐成长 · 每一刻都值得珍藏
+
+
+
+description: 亦然亦航 - 记录双胞胎的快乐成长，每一刻都值得珍藏
+
+
+
+keywords: 双胞胎,成长博客,儿童成长,亦然亦航
+
+
+
+author: 亦然亦航
+
+
+
+language: zh-CN
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 主题色 - 马里奥兄弟经典配色
+
+
+
+# ===============================
+
+
+
+theme_color:
+
+
+
+  enable: true
+
+
+
+  main: "#E52521"
+
+
+
+  paginator: "#E52521"
+
+
+
+  button_hover: "#FBD000"
+
+
+
+  text_selection: "#FBD000"
+
+
+
+  link_color: "#049CD8"
+
+
+
+  link_hover: "#E52521"
+
+
+
+  dark_mode:
+
+
+
+    main: "#E52521"
+
+
+
+    paginator: "#E52521"
+
+
+
+    button_hover: "#FBD000"
+
+
+
+    text_selection: "#FBD000"
+
+
+
+    link_color: "#049CD8"
+
+
+
+    link_hover: "#FBD000"
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 网站图标
+
+
+
+# ===============================
+
+
+
+favicon: /img/favicon.svg
+
+
+
+avatar:
+
+
+
+  img: /img/avatar.svg
+
+
+
+  effect: false
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 错误图片
+
+
+
+# ===============================
+
+
+
+error_img:
+
+
+
+  flink: /img/friend_404.svg
+
+
+
+  post_page: /img/friend_404.svg
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 顶部图
+
+
+
+# ===============================
+
+
+
+# 首页banner
+
+
+
+index_img: /img/index_bg.svg
+
+
+
+# 分类页banner
+
+
+
+category_img: /img/banner/category.svg
+
+
+
+# 标签页banner
+
+
+
+tag_img: /img/banner/tag.svg
+
+
+
+# 归档页banner
+
+
+
+archive_img: /img/banner/archive.svg
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 文章页配置
+
+
+
+# ===============================
+
+
+
+post:
+
+
+
+  enable: true
+
+
+
+  default_index_img: /img/post-default.svg
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 代码高亮
+
+
+
+# ===============================
+
+
+
+highlight_theme: mac
+
+
+
+highlight_copy: true
+
+
+
+highlight_lang: true
+
+
+
+highlight_shrink: false
+
+
+
+highlight_height_limit: 200
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 代码字体
+
+
+
+# ===============================
+
+
+
+code_word_wrap: false
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 社交图标
+
+
+
+# ===============================
+
+
+
+social:
+
+
+
+  fas fa-home: http://www.1r1h.com || 亦然亦航
+
+
+
+  fab fa-github: https://github.com/1h1r || GitHub
+
+
+
+  fas fa-envelope: mailto:contact@1r1h.com || 邮箱
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 分类与标签
+
+
+
+# ===============================
+
+
+
+category_ui: 
+
+
+
+  enable: true
+
+
+
+  type: card
+
+
+
+
+
+
+
+tag_ui:
+
+
+
+  enable: true
+
+
+
+  type: cloud
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 文章元信息
+
+
+
+# ===============================
+
+
+
+post_meta:
+
+
+
+  page:
+
+
+
+    date_type: both
+
+
+
+    date_format: relative
+
+
+
+    categories: true
+
+
+
+    tags: true
+
+
+
+    label: true
+
+
+
+  post:
+
+
+
+    date_type: both
+
+
+
+    date_format: relative
+
+
+
+    categories: true
+
+
+
+    tags: true
+
+
+
+    label: true
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 字数统计
+
+
+
+# ===============================
+
+
+
+wordcount:
+
+
+
+  enable: true
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 相关文章推荐
+
+
+
+# ===============================
+
+
+
+related_post:
+
+
+
+  enable: true
+
+
+
+  limit: 6
+
+
+
+  date_type: created
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 文章过期提醒
+
+
+
+# ===============================
+
+
+
+post_outdated:
+
+
+
+  enable: true
+
+
+
+  message: 本文最后更新于[x]天前，内容可能已经过时
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# TOC目录
+
+
+
+# ===============================
+
+
+
+toc:
+
+
+
+  enable: true
+
+
+
+  number: true
+
+
+
+  auto_open: true
+
+
+
+  expand: true
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 版权声明
+
+
+
+# ===============================
+
+
+
+copyright:
+
+
+
+  enable: true
+
+
+
+  license: CC BY-NC-SA 4.0
+
+
+
+  license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 暗黑模式
+
+
+
+# ===============================
+
+
+
+darkmode:
+
+
+
+  enable: true
+
+
+
+  default: auto
+
+
+
+  button: true
+
+
+
+  autoChangeMode: 1
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 阅读模式
+
+
+
+# ===============================
+
+
+
+readmode:
+
+
+
+  enable: true
+
+
+
+  auto_open: false
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 搜索
+
+
+
+# ===============================
+
+
+
+search:
+
+
+
+  enable: true
+
+
+
+  type: local
+
+
+
+  tag:
+
+
+
+    enable: true
+
+
+
+  preload: true
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 评论系统 - 使用自定义本地留言系统
+
+
+
+# ===============================
+
+
+
+comments:
+
+
+
+  enable: true
+
+
+
+  use: giscus
+giscus
+  text: true
+
+
+
+  lazyload: true
+
+
+
+  count: false
+
+
+
+  card_post_count: false
+
+
+
+
+
+
+
+# Giscus评论 - 已禁用（未配置 repo_id 和 category_id）
+
+
+
+giscus:
+
+
+
+  repo: 1h1r/1h1r.github.io
+
+
+
+  repo_id: R_kgDOTOB-Nw
+
+
+
+  category: Announcements
+
+
+
+  category_id: DIC_kwDOTOB-N84DBcrw
+
+
+
+  mapping: pathname
+
+
+
+  reactions_enabled: 1
+
+
+
+  emit_metadata: 0
+
+
+
+  input_position: bottom
+
+
+
+  theme: light
+
+
+
+  lang: zh-CN
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 分享
+
+
+
+# ===============================
+
+
+
+share:
+
+
+
+  enable: true
+
+
+
+  use: sharejs
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 侧边栏公告
+
+
+
+# ===============================
+
+
+
+announcement:
+
+
+
+  content: This is OUR Blog ✨
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 侧边栏配置
+
+
+
+# ===============================
+
+
+
+aside:
+
+
+
+  enable: true
+
+
+
+  hide: false
+
+
+
+  button: true
+
+
+
+  mobile: true
+
+
+
+  position: right
+
+
+
+  display:
+
+
+
+    archive: true
+
+
+
+    tag: true
+
+
+
+    category: true
+
+
+
+  card_author:
+
+
+
+    enable: true
+
+
+
+    description: 记录双胞胎帅哥亦然与亦航的日常
+
+
+
+    button:
+
+
+
+      enable: true
+
+
+
+      icon: fas fa-home
+
+
+
+      text: Follow Me
+
+
+
+      link: http://www.1r1h.com
+
+
+
+  card_announcement:
+
+
+
+    enable: true
+
+
+
+    content: This is OUR Blog ✨
+
+
+
+  card_recent_post:
+
+
+
+    enable: true
+
+
+
+    limit: 5
+
+
+
+    sort: date
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 右下角按钮
+
+
+
+# ===============================
+
+
+
+rightside:
+
+
+
+  enable: true
+
+
+
+  position: bottom
+
+
+
+  percent: true
+
+
+
+  hide: true
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# Pjax - 无刷新加载
+
+
+
+# ===============================
+
+
+
+pjax:
+
+
+
+  enable: true
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 页脚
+
+
+
+# ===============================
+
+
+
+footer:
+
+
+
+  owner:
+
+
+
+    enable: true
+
+
+
+    since: 2026
+
+
+
+  custom_text: 亦然亦航 | 🍄 用爱记录双胞胎的每一天 | Let's-a go!
+
+
+
+  copyright: true
+
+
+
+  license: CC BY-NC-SA 4.0
+
+
+
+  license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 页面加载动画
+
+
+
+# ===============================
+
+
+
+preloader:
+
+
+
+  enable: true
+
+
+
+  source: 1
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# PWA - 渐进式Web应用
+
+
+
+# ===============================
+
+
+
+pwa:
+
+
+
+  enable: false
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 打字效果
+
+
+
+# ===============================
+
+
+
+activate_power_mode:
+
+
+
+  enable: true
+
+
+
+  colorful: true
+
+
+
+  shake: false
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 背景效果
+
+
+
+# ===============================
+
+
+
+canvas_ribbon:
+
+
+
+  enable: false
+
+
+
+  size: 300
+
+
+
+  alpha: 0.6
+
+
+
+  zIndex: -1
+
+
+
+
+
+
+
+canvas_ribbon_polar:
+
+
+
+  enable: false
+
+
+
+
+
+
+
+canvas_nest:
+
+
+
+  enable: true
+
+
+
+  color: "0,0,255"
+
+
+
+  pointColor: "0,0,255"
+
+
+
+  opacity: 0.5
+
+
+
+  count: 50
+
+
+
+  zIndex: -1
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 鼠标点击效果
+
+
+
+# ===============================
+
+
+
+fireworks:
+
+
+
+  enable: true
+
+
+
+  zIndex: 9999
+
+
+
+  defaultIndex: 6
+
+
+
+  path: /img/fireworks.min.js
+
+
+
+
+
+
+
+click_heart:
+
+
+
+  enable: false
+
+
+
+
+
+
+
+clickShowText:
+
+
+
+  enable: true
+
+
+
+  text:
+
+
+
+    - 🪙
+
+
+
+    - ⭐
+
+
+
+    - 🍄
+
+
+
+    - 1-Up!
+
+
+
+    - Wahoo!
+
+
+
+    - 亦然亦航
+
+
+
+    - 快乐成长
+
+
+
+  fontSize: 20px
+
+
+
+  random: true
+
+
+
+  position: center
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 图片懒加载
+
+
+
+# ===============================
+
+
+
+lazyload:
+
+
+
+  enable: true
+
+
+
+  field: site
+
+
+
+  placeholder: /img/loading.svg
+
+
+
+  blur: true
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 图片放大
+
+
+
+# ===============================
+
+
+
+fancybox:
+
+
+
+  enable: true
+
+
+
+  options:
+
+
+
+    animationEffect: zoom
+
+
+
+    transitionEffect: slide
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 中英文切换
+
+
+
+# ===============================
+
+
+
+translate:
+
+
+
+  enable: false
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 简繁切换
+
+
+
+# ===============================
+
+
+
+traditional_and_simplified_chinese:
+
+
+
+  enable: false
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 网站统计
+
+
+
+# ===============================
+
+
+
+busuanzi:
+
+
+
+  enable: true
+
+
+
+  page_pv: true
+
+
+
+  site_pv: true
+
+
+
+  site_uv: true
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 图表支持
+
+
+
+# ===============================
+
+
+
+mermaid:
+
+
+
+  enable: true
+
+
+
+  theme: default
+
+
+
+  code_word_wrap: false
+
+
+
+
+
+
+
+chart:
+
+
+
+  enable: true
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 音乐播放器
+
+
+
+# ===============================
+
+
+
+aplayer:
+
+
+
+  enable: true
+
+
+
+  audio:
+
+
+
+    - name: 小星星
+
+
+
+      artist: 儿歌
+
+
+
+      url: 
+
+
+
+      cover: 
+
+
+
+    - name: 虫儿飞
+
+
+
+      artist: 儿歌
+
+
+
+      url: 
+
+
+
+      cover: 
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 数学公式
+
+
+
+# ===============================
+
+
+
+mathjax:
+
+
+
+  enable: true
+
+
+
+  per_page: false
+
+
+
+
+
+
+
+katex:
+
+
+
+  enable: true
+
+
+
+  per_page: false
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 文章封面
+
+
+
+# ===============================
+
+
+
+cover:
+
+
+
+  enable: true
+
+
+
+  index_default: /img/cover/default.svg
+
+
+
+  archive_default: /img/cover/archive.svg
+
+
+
+  default: /img/cover/default.svg
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 文章系列
+
+
+
+# ===============================
+
+
+
+series:
+
+
+
+  enable: true
+
+
+
+  group: 
+
+
+
+    - name: 幼儿园时光
+
+
+
+      cover: /img/cover/kindergarten.svg
+
+
+
+      description: 亦然亦航的幼儿园快乐时光
+
+
+
+    - name: 小学成长
+
+
+
+      cover: /img/cover/primary.svg
+
+
+
+      description: 小学六年的成长故事
+
+
+
+    - name: 初中岁月
+
+
+
+      cover: /img/cover/junior.svg
+
+
+
+      description: 青春期的初中三年
+
+
+
+    - name: 高中冲刺
+
+
+
+      cover: /img/cover/high.svg
+
+
+
+      description: 高中三年的拼搏与收获
+
+
+
+    - name: 大学殿堂
+
+
+
+      cover: /img/cover/college.svg
+
+
+
+      description: 大学四年的精彩篇章
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 即时页面预加载
+
+
+
+# ===============================
+
+
+
+instantpage:
+
+
+
+  enable: true
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# 通知
+
+
+
+# ===============================
+
+
+
+snackbar:
+
+
+
+  enable: true
+
+
+
+  position: bottom-right
+
+
+
+  bglight: '#49B1F5'
+
+
+
+  bgdark: '#1f1f1f'
+
+
+
+
+
+
+
+# ===============================
+
+
+
+# CSS自定义
+
+
+
+# ===============================
+
+
+
+inject:
+
+
+
+  head:
+
+
+
+    - <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+
+
+
+    - <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+
+
+    - <link rel="stylesheet" href="/css/custom.css">
+
+
+
+    - <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+
+
+
+  bottom:
+
+
+
+    - <script src="/js/custom.js"></script>
+
+
+
+
+
+version: 5.5.5
+
+
+
